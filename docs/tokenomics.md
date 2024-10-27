@@ -37,6 +37,41 @@ The $GR33D token is designed with a deflationary model to ensure long-term value
 - **Compound Option**: Available for optimized returns
 - **Flexible Entry/Exit**: No minimum lock period
 
+## Sustainable Staking System
+
+### Initial Rewards Pool
+- 20% of total supply allocated (1,000,000 $GR33D)
+- Used for initial staking rewards distribution
+- Supports early adopters and bootstrap phase
+
+### Long-term Sustainability Mechanism
+1. **Transaction Fee Distribution**
+   - 0.5% of each transaction fee goes to staking rewards pool
+   - Continuous replenishment of rewards
+   - Sustainable long-term yield generation
+
+2. **Dynamic APY System**
+   - Base APY: 20% (supported by transaction fees)
+   - Bonus APY: Up to +20% (from initial rewards pool)
+   - Total Maximum APY: 40%
+
+3. **APY Evolution**
+   - Initial Phase: Full APY from rewards pool
+   - Transition Phase: Gradual shift to transaction-based rewards
+   - Mature Phase: Self-sustaining system through transaction fees
+
+### Reward Distribution Strategy
+- **Short-term**: Primarily from allocated rewards pool
+- **Mid-term**: Hybrid of pool and transaction fees
+- **Long-term**: Primarily sustained by transaction fees
+- **Emergency Reserve**: 5% of rewards pool kept for stability
+
+### Monitoring and Adjustment
+- Real-time APY calculations based on pool size
+- Automatic adjustment mechanisms
+- Regular community updates on rewards status
+- DAO governance for parameter adjustments
+
 ## Anti-Whale Measures
 - Maximum wallet holding cap (2% of total supply)
 - Transaction limit (10,000 tokens)
