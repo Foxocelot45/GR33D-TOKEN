@@ -5,7 +5,7 @@ This directory contains the smart contracts for the GreedysClub ecosystem.
 ## Contract Addresses
 
 ### Testnet (Sepolia)
-- GreedysClub Token: `0xEa2F6bfA79852130070cE05dA270064B0E44C0bB`
+- GreedysClub Token: `0xeBaFE97112C5008249fb6fF4bCAf0a603d39e2a7`
 
 ### Mainnet
 - To be deployed
