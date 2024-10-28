@@ -9,7 +9,7 @@ The $GR33D token is designed with a deflationary model to ensure long-term value
 - **Initial Supply**: 5,000,000 tokens
 - **Decimals**: 18
 - **Network**: Multi-chain (ETH, BSC, Solana)
-- **Smart Contract**: [Contract address to be updated upon mainnet launch]
+- **Smart Contract**: 0xeBaFE97112C5008249fb6fF4bCAf0a603d39e2a7
 
 ## Distribution Model
 - **Fair Launch**: 100% fair launch with no pre-mine
