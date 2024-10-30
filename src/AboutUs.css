@@ -1,0 +1,30 @@
+/* AboutUs.css */
+
+.about-us-section {
+    background-image: url('/about-background.webp');
+    background-size: cover;
+    background-position: center;
+    color: #ffffff;
+    padding: 50px 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.content-wrapper {
+    max-width: 800px;
+    background: rgba(0, 0, 0, 0.7); /* Filtre sombre */
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.about-us-section h2 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.about-us-section p {
+    line-height: 1.6;
+    margin-bottom: 15px;
+    text-align: justify;
+}
