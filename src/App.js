@@ -25,13 +25,15 @@ function App() {
           </nav>
         </header>
 
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/about" element={<AboutUs />} />
-          <Route path="/roadmap" element={<Roadmap />} />
-          <Route path="/staking" element={<Staking />} />
-          <Route path="/contacts" element={<Contacts />} />
-        </Routes>
+        <main>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/about" element={<AboutUs />} />
+            <Route path="/roadmap" element={<Roadmap />} />
+            <Route path="/staking" element={<Staking />} />
+            <Route path="/contacts" element={<Contacts />} />
+          </Routes>
+        </main>
 
         <footer>
           <a href="https://x.com/TheGr33dyzClub" target="_blank" rel="noopener noreferrer">Twitter</a>
