@@ -1,7 +1,7 @@
 /* AboutUs.css */
 
 .about-us-section {
-    background-image: url('/about-background.webp');
+    background-image: url('./about-background.webp');
     background-size: cover;
     background-position: center;
     color: #ffffff;
