@@ -1,6 +1,6 @@
 .about-us {
   padding: 50px;
-  background-image: url('/about-background.webp');
+  background-image: url('about-background.webp');
   background-size: cover;
   background-position: center;
   color: white;
