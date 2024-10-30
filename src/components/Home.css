@@ -3,18 +3,22 @@
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background-image: url('../assets/about-background.png'); /* Ajustez le chemin si nécessaire */
+  background-image: url('../assets/about-background.png'); /* Assurez-vous que le chemin est correct */
   background-size: cover;
   background-position: center;
   color: #ffffff;
   text-align: center;
+  padding: 20px;
 }
 
 .home-text {
+  background: rgba(0, 0, 0, 0.7); /* Fond noir avec opacité */
+  padding: 20px 40px;
+  border-radius: 10px;
   font-size: 2.5em;
   font-weight: bold;
   line-height: 1.4;
-  color: #f5c518; /* Couleur dorée pour correspondre au style du site */
+  color: #f5c518; /* Couleur dorée */
 }
 
 .home-text span {
