@@ -1,22 +1,27 @@
 .about-us {
   padding: 50px;
-  background-image: url('about-background.webp');
+  position: relative;
+  min-height: 100vh;
+  color: white;
+}
+
+.about-us::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('/src/assets/about-background.webp');
   background-size: cover;
   background-position: center;
-  color: white;
+  z-index: -1;
 }
 
 .about-us-content {
   max-width: 800px;
-  background-color: rgba(0, 0, 0, 0.7); /* Cadre sombre pour la lisibilité */
+  margin: 0 auto;
   padding: 20px;
+  background: rgba(0, 0, 0, 0.7);
   border-radius: 8px;
-  margin: auto;
 }
-
-h2 {
-  font-size: 2em;
-  margin-bottom: 20px;
-  text-align: center;
-}
-
