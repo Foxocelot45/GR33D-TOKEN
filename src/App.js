@@ -3,17 +3,16 @@ import './App.css';
 import './components/AboutUs/AboutUs.css';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import AboutUs from './components/AboutUs/AboutUs';
-
-function PlaceholderComponent({ name }) {
-  return <div style={{ padding: '20px', textAlign: 'center' }}>{name} Page - Under Construction</div>;
-}
+import Home from './components/Home';
+import Roadmap from './components/Roadmap';
+import Staking from './components/Staking';
+import Contacts from './components/Contacts';
 
 function App() {
   return (
     <Router>
       <div className="App">
         <header>
-          {/* En-tête avec texte stylisé */}
           <h1 className="header-title">The Greedy's Club</h1>
           <nav>
             <Link to="/">Home</Link>
@@ -22,16 +21,16 @@ function App() {
             <Link to="/whitepaper.pdf" target="_blank" rel="noopener noreferrer">Whitepaper</Link>
             <Link to="/dex" className="disabled">DEX/AMM (Soon)</Link>
             <Link to="/staking">Staking</Link>
-            <Link to="/contacts">Contacts</Link> {/* Ajout de la section Contacts */}
+            <Link to="/contacts">Contacts</Link>
           </nav>
         </header>
 
         <Routes>
-          <Route path="/" element={<PlaceholderComponent name="Home" />} />
+          <Route path="/" element={<Home />} />
           <Route path="/about" element={<AboutUs />} />
-          <Route path="/roadmap" element={<PlaceholderComponent name="Roadmap" />} />
-          <Route path="/staking" element={<PlaceholderComponent name="Staking" />} />
-          <Route path="/contacts" element={<PlaceholderComponent name="Contacts" />} /> {/* Ajout de la route Contacts */}
+          <Route path="/roadmap" element={<Roadmap />} />
+          <Route path="/staking" element={<Staking />} />
+          <Route path="/contacts" element={<Contacts />} />
         </Routes>
 
         <footer>
