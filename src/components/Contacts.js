@@ -1,10 +1,12 @@
 import React from 'react';
+import './Contacts.css';
 
 function Contacts() {
   return (
-    <div className="page-content">
-      <h2>Contacts</h2>
-      <p>Page en construction.</p>
+    <div className="contacts-container">
+      <div className="contacts-message">
+        Page en construction
+      </div>
     </div>
   );
 }
