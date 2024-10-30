@@ -1,1 +1,22 @@
+.about-us {
+  padding: 50px;
+  background-image: url('about-background.webp');
+  background-size: cover;
+  background-position: center;
+  color: white;
+}
+
+.about-us-content {
+  max-width: 800px;
+  background-color: rgba(0, 0, 0, 0.7); /* Cadre sombre pour la lisibilité */
+  padding: 20px;
+  border-radius: 8px;
+  margin: auto;
+}
+
+h2 {
+  font-size: 2em;
+  margin-bottom: 20px;
+  text-align: center;
+}
 
