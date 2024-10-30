@@ -12,15 +12,15 @@ body, html {
 }
 
 .header-title {
-  font-size: 2.5em;
-  font-weight: bold;
-  margin: 20px 0;
+  font-size: 2.2em;
+  font-weight: 700;
+  margin: 10px 0;
   color: #ffd700;
-  background: linear-gradient(135deg, #ffd700, #ff8c00);
+  background: linear-gradient(90deg, #ffd700, #ff8c00);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
-  font-family: 'Poppins', sans-serif;
+  font-family: 'Roboto', sans-serif;
+  letter-spacing: 0.5px;
 }
 
 header {
@@ -36,7 +36,7 @@ header nav a {
   text-decoration: none;
   margin: 0 15px;
   font-size: 1.1em;
-  font-weight: bold;
+  font-weight: 600;
   transition: color 0.3s ease-in-out;
 }
 
