@@ -3,17 +3,25 @@ import './AboutUs.css';
 
 function AboutUs() {
   return (
-    <div className="about-us">
-      <h2>About Us</h2>
-      <div className="about-us-content">
+    <div className="about-us-section">
+      <div className="content-wrapper">
+        <h2>About Us</h2>
         <p>
-          Greedy's Club represents a pioneering crypto community with a wealth of experience in DeFi and blockchain exploration. As early adopters, we have been among the first to test and engage with emerging networks and technologies in the DeFi space.
+          The Greedy's Club is a pioneering crypto community with extensive experience in the DeFi world. 
+          As early adopters of blockchain technology, we have explored new networks and innovative 
+          decentralized finance solutions. Our ecosystem revolves around the $GR33D token, which powers 
+          a range of projects including a creator-friendly NFT marketplace, Play2Earn games, and a staking 
+          platform offering up to 40% APY.
         </p>
         <p>
-          Our ecosystem is built around the $GR33D token, with a vision for a decentralized future. We are committed to empowering artists through a revolutionary NFT marketplace that ensures royalties on every future sale, giving creators true control and lifetime revenue from their work.
+          Artists, musicians, and creators of all kinds will have the opportunity to earn royalties on each 
+          future resale of their work. Our NFT marketplace is designed to support creative independence, 
+          providing artists with a transparent, lifelong revenue stream through each sale.
         </p>
         <p>
-          Our plans include launching a DAO for community-driven decisions, a DEX/AMM for optimized trading, and a suite of Play2Earn games crafted by and for the community. With multi-chain support on Ethereum, Binance Smart Chain, and Solana, $GR33D is designed to be a cross-chain token with security, transparency, and scalable solutions at its core.
+          Our vision goes beyond a simple token; we are building a DAO for community-driven decision-making, 
+          a DEX/AMM for optimized exchanges, and a multi-chain presence from launch. With a roadmap reaching 
+          into 2025, we’re dedicated to security, innovation, and a sustainable ecosystem that rewards loyalty.
         </p>
       </div>
     </div>
@@ -21,4 +29,3 @@ function AboutUs() {
 }
 
 export default AboutUs;
-
