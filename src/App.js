@@ -7,6 +7,7 @@ import Home from './components/Home';
 import Roadmap from './components/Roadmap';
 import Staking from './components/Staking';
 import Contacts from './components/Contacts';
+import Whitepaper from './components/Whitepaper/Whitepaper'; // Importation de Whitepaper
 
 function App() {
   return (
@@ -18,7 +19,7 @@ function App() {
             <Link to="/">Home</Link>
             <Link to="/about">About Us</Link>
             <Link to="/roadmap">Roadmap</Link>
-            <Link to="/whitepaper.pdf" target="_blank" rel="noopener noreferrer">Whitepaper</Link>
+            <Link to="/whitepaper">Whitepaper</Link> {/* Mise à jour du lien vers Whitepaper */}
             <Link to="/dex" className="disabled">DEX/AMM (Soon)</Link>
             <Link to="/staking">Staking</Link>
             <Link to="/contacts">Contacts</Link>
@@ -32,6 +33,7 @@ function App() {
             <Route path="/roadmap" element={<Roadmap />} />
             <Route path="/staking" element={<Staking />} />
             <Route path="/contacts" element={<Contacts />} />
+            <Route path="/whitepaper" element={<Whitepaper />} /> {/* Ajout de la route vers Whitepaper */}
           </Routes>
         </main>
 
