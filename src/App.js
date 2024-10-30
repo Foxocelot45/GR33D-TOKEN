@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import './AboutUs.css'; // Ajoute ce fichier CSS pour les styles de la section About Us
+import './components/AboutUs/AboutUs.css';
 import logo from './logo.jpeg';
 
 function App() {
