@@ -1,17 +1,27 @@
-/* Contacts.css */
 .contacts-container {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
-  height: 80vh;
+  justify-content: center;
+  height: 100vh;
   color: white;
-  font-size: 1.5em;
   text-align: center;
+  background-image: url('../assets/about-background.png');
+  background-size: cover;
+  background-position: center;
 }
 
-.contacts-message {
-  background-color: rgba(0, 0, 0, 0.7); /* Un fond transparent */
-  padding: 20px;
-  border-radius: 8px;
+.social-links {
+  margin-top: 20px;
 }
 
+.social-links a {
+  margin: 0 10px;
+  color: #f1c40f;
+  text-decoration: none;
+  font-size: 1.2em;
+}
+
+.social-links a:hover {
+  color: #e67e22;
+}
