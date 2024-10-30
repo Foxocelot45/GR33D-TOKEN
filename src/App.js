@@ -3,7 +3,10 @@ import './App.css';
 import './components/AboutUs/AboutUs.css';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import AboutUs from './components/AboutUs/AboutUs';
-import logo from './logo.jpeg';  // Vous pouvez supprimer cette ligne si le logo n'est plus nécessaire
+
+function PlaceholderComponent({ name }) {
+  return <div style={{ padding: '20px', textAlign: 'center' }}>{name} Page - Under Construction</div>;
+}
 
 function App() {
   return (
@@ -24,11 +27,11 @@ function App() {
         </header>
 
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<PlaceholderComponent name="Home" />} />
           <Route path="/about" element={<AboutUs />} />
-          <Route path="/roadmap" element={<Roadmap />} />
-          <Route path="/staking" element={<Staking />} />
-          <Route path="/contacts" element={<Contacts />} /> {/* Ajout de la route Contacts */}
+          <Route path="/roadmap" element={<PlaceholderComponent name="Roadmap" />} />
+          <Route path="/staking" element={<PlaceholderComponent name="Staking" />} />
+          <Route path="/contacts" element={<PlaceholderComponent name="Contacts" />} /> {/* Ajout de la route Contacts */}
         </Routes>
 
         <footer>
