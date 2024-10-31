@@ -17,17 +17,26 @@
   border-radius: 10px;
   max-width: 600px;
   text-align: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.whitepaper-content:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
 }
 
 .whitepaper-container h2 {
   font-size: 2.5em;
   margin-bottom: 0.5em;
+  color: #ffd700;
 }
 
 .whitepaper-container p {
   font-size: 1.2em;
   margin-bottom: 1em;
   max-width: 600px;
+  color: #cccccc;
 }
 
 .download-link {
@@ -38,11 +47,24 @@
   background-color: #ffb347;
   border-radius: 5px;
   text-decoration: none;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
 .download-link:hover {
   background-color: #ff9f1c;
+  transform: translateY(-2px);
+}
+
+/* Effet de scroll reveal */
+.whitepaper-content.scroll-reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.whitepaper-content.scrolled {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 /* Responsive styles for Whitepaper */
