@@ -9,18 +9,18 @@
   font-size: 0.9em; /* Taille du texte réduite */
   line-height: 1.5em;
   text-align: left;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Ombre légère pour la boîte */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
 .aboutus-container h2 {
-  font-size: 1.6em; /* Taille de titre réduite */
+  font-size: 1.6em;
   color: #ffd700;
   margin-bottom: 15px;
   text-align: center;
 }
 
 .aboutus-container h3 {
-  font-size: 1.2em; /* Taille du sous-titre réduite */
+  font-size: 1.2em;
   color: #ffb347;
   margin-top: 20px;
 }
