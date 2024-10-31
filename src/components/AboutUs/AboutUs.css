@@ -1,6 +1,6 @@
 /* AboutUs.css */
 .aboutus-section {
-  background-image: url('../assets/about-background.png'); /* Chemin de l'image */
+  background-image: url('/src/assets/about-background.png');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
