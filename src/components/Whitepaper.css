@@ -44,3 +44,24 @@
 .download-link:hover {
   background-color: #ff9f1c;
 }
+
+/* Responsive styles for Whitepaper */
+@media (max-width: 768px) {
+  .whitepaper-content {
+    max-width: 90%;
+    padding: 15px;
+  }
+
+  .whitepaper-container h2 {
+    font-size: 2em;
+  }
+
+  .whitepaper-container p {
+    font-size: 1em;
+  }
+
+  .download-link {
+    font-size: 1em;
+    padding: 8px 15px;
+  }
+}
