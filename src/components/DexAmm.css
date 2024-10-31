@@ -20,6 +20,12 @@
   font-size: 1em;
   text-align: center;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.dexamm-container:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
 }
 
 .dexamm-container h2 {
@@ -31,6 +37,18 @@
 .dexamm-container p {
   font-size: 1em;
   color: #cccccc;
+}
+
+/* Effet de scroll reveal */
+.dexamm-container.scroll-reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.dexamm-container.scrolled {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 /* Responsive styles for DexAmm */
