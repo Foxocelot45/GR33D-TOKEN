@@ -11,16 +11,9 @@ body, html {
   background-color: #121212;
 }
 
-.header-title {
-  font-size: 2.2em;
-  font-weight: 700;
-  margin: 10px 0;
-  color: #ffd700;
-  background: linear-gradient(90deg, #ffd700, #ff8c00);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  font-family: 'Roboto', sans-serif;
-  letter-spacing: 0.5px;
+.header-logo {
+  height: 50px; /* Ajustez la taille pour convenir au bandeau */
+  margin-right: 20px;
 }
 
 header {
@@ -92,4 +85,3 @@ footer a {
 footer a:hover {
   color: #ff8c00;
 }
-
