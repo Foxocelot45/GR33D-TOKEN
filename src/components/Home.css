@@ -1,21 +1,50 @@
-/* Responsive styles for Home */
+.home-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-image: url('../assets/about-background.png'); /* Assurez-vous que le chemin est correct */
+  background-size: cover;
+  background-position: center;
+  color: #ffffff;
+  text-align: center;
+  padding: 20px;
+}
 
+.home-text {
+  background: rgba(0, 0, 0, 0.7); /* Fond noir avec opacité */
+  padding: 20px 40px;
+  border-radius: 10px;
+  font-size: 2.5em;
+  font-weight: bold;
+  line-height: 1.4;
+  color: #f5c518; /* Couleur dorée */
+}
+
+.home-text span {
+  font-size: 1.5em;
+  display: block;
+  margin-top: 20px;
+  color: #ffffff;
+}
+
+/* Responsive styles for Home */
 @media (max-width: 768px) {
   .home-container {
     padding: 10px;
     height: auto;
-    background-position: center;
     background-size: cover;
+    background-position: center;
   }
 
   .home-text {
-    font-size: 1.5em;
+    font-size: 1.2em;
     padding: 15px 20px;
   }
 
   .home-text span {
-    font-size: 1.2em;
-    margin-top: 15px;
+    font-size: 1em;
+    margin-top: 10px;
   }
 }
 
