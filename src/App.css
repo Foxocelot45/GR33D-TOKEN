@@ -1,4 +1,4 @@
-/* App.css */
+/* Styles globaux */
 body, html {
   margin: 0;
   padding: 0;
@@ -15,6 +15,27 @@ body, html {
   background-color: #121212;
 }
 
+/* Loader */
+.loader {
+  border: 5px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 5px solid #ffb347;
+  width: 40px;
+  height: 40px;
+  animation: spin 1s linear infinite;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1000;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Header et Navigation */
 .header-title {
   font-size: 2.2em;
   font-weight: 700;
@@ -27,12 +48,16 @@ body, html {
   letter-spacing: 0.5px;
 }
 
+/* Menu sticky */
 header {
+  position: sticky;
+  top: 0;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 15px 50px;
   background-color: rgba(0, 0, 0, 0.9);
+  z-index: 1000;
 }
 
 header nav a {
@@ -41,13 +66,15 @@ header nav a {
   margin: 0 15px;
   font-size: 1.1em;
   font-weight: 600;
-  transition: color 0.3s ease-in-out;
+  transition: color 0.3s ease-in-out, transform 0.3s ease;
 }
 
 header nav a:hover {
   color: #ff8c00;
+  transform: translateY(-3px);
 }
 
+/* Footer */
 footer {
   padding: 20px;
   background-color: rgba(0, 0, 0, 0.8);
@@ -60,14 +87,36 @@ footer a {
   color: #ffd700;
   font-size: 1.1em;
   text-decoration: none;
-  transition: color 0.3s;
+  transition: color 0.3s ease-in-out;
 }
 
 footer a:hover {
   color: #ff8c00;
 }
 
-/* Menu responsive */
+/* Transitions et animations */
+.button {
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.button:hover {
+  transform: translateY(-3px);
+  background-color: #ff9f1c;
+}
+
+/* Classes de transition pour les animations au scroll */
+.scroll-reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.scroll-reveal.scrolled {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Responsive */
 @media (max-width: 768px) {
   header {
     flex-direction: column;
@@ -75,7 +124,7 @@ footer a:hover {
   }
 
   .header-title {
-    font-size: 1.5em; /* Réduit la taille de la police pour le titre */
+    font-size: 1.5em; /* Réduction de la taille de la police pour le titre */
   }
 
   header nav {
@@ -86,9 +135,12 @@ footer a:hover {
   }
 
   header nav a {
-    font-size: 1em; /* Réduit la taille de la police pour les liens */
+    font-size: 1em; /* Réduction de la taille de la police pour les liens */
     margin: 5px 0;
   }
-}
 
+  footer a {
+    font-size: 1em;
+  }
+}
 
