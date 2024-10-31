@@ -24,3 +24,11 @@
   height: auto;
   border-radius: 8px;
 }
+
+/* Responsive styles for Roadmap */
+@media (max-width: 768px) {
+  .roadmap-container {
+    max-width: 90%;
+    padding: 15px;
+  }
+}
