@@ -355,6 +355,22 @@
         margin: 20px;
         max-width: none;
     }
+
+/* Progress bar */
+.progress-bar-container {
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 5px;
+    margin-top: 15px;
+    height: 10px;
+    overflow: hidden;
+}
+
+.progress-bar {
+    width: 0%;
+    height: 100%;
+    background-color: #ffb347;
+    transition: width 0.4s ease;
 }
 
 /* Support pour les écrans très larges */
