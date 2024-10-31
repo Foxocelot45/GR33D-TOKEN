@@ -1,28 +1,35 @@
-.about-us-section {
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-  color: white;
-  background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
-              url('/src/assets/about-background.png') center center/cover no-repeat;
-}
-
-.content-wrapper {
+.aboutus-container {
   max-width: 800px;
+  margin: auto;
   padding: 20px;
-  text-align: center;
-  background-color: rgba(0, 0, 0, 0.5);
-  border-radius: 10px;
+  background-color: rgba(0, 0, 0, 0.8);
+  border-radius: 8px;
+  color: #ffffff;
+  font-size: 1.1em;
+  line-height: 1.6em;
 }
 
-.content-wrapper h2 {
-  font-size: 2rem;
-  margin-bottom: 1rem;
+.aboutus-container h2 {
+  font-size: 2em;
+  color: #ffd700;
+  margin-bottom: 15px;
 }
 
-.content-wrapper p {
-  line-height: 1.6;
-  margin-bottom: 1rem;
+.aboutus-container h3 {
+  font-size: 1.5em;
+  color: #ffb347;
+  margin-top: 20px;
+}
+
+.aboutus-container p, .aboutus-container ul {
+  margin-bottom: 15px;
+  text-align: left;
+}
+
+.aboutus-container ul {
+  padding-left: 20px;
+}
+
+.aboutus-container ul li {
+  margin-bottom: 10px;
 }
