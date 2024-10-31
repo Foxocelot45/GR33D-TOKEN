@@ -7,7 +7,7 @@
   justify-content: center;
   min-height: 100vh;
   color: #fff;
-  background-image: url('../assets/staking-background.png');
+  background-image: url('../assets/staking-background.png'); /* Veille à ce que le chemin d'image soit correct */
   background-size: cover;
   background-position: center;
   text-align: center;
