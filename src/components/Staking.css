@@ -1,4 +1,4 @@
-/* Staking.css */
+/* Styles existants */
 .staking-section {
     display: flex;
     flex-direction: column;
@@ -161,35 +161,154 @@
     font-size: 1em;
 }
 
-/* Animation de chargement pour les boutons */
+/* Nouveaux styles pour les améliorations */
+
+/* Bannière de réseau */
+.network-banner {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.9);
+    color: #00ff00;
+    padding: 8px;
+    text-align: center;
+    font-size: 0.9em;
+    z-index: 1000;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(5px);
+}
+
+/* Notifications */
+.notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 15px 40px 15px 20px;
+    border-radius: 8px;
+    color: white;
+    animation: slideIn 0.3s ease-out;
+    z-index: 1000;
+    text-align: left;
+}
+
+.notification.success {
+    background-color: rgba(46, 125, 50, 0.9);
+}
+
+.notification.error {
+    background-color: rgba(198, 40, 40, 0.9);
+}
+
+.notification.info {
+    background-color: rgba(2, 136, 209, 0.9);
+}
+
+.notification-close {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+    font-size: 1.2em;
+    padding: 0 5px;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+/* Modal de confirmation */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    backdrop-filter: blur(5px);
+}
+
+.modal-content {
+    background-color: rgba(30, 30, 30, 0.95);
+    padding: 25px;
+    border-radius: 12px;
+    min-width: 300px;
+    max-width: 500px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.modal-buttons {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+    justify-content: flex-end;
+}
+
+.modal-button {
+    padding: 8px 20px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+.modal-button.confirm {
+    background-color: #ffb347;
+    color: #121212;
+}
+
+.modal-button.cancel {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: white;
+}
+
+.modal-button:hover {
+    transform: translateY(-2px);
+}
+
+/* Animation de chargement */
 .staking-button.loading {
     position: relative;
     opacity: 0.8;
     pointer-events: none;
 }
 
-.staking-button.loading:after {
+.staking-button.loading::after {
     content: '';
     position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     width: 16px;
     height: 16px;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    margin: auto;
-    border: 3px solid transparent;
-    border-top-color: #ffffff;
+    border: 2px solid transparent;
     border-radius: 50%;
-    animation: button-loading-spinner 1s ease infinite;
+    border-top-color: currentColor;
+    animation: spin 1s linear infinite;
 }
 
-@keyframes button-loading-spinner {
+@keyframes spin {
     from {
-        transform: rotate(0turn);
+        transform: translate(-50%, -50%) rotate(0deg);
     }
     to {
-        transform: rotate(1turn);
+        transform: translate(-50%, -50%) rotate(360deg);
     }
 }
 
@@ -215,6 +334,18 @@
     
     .staking-card {
         margin: 0;
+    }
+
+    .notification {
+        top: 10px;
+        right: 10px;
+        left: 10px;
+        max-width: none;
+    }
+
+    .modal-content {
+        margin: 20px;
+        max-width: none;
     }
 }
 
