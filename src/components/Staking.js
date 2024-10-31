@@ -5,14 +5,25 @@ import { ethers } from 'ethers';
 // Configuration du contrat avec ABI mis à jour pour le lock period
 const PROXY_ADDRESS = "0xeBaFE97112C5008249fb6fF4bCAf0a603d39e2a7";
 const CONTRACT_ABI = [
-    // Fonctions de lecture
-    "function balanceOf(address) view returns (uint256)",
+    // Lecture
+    "function name() view returns (string)",
+    "function symbol() view returns (string)",
+    "function decimals() view returns (uint8)",
+    "function totalSupply() view returns (uint256)",
+    "function balanceOf(address account) view returns (uint256)",
+    "function allowance(address owner, address spender) view returns (uint256)",
     "function getStakeInfo(address) view returns (uint256 stakedAmount, uint256 pendingRewards, uint256 contractBalance, uint256 rewardsPool)",
     "function BASE_APY() view returns (uint256)",
     "function getStakeDuration(address) view returns (uint256)",
+    "function stakingBurnRate() view returns (uint256)",
+    "function standardBurnRate() view returns (uint256)",
+    "function isExcludedFromTxLimit(address) view returns (bool)",
     
-    // Fonctions d'écriture
-    "function stake(uint256 amount, uint256 lockPeriod) external",
+    // Écriture
+    "function approve(address spender, uint256 amount) returns (bool)",
+    "function transfer(address to, uint256 amount) returns (bool)",
+    "function transferFrom(address from, address to, uint256 amount) returns (bool)",
+    "function stake(uint256 amount) external",  // Notez que j'ai enlevé lockPeriod car il n'est pas dans le contrat original
     "function unstake(uint256) external",
     "function claimRewards() external"
 ];
