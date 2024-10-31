@@ -50,3 +50,29 @@
   color: #fff;
   background: rgba(50, 50, 50, 0.9);
 }
+
+/* Responsive styles for Contacts */
+@media (max-width: 768px) {
+  .contacts-content {
+    max-width: 90%;
+    padding: 15px;
+  }
+
+  .contacts-content h2 {
+    font-size: 2em;
+  }
+
+  .contacts-content p {
+    font-size: 1em;
+  }
+
+  .social-links {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .social-links a {
+    font-size: 1.1em;
+    padding: 8px 15px;
+  }
+}
