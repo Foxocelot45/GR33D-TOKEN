@@ -10,6 +10,7 @@ import Staking from './components/Staking';
 import Contacts from './components/Contacts';
 import Whitepaper from './components/Whitepaper';
 import Liquidity from './components/Liquidity'; // Import de la nouvelle page Liquidity
+import DexAmm from './components/DexAmm'; // Import de la nouvelle page DexAmm
 
 function Footer() {
   const location = useLocation();
@@ -39,9 +40,9 @@ function App() {
             <Link to="/about">About Us</Link>
             <Link to="/roadmap">Roadmap</Link>
             <Link to="/whitepaper" target="_blank" rel="noopener noreferrer">Whitepaper</Link>
-            <Link to="/dex" className="disabled">DEX/AMM (Soon)</Link>
+            <Link to="/dex">DEX/AMM (Soon)</Link> {/* Nouveau lien pour la page DEX/AMM */}
             <Link to="/staking">Staking</Link>
-            <Link to="/liquidity">Liquidity (Coming Soon)</Link> {/* Nouveau bouton */}
+            <Link to="/liquidity">Liquidity (Coming Soon)</Link> {/* Lien pour la page Liquidity */}
             <Link to="/contacts">Contacts</Link>
           </nav>
         </header>
@@ -51,10 +52,11 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<AboutUs />} />
             <Route path="/roadmap" element={<Roadmap />} />
+            <Route path="/dex" element={<DexAmm />} /> {/* Nouvelle route pour DEX/AMM */}
             <Route path="/staking" element={<Staking />} />
             <Route path="/contacts" element={<Contacts />} />
             <Route path="/whitepaper" element={<Whitepaper />} />
-            <Route path="/liquidity" element={<Liquidity />} /> {/* Nouvelle route */}
+            <Route path="/liquidity" element={<Liquidity />} /> {/* Route pour Liquidity */}
           </Routes>
         </main>
 
