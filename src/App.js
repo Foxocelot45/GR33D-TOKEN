@@ -8,18 +8,19 @@ import Roadmap from './components/Roadmap';
 import Staking from './components/Staking';
 import Contacts from './components/Contacts';
 import Whitepaper from './components/Whitepaper';
+import logoImage from './assets/The-Greedy-s-Club-31-10-2024.png';
 
 function App() {
   return (
     <Router>
       <div className="App">
         <header>
-          <h1 className="header-title">The Greedy's Club</h1>
+          <img src={logoImage} alt="The Greedy's Club Logo" className="header-logo" />
           <nav>
             <Link to="/">Home</Link>
             <Link to="/about">About Us</Link>
             <Link to="/roadmap">Roadmap</Link>
-            <Link to="/whitepaper">Whitepaper</Link> {/* Mise à jour du lien vers Whitepaper */}
+            <Link to="/whitepaper">Whitepaper</Link>
             <Link to="/dex" className="disabled">DEX/AMM (Soon)</Link>
             <Link to="/staking">Staking</Link>
             <Link to="/contacts">Contacts</Link>
@@ -33,7 +34,7 @@ function App() {
             <Route path="/roadmap" element={<Roadmap />} />
             <Route path="/staking" element={<Staking />} />
             <Route path="/contacts" element={<Contacts />} />
-            <Route path="/whitepaper" element={<Whitepaper />} /> {/* Ajout de la route vers Whitepaper */}
+            <Route path="/whitepaper" element={<Whitepaper />} />
           </Routes>
         </main>
 
