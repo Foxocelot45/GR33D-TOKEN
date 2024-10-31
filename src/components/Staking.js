@@ -61,6 +61,8 @@ function Staking() {
     const [networkName, setNetworkName] = useState('');
     const [showConfirmation, setShowConfirmation] = useState(false);
     const [confirmationConfig, setConfirmationConfig] = useState({});
+    const [progress, setProgress] = useState(0); // Ajout de la progression de staking
+    const [isStaking, setIsStaking] = useState(false); // Indicateur de staking en cours
 
     const showNotification = (message, type = 'info') => {
         setNotification({ message, type });
@@ -121,10 +123,24 @@ function Staking() {
             message: `Êtes-vous sûr de vouloir staker ${stakeAmount} $GR33D ?`,
             onConfirm: async () => {
                 setIsLoading(true);
+                setIsStaking(true); // Active la barre de progression
+                setProgress(0); // Réinitialise la barre de progression
                 setError(null);
                 try {
                     const amount = ethers.utils.parseEther(stakeAmount);
                     const tx = await contract.stake(amount);
+
+                    // Simulation de progression de la barre
+                    const interval = setInterval(() => {
+                        setProgress(prev => {
+                            if (prev >= 100) {
+                                clearInterval(interval);
+                                return 100;
+                            }
+                            return prev + 10;
+                        });
+                    }, 300);
+
                     showNotification("Transaction en cours...", "info");
                     await tx.wait();
                     await updateUserData(contract, userAddress);
@@ -135,6 +151,7 @@ function Staking() {
                     showNotification("Erreur lors du staking", "error");
                 } finally {
                     setIsLoading(false);
+                    setIsStaking(false); // Désactive la barre de progression
                 }
             }
         });
@@ -284,6 +301,11 @@ function Staking() {
                                 Stake
                             </button>
                         </div>
+                        {isStaking && (
+                            <div className="progress-bar-container">
+                                <div className="progress-bar" style={{ width: `${progress}%` }}></div>
+                            </div>
+                        )}
                     </div>
 
                     <div className="staking-card unstaking-actions">
