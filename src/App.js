@@ -7,7 +7,7 @@ import Home from './components/Home';
 import Roadmap from './components/Roadmap';
 import Staking from './components/Staking';
 import Contacts from './components/Contacts';
-import Whitepaper from './components/Whitepaper/Whitepaper'; // Importation de Whitepaper
+import Whitepaper from './components/Whitepaper/Whitepaper'; // Vérifiez ce chemin
 
 function App() {
   return (
