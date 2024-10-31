@@ -3,7 +3,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   min-height: 100vh;
   color: #fff;
   background-image: url('../assets/staking-background.png');
@@ -19,63 +19,53 @@
   padding: 15px;
   margin-bottom: 20px;
   border-radius: 8px;
-  max-width: 600px;
+  max-width: 800px;
   font-size: 1em;
 }
 
-.connect-button {
-  background-color: #ffb347;
-  color: #121212;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 5px;
-  font-size: 1.2em;
-  cursor: pointer;
-  transition: background 0.3s ease;
-}
-
-.connect-button:hover {
-  background-color: #ff9f1c;
-  color: #fff;
-}
-
-.wallet-info-box {
-  background-color: rgba(0, 0, 0, 0.8);
-  color: #ffd700;
-  padding: 15px;
-  margin-top: 20px;
-  border-radius: 8px;
-  max-width: 600px;
-  font-size: 1em;
-}
-
-/* Nouveaux styles */
 .staking-container {
-  background-color: rgba(0, 0, 0, 0.8);
-  padding: 20px;
-  border-radius: 8px;
-  margin-top: 20px;
-  width: 100%;
-  max-width: 600px;
-}
-
-.staking-grid {
   display: grid;
-  grid-template-columns: 1fr;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 20px;
+  width: 100%;
+  max-width: 1200px;
   margin-top: 20px;
 }
 
 .staking-card {
-  background-color: rgba(255, 255, 255, 0.1);
+  background-color: rgba(0, 0, 0, 0.8);
   padding: 20px;
   border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.staking-card h3 {
+  color: #ffb347;
+  margin-bottom: 15px;
+  font-size: 1.2em;
+}
+
+.wallet-info {
+  grid-column: span 2;
+}
+
+.token-price {
+  grid-column: span 2;
+}
+
+.price-text {
+  font-size: 2em;
+  color: #ffd700;
+}
+
+.staking-info {
+  grid-column: span 2;
 }
 
 .input-group {
   display: flex;
   gap: 10px;
-  margin-top: 10px;
+  margin-top: 15px;
 }
 
 .staking-input {
@@ -85,6 +75,7 @@
   border: 1px solid rgba(255, 255, 255, 0.2);
   background-color: rgba(0, 0, 0, 0.5);
   color: white;
+  min-width: 0;
 }
 
 .staking-button {
@@ -95,6 +86,7 @@
   border-radius: 5px;
   cursor: pointer;
   transition: all 0.3s ease;
+  min-width: 100px;
 }
 
 .staking-button:hover {
@@ -107,15 +99,53 @@
   cursor: not-allowed;
 }
 
-.error-message {
-  color: #ff6b6b;
-  background-color: rgba(255, 107, 107, 0.1);
-  padding: 10px;
-  border-radius: 5px;
+.claim-button {
+  width: 100%;
   margin-top: 10px;
 }
 
-.info-text {
-  color: #ffd700;
+.error-message {
+  background-color: rgba(255, 0, 0, 0.2);
+  color: #ff6b6b;
+  padding: 10px;
+  border-radius: 5px;
   margin: 10px 0;
+  max-width: 800px;
+}
+
+.lock-period-selector {
+  margin-bottom: 15px;
+}
+
+.lock-period-selector select {
+  width: 100%;
+  padding: 10px;
+  border-radius: 5px;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  margin-top: 5px;
+}
+
+/* Animation de chargement */
+.loading {
+  opacity: 0.7;
+  pointer-events: none;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .staking-container {
+    grid-template-columns: 1fr;
+  }
+  
+  .wallet-info,
+  .token-price,
+  .staking-info {
+    grid-column: span 1;
+  }
+  
+  .staking-card {
+    margin: 0;
+  }
 }
