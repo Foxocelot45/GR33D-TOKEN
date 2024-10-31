@@ -3,12 +3,11 @@ import Web3Modal from "web3modal";
 import { ethers } from "ethers";
 import WalletConnectProvider from "@walletconnect/web3-provider";
 
-// Configuration du modal Web3
 const providerOptions = {
   walletconnect: {
     package: WalletConnectProvider,
     options: {
-      infuraId: "ba7fccd6b6004ecfbcf47ae9f61578ff"  // Utilisation de votre ID de projet Infura
+      infuraId: "ba7fccd6b6004ecfbcf47ae9f61578ff"  // Votre ID de projet Infura
     }
   }
 };
@@ -19,10 +18,17 @@ const web3Modal = new Web3Modal({
 });
 
 export async function connectWallet() {
-  const instance = await web3Modal.connect();
-  const provider = new ethers.providers.Web3Provider(instance);
-  const signer = provider.getSigner();
-  return { provider, signer };
+  try {
+    console.log("Initialisation de la connexion au wallet...");
+    const instance = await web3Modal.connect();
+    const provider = new ethers.providers.Web3Provider(instance);
+    const signer = provider.getSigner();
+
+    console.log("Connexion réussie au wallet. Adresse:", await signer.getAddress());
+    return { provider, signer };
+  } catch (error) {
+    console.error("Erreur lors de la connexion au wallet :", error);
+  }
 }
 
 export default web3Modal;
