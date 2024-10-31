@@ -67,3 +67,28 @@ footer a:hover {
   color: #ff8c00;
 }
 
+/* Menu responsive */
+@media (max-width: 768px) {
+  header {
+    flex-direction: column;
+    padding: 10px;
+  }
+
+  .header-title {
+    font-size: 1.5em; /* Réduit la taille de la police pour le titre */
+  }
+
+  header nav {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+  }
+
+  header nav a {
+    font-size: 1em; /* Réduit la taille de la police pour les liens */
+    margin: 5px 0;
+  }
+}
+
+
