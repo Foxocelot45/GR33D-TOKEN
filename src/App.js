@@ -1,13 +1,31 @@
+// App.js
 import React from 'react';
 import './App.css';
 import './components/AboutUs/AboutUs.css';
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Link, useLocation } from 'react-router-dom';
 import AboutUs from './components/AboutUs/AboutUs';
 import Home from './components/Home';
 import Roadmap from './components/Roadmap';
 import Staking from './components/Staking';
 import Contacts from './components/Contacts';
 import Whitepaper from './components/Whitepaper';
+
+function Footer() {
+  const location = useLocation();
+  const hideFooterLinks = location.pathname === '/about';
+
+  return (
+    <footer>
+      {!hideFooterLinks && (
+        <>
+          <a href="https://x.com/TheGr33dyzClub" target="_blank" rel="noopener noreferrer">Twitter</a>
+          <a href="https://t.co/e6Z9lyHC2k" target="_blank" rel="noopener noreferrer">GitHub</a>
+          <a href="https://t.me/+XWXpQfDJoUhmZDlk" target="_blank" rel="noopener noreferrer">Telegram</a>
+        </>
+      )}
+    </footer>
+  );
+}
 
 function App() {
   return (
@@ -37,11 +55,7 @@ function App() {
           </Routes>
         </main>
 
-        <footer>
-          <a href="https://x.com/TheGr33dyzClub" target="_blank" rel="noopener noreferrer">Twitter</a>
-          <a href="https://t.co/e6Z9lyHC2k" target="_blank" rel="noopener noreferrer">GitHub</a>
-          <a href="https://t.me/+XWXpQfDJoUhmZDlk" target="_blank" rel="noopener noreferrer">Telegram</a>
-        </footer>
+        <Footer />
       </div>
     </Router>
   );
