@@ -8,7 +8,7 @@ const providerOptions = {
   walletconnect: {
     package: WalletConnectProvider,
     options: {
-      infuraId: "INFURA_PROJECT_ID"  // Remplacez par votre ID de projet Infura
+      infuraId: "ba7fccd6b6004ecfbcf47ae9f61578ff"  // Utilisation de votre ID de projet Infura
     }
   }
 };
