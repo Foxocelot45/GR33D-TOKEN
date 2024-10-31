@@ -1,26 +1,37 @@
 /* AboutUs.css */
+.aboutus-section {
+  background-image: url('../assets/about-background.png'); /* Chemin de l'image */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  padding: 40px 0; /* Espace pour ne pas écraser le contenu */
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .aboutus-container {
   max-width: 700px;
-  margin: auto;
   padding: 20px;
   background-color: rgba(0, 0, 0, 0.6); /* Fond noir avec transparence */
   border-radius: 8px;
   color: #ffffff;
-  font-size: 0.9em; /* Taille du texte réduite */
-  line-height: 1.5em;
+  font-size: 0.85em; /* Taille du texte ajustée */
+  line-height: 1.6em;
   text-align: left;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
 .aboutus-container h2 {
-  font-size: 1.6em;
+  font-size: 1.5em;
   color: #ffd700;
   margin-bottom: 15px;
   text-align: center;
 }
 
 .aboutus-container h3 {
-  font-size: 1.2em;
+  font-size: 1.1em;
   color: #ffb347;
   margin-top: 20px;
 }
