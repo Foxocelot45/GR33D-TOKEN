@@ -2,10 +2,9 @@ import React, { useState, useEffect } from 'react';
 import './Staking.css';
 import { ethers } from 'ethers';
 
-// Configuration du contrat avec ABI mis à jour pour le lock period
+// Configuration du contrat avec ABI mis à jour sans lock period
 const PROXY_ADDRESS = "0xeBaFE97112C5008249fb6fF4bCAf0a603d39e2a7";
 const CONTRACT_ABI = [
-    // Lecture
     "function name() view returns (string)",
     "function symbol() view returns (string)",
     "function decimals() view returns (uint8)",
@@ -14,21 +13,18 @@ const CONTRACT_ABI = [
     "function allowance(address owner, address spender) view returns (uint256)",
     "function getStakeInfo(address) view returns (uint256 stakedAmount, uint256 pendingRewards, uint256 contractBalance, uint256 rewardsPool)",
     "function BASE_APY() view returns (uint256)",
-    "function getStakeDuration(address) view returns (uint256)",
     "function stakingBurnRate() view returns (uint256)",
     "function standardBurnRate() view returns (uint256)",
     "function isExcludedFromTxLimit(address) view returns (bool)",
     
-    // Écriture
     "function approve(address spender, uint256 amount) returns (bool)",
     "function transfer(address to, uint256 amount) returns (bool)",
     "function transferFrom(address from, address to, uint256 amount) returns (bool)",
-    "function stake(uint256 amount) external",  // Notez que j'ai enlevé lockPeriod car il n'est pas dans le contrat original
+    "function stake(uint256 amount) external",
     "function unstake(uint256) external",
     "function claimRewards() external"
 ];
 
-// Nouveau composant pour la notification (existant)
 const Notification = ({ message, type, onClose }) => (
     <div className={`notification ${type}`}>
         {message}
@@ -36,7 +32,6 @@ const Notification = ({ message, type, onClose }) => (
     </div>
 );
 
-// Nouveau composant pour la modale de confirmation (existant)
 const ConfirmationModal = ({ onConfirm, onCancel, message }) => (
     <div className="modal-overlay">
         <div className="modal-content">
@@ -51,7 +46,6 @@ const ConfirmationModal = ({ onConfirm, onCancel, message }) => (
 );
 
 function Staking() {
-    // États existants
     const [userAddress, setUserAddress] = useState(null);
     const [provider, setProvider] = useState(null);
     const [contract, setContract] = useState(null);
@@ -63,56 +57,30 @@ function Staking() {
     const [stakeAmount, setStakeAmount] = useState('');
     const [unstakeAmount, setUnstakeAmount] = useState('');
     const [isLoading, setIsLoading] = useState(false);
-
-    // Nouveaux états pour les améliorations UI et lock period
     const [notification, setNotification] = useState(null);
     const [networkName, setNetworkName] = useState('');
     const [showConfirmation, setShowConfirmation] = useState(false);
     const [confirmationConfig, setConfirmationConfig] = useState({});
-    const [selectedLockPeriod, setSelectedLockPeriod] = useState(0);
-    const [currentBonusAPY, setCurrentBonusAPY] = useState('0.00');
 
-    // Options de période de lock
-    const lockPeriodOptions = [
-        { value: 0, label: 'Pas de lock', bonus: '0.00' },
-        { value: 90, label: '3 mois', bonus: '5.00' },
-        { value: 180, label: '6 mois', bonus: '10.00' },
-        { value: 270, label: '9 mois', bonus: '15.00' },
-        { value: 360, label: '12 mois', bonus: '20.00' }
-    ];
-
-    // Fonction pour afficher une notification (existant)
     const showNotification = (message, type = 'info') => {
         setNotification({ message, type });
         setTimeout(() => setNotification(null), 5000);
     };
 
-    // Fonction existante mise à jour pour inclure le bonus APY
     const updateUserData = async (contract, address) => {
         try {
             const balance = await contract.balanceOf(address);
             const stakeInfo = await contract.getStakeInfo(address);
-            const stakeDuration = await contract.getStakeDuration(address);
-            
+
             setBalance(ethers.utils.formatEther(balance));
             setStakedAmount(ethers.utils.formatEther(stakeInfo.stakedAmount));
             setPendingRewards(ethers.utils.formatEther(stakeInfo.pendingRewards));
-            
-            // Calculer le bonus APY basé sur la durée de stake
-            const months = Math.floor(stakeDuration.toNumber() / (30 * 24 * 60 * 60));
-            if (months >= 12) setCurrentBonusAPY('20.00');
-            else if (months >= 9) setCurrentBonusAPY('15.00');
-            else if (months >= 6) setCurrentBonusAPY('10.00');
-            else if (months >= 3) setCurrentBonusAPY('5.00');
-            else setCurrentBonusAPY('0.00');
-            
         } catch (error) {
             console.error("Erreur lors de la mise à jour des données:", error);
             showNotification("Erreur lors de la mise à jour des données", "error");
         }
     };
 
-    // Fonction de connexion mise à jour (existant)
     const handleConnectWallet = async () => {
         try {
             setError(null);
@@ -125,7 +93,6 @@ function Staking() {
             const signer = provider.getSigner();
             const address = await signer.getAddress();
             
-            // Vérification du réseau
             const network = await provider.getNetwork();
             if (network.chainId !== 11155111) {
                 throw new Error("Veuillez vous connecter au réseau Sepolia");
@@ -147,21 +114,17 @@ function Staking() {
         }
     };
 
-    // Fonction de staking mise à jour pour inclure la période de lock
     const handleStake = async () => {
         if (!contract || !stakeAmount) return;
-        
-        const lockPeriodInSeconds = selectedLockPeriod * 24 * 60 * 60; // Conversion en secondes
-        const selectedOption = lockPeriodOptions.find(opt => opt.value === selectedLockPeriod);
-        
+
         setConfirmationConfig({
-            message: `Êtes-vous sûr de vouloir staker ${stakeAmount} $GR33D ${selectedOption.value > 0 ? `pour ${selectedOption.label} (+${selectedOption.bonus}% APY)` : 'sans période de lock'} ?`,
+            message: `Êtes-vous sûr de vouloir staker ${stakeAmount} $GR33D ?`,
             onConfirm: async () => {
                 setIsLoading(true);
                 setError(null);
                 try {
                     const amount = ethers.utils.parseEther(stakeAmount);
-                    const tx = await contract.stake(amount, lockPeriodInSeconds);
+                    const tx = await contract.stake(amount);
                     showNotification("Transaction en cours...", "info");
                     await tx.wait();
                     await updateUserData(contract, userAddress);
@@ -178,7 +141,6 @@ function Staking() {
         setShowConfirmation(true);
     };
 
-    // Fonctions existantes (handleUnstake, handleClaimRewards, etc.)
     const handleUnstake = async () => {
         if (!contract || !unstakeAmount) return;
         
@@ -231,7 +193,6 @@ function Staking() {
         setShowConfirmation(true);
     };
 
-    // Effets existants
     useEffect(() => {
         if (contract && userAddress) {
             const interval = setInterval(() => {
@@ -254,14 +215,12 @@ function Staking() {
 
     return (
         <div className="staking-section">
-            {/* Bannière de réseau */}
             {networkName && (
                 <div className="network-banner">
                     Réseau actuel : {networkName}
                 </div>
             )}
 
-            {/* Notification */}
             {notification && (
                 <Notification
                     message={notification.message}
@@ -270,7 +229,6 @@ function Staking() {
                 />
             )}
 
-            {/* Modal de confirmation */}
             {showConfirmation && (
                 <ConfirmationModal
                     message={confirmationConfig.message}
@@ -282,7 +240,6 @@ function Staking() {
                 />
             )}
 
-            {/* Contenu existant */}
             <div className="instruction-box">
                 <p>Pour une connexion optimale avec MetaMask, veuillez désactiver temporairement 
                    les autres extensions Web3 si MetaMask ne s'ouvre pas comme prévu.</p>
@@ -296,40 +253,21 @@ function Staking() {
                 </button>
             ) : (
                 <div className="staking-container">
-                    {/* Information Wallet */}
                     <div className="staking-card wallet-info">
                         <h3>Informations Wallet</h3>
                         <p>Adresse: {userAddress}</p>
                         <p>Balance: {balance} $GR33D</p>
                     </div>
 
-                    {/* Informations Staking */}
                     <div className="staking-card staking-info">
                         <h3>Informations Staking</h3>
                         <p>Montant Staké: {stakedAmount} $GR33D</p>
                         <p>Récompenses en attente: {pendingRewards} $GR33D</p>
                         <p>APY Base: {baseAPY}%</p>
-                        <p>APY Bonus actuel: +{currentBonusAPY}%</p>
-                        <p>APY Total: {(parseFloat(baseAPY) + parseFloat(currentBonusAPY)).toFixed(2)}%</p>
                     </div>
 
-                    {/* Section Staking avec sélecteur de période */}
                     <div className="staking-card staking-actions">
                         <h3>Staking</h3>
-                        <div className="lock-period-selector">
-                            <label>Période de lock:</label>
-                            <select 
-                                value={selectedLockPeriod}
-                                onChange={(e) => setSelectedLockPeriod(Number(e.target.value))}
-                                className="period-select"
-                            >
-                                {lockPeriodOptions.map(option => (
-                                    <option key={option.value} value={option.value}>
-                                        {option.label} {option.value > 0 ? `(+${option.bonus}% APY)` : ''}
-                                    </option>
-                                ))}
-                            </select>
-                        </div>
                         <div className="input-group">
                             <input
                                 type="number"
@@ -348,7 +286,6 @@ function Staking() {
                         </div>
                     </div>
 
-                    {/* Section Unstaking */}
                     <div className="staking-card unstaking-actions">
                         <h3>Unstaking</h3>
                         <div className="input-group">
@@ -369,7 +306,6 @@ function Staking() {
                         </div>
                     </div>
 
-                    {/* Section Récompenses */}
                     <div className="staking-card rewards-actions">
                         <h3>Récompenses</h3>
                         <button 
