@@ -1,4 +1,4 @@
-/* Styles existants */
+/* Styles de base pour la section de staking */
 .staking-section {
     display: flex;
     flex-direction: column;
@@ -77,15 +77,6 @@
     grid-column: span 2;
 }
 
-.token-price {
-    grid-column: span 2;
-}
-
-.price-text {
-    font-size: 2em;
-    color: #ffd700;
-}
-
 .input-group {
     display: flex;
     gap: 10px;
@@ -107,45 +98,6 @@
     border-color: #ffb347;
 }
 
-/* Nouveaux styles pour le sélecteur de période */
-.lock-period-selector {
-    margin-bottom: 15px;
-    text-align: left;
-}
-
-.lock-period-selector label {
-    display: block;
-    margin-bottom: 8px;
-    color: #fff;
-    font-size: 0.9em;
-}
-
-.period-select {
-    width: 100%;
-    padding: 10px;
-    border-radius: 5px;
-    background-color: rgba(0, 0, 0, 0.5);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    color: white;
-    font-size: 1em;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    margin-bottom: 10px;
-}
-
-.period-select:focus {
-    outline: none;
-    border-color: #ffb347;
-    box-shadow: 0 0 0 1px rgba(255, 179, 71, 0.2);
-}
-
-.period-select option {
-    background-color: #1a1a1a;
-    color: white;
-    padding: 10px;
-}
-
-/* Styles existants */
 .staking-button {
     background-color: #ffb347;
     color: #121212;
@@ -319,7 +271,7 @@
     transform: translateY(-2px);
 }
 
-/* Animations de chargement existantes */
+/* Animations de chargement */
 .staking-button.loading {
     position: relative;
     opacity: 0.8;
@@ -356,7 +308,6 @@
     }
     
     .wallet-info,
-    .token-price,
     .staking-info {
         grid-column: span 1;
     }
@@ -384,10 +335,6 @@
         margin: 20px;
         max-width: none;
     }
-
-    .period-select {
-        margin-bottom: 15px;
-    }
 }
 
 /* Support pour les écrans très larges */
@@ -396,3 +343,4 @@
         grid-template-columns: repeat(3, 1fr);
     }
 }
+
