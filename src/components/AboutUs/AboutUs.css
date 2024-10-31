@@ -14,24 +14,24 @@
 .aboutus-container {
   max-width: 700px;
   padding: 20px;
-  background-color: rgba(0, 0, 0, 0.6); /* Fond noir avec transparence */
+  background-color: rgba(0, 0, 0, 0.75); /* Fond noir avec une transparence plus foncée */
   border-radius: 8px;
   color: #ffffff;
-  font-size: 0.85em; /* Taille du texte ajustée */
-  line-height: 1.6em;
+  font-size: 1em; /* Taille du texte légèrement augmentée */
+  line-height: 1.8em;
   text-align: left;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
 .aboutus-container h2 {
-  font-size: 1.5em;
+  font-size: 1.7em;
   color: #ffd700;
   margin-bottom: 15px;
   text-align: center;
 }
 
 .aboutus-container h3 {
-  font-size: 1.1em;
+  font-size: 1.2em;
   color: #ffb347;
   margin-top: 20px;
 }
@@ -48,3 +48,4 @@
 .aboutus-container ul li {
   margin-bottom: 8px;
 }
+
