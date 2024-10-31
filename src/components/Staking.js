@@ -346,4 +346,33 @@ function Staking() {
                                 className="staking-input"
                                 placeholder="Montant à unstaker"
                                 value={unstakeAmount}
-                                onChange={(e) => setUnstakeAmount(
+                                onChange={(e) => setUnstakeAmount(e.target.value)}
+                            />
+                            <button 
+                                className={`staking-button ${isLoading ? 'loading' : ''}`}
+                                onClick={handleUnstake}
+                                disabled={isLoading || !unstakeAmount}
+                            >
+                                Unstake
+                            </button>
+                        </div>
+                    </div>
+
+                    {/* Section Récompenses */}
+                    <div className="staking-card rewards-actions">
+                        <h3>Récompenses</h3>
+                        <button 
+                            className={`staking-button claim-button ${isLoading ? 'loading' : ''}`}
+                            onClick={handleClaimRewards}
+                            disabled={isLoading || parseFloat(pendingRewards) <= 0}
+                        >
+                            Réclamer {pendingRewards} $GR33D
+                        </button>
+                    </div>
+                </div>
+            )}
+        </div>
+    );
+}
+
+export default Staking;
