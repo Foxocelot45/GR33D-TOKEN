@@ -1,37 +1,82 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './Staking.css';
-import { connectWallet } from '../web3config';
+import { ethers } from 'ethers';
+import { PROXY_ADDRESS, CONTRACT_ABI } from '../constants/contract';
 
 function Staking() {
   const [userAddress, setUserAddress] = useState(null);
+  const [provider, setProvider] = useState(null);
+  const [contract, setContract] = useState(null);
+  const [error, setError] = useState(null);
+  const [balance, setBalance] = useState('0');
 
-  // Fonction pour connecter le wallet et récupérer l'adresse
+  // Fonction pour connecter le wallet et initialiser le contrat
   const handleConnectWallet = async () => {
     try {
-      const { userAddress } = await connectWallet();
-      setUserAddress(userAddress);
+      setError(null);
+      if (!window.ethereum) {
+        throw new Error("MetaMask n'est pas installé");
+      }
+
+      const provider = new ethers.providers.Web3Provider(window.ethereum);
+      await provider.send("eth_requestAccounts", []);
+      const signer = provider.getSigner();
+      const address = await signer.getAddress();
+      
+      const contract = new ethers.Contract(PROXY_ADDRESS, CONTRACT_ABI, signer);
+      
+      setProvider(provider);
+      setContract(contract);
+      setUserAddress(address);
+
+      // Récupérer le solde initial
+      const balance = await contract.balanceOf(address);
+      setBalance(ethers.utils.formatEther(balance));
+
     } catch (error) {
-      console.error("Erreur lors de la connexion du wallet :", error);
+      console.error("Erreur lors de la connexion:", error);
+      setError(error.message);
     }
   };
 
+  // Effet pour vérifier si déjà connecté
+  useEffect(() => {
+    if (window.ethereum) {
+      window.ethereum.on('accountsChanged', () => {
+        window.location.reload();
+      });
+      window.ethereum.on('chainChanged', () => {
+        window.location.reload();
+      });
+    }
+  }, []);
+
   return (
     <div className="staking-section">
-      {/* Message d'instruction */}
       <div className="instruction-box">
-        <p>Pour une connexion optimale avec Metamask, veuillez désactiver temporairement les autres extensions Web3 si Metamask ne s’ouvre pas comme prévu.</p>
+        <p>Pour une connexion optimale avec MetaMask, veuillez désactiver temporairement 
+           les autres extensions Web3 si MetaMask ne s'ouvre pas comme prévu.</p>
       </div>
 
       <h2>Staking</h2>
-      <button className="connect-button" onClick={handleConnectWallet}>
-        Connecter
-      </button>
+      
+      {error && (
+        <div className="error-message">
+          {error}
+        </div>
+      )}
 
-      {/* Affichage de l'adresse du wallet si connecté */}
-      {userAddress && (
-        <div className="wallet-info-box">
-          <p>Wallet connecté avec succès :</p>
-          <p>{userAddress}</p>
+      {!userAddress ? (
+        <button className="connect-button" onClick={handleConnectWallet}>
+          Connecter
+        </button>
+      ) : (
+        <div className="staking-container">
+          <div className="wallet-info-box">
+            <p>Wallet connecté avec succès:</p>
+            <p>{userAddress}</p>
+            <p className="info-text">Balance: {balance} $GR33D</p>
+          </div>
         </div>
       )}
     </div>
@@ -39,5 +84,3 @@ function Staking() {
 }
 
 export default Staking;
-
-
