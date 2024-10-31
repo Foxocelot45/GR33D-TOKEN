@@ -1,33 +1,32 @@
-// src/components/Staking.js
 import React, { useState } from 'react';
+import { connectWallet } from '../web3config';
 import './Staking.css';
 
 function Staking() {
-  const [account, setAccount] = useState(null);
+  const [connected, setConnected] = useState(false);
+  const [userAddress, setUserAddress] = useState('');
 
-  // Fonction pour se connecter à MetaMask
-  const connectWallet = async () => {
-    if (window.ethereum) {
-      try {
-        const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
-        setAccount(accounts[0]);
-        console.log('Connected account:', accounts[0]);
-      } catch (error) {
-        console.error('Connection error:', error);
-      }
-    } else {
-      alert('MetaMask non détecté. Veuillez installer MetaMask pour continuer.');
+  const handleConnect = async () => {
+    try {
+      const { provider, userAddress } = await connectWallet();
+      setConnected(true);
+      setUserAddress(userAddress);
+    } catch (error) {
+      console.error('Connection failed:', error);
     }
   };
 
   return (
-    <div className="staking-container">
+    <div className="staking-page">
       <h2>Staking</h2>
-      {/* Bouton Connecter */}
-      {!account ? (
-        <button className="connect-button" onClick={connectWallet}>Connecter</button>
-      ) : (
-        <p>Connecté avec l'adresse : {account}</p>
+      <button onClick={handleConnect} className="connect-button">
+        Connecter
+      </button>
+      {connected && (
+        <div className="wallet-info">
+          <p>Wallet connecté avec succès.</p>
+          <p>Adresse : {userAddress}</p>
+        </div>
       )}
     </div>
   );
