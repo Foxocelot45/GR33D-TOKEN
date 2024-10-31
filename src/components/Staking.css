@@ -1,151 +1,226 @@
 /* Staking.css */
 .staking-section {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-  min-height: 100vh;
-  color: #fff;
-  background-image: url('../assets/staking-background.png');
-  background-size: cover;
-  background-position: center;
-  text-align: center;
-  padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    min-height: 100vh;
+    color: #fff;
+    background-image: url('../assets/staking-background.png');
+    background-size: cover;
+    background-position: center;
+    text-align: center;
+    padding: 20px;
 }
 
 .instruction-box {
-  background-color: rgba(0, 0, 0, 0.8);
-  color: #fff;
-  padding: 15px;
-  margin-bottom: 20px;
-  border-radius: 8px;
-  max-width: 800px;
-  font-size: 1em;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: #fff;
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    max-width: 800px;
+    font-size: 1em;
+}
+
+.connect-button {
+    background-color: #ffb347;
+    color: #121212;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.2em;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.connect-button:hover {
+    background-color: #ff9f1c;
+    color: #fff;
 }
 
 .staking-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 20px;
-  width: 100%;
-  max-width: 1200px;
-  margin-top: 20px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    width: 100%;
+    max-width: 1200px;
+    margin-top: 20px;
 }
 
 .staking-card {
-  background-color: rgba(0, 0, 0, 0.8);
-  padding: 20px;
-  border-radius: 8px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+    background-color: rgba(0, 0, 0, 0.8);
+    padding: 20px;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(5px);
 }
 
 .staking-card h3 {
-  color: #ffb347;
-  margin-bottom: 15px;
-  font-size: 1.2em;
+    color: #ffb347;
+    margin-bottom: 15px;
+    font-size: 1.2em;
+    text-align: left;
+}
+
+.staking-card p {
+    text-align: left;
+    margin: 10px 0;
+    color: #fff;
 }
 
 .wallet-info {
-  grid-column: span 2;
-}
-
-.token-price {
-  grid-column: span 2;
-}
-
-.price-text {
-  font-size: 2em;
-  color: #ffd700;
+    grid-column: span 2;
 }
 
 .staking-info {
-  grid-column: span 2;
+    grid-column: span 2;
+}
+
+.token-price {
+    grid-column: span 2;
+}
+
+.price-text {
+    font-size: 2em;
+    color: #ffd700;
 }
 
 .input-group {
-  display: flex;
-  gap: 10px;
-  margin-top: 15px;
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
 }
 
 .staking-input {
-  flex: 1;
-  padding: 10px;
-  border-radius: 5px;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  background-color: rgba(0, 0, 0, 0.5);
-  color: white;
-  min-width: 0;
+    flex: 1;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    min-width: 0;
+}
+
+.staking-input:focus {
+    outline: none;
+    border-color: #ffb347;
 }
 
 .staking-button {
-  background-color: #ffb347;
-  color: #121212;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  min-width: 100px;
+    background-color: #ffb347;
+    color: #121212;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    min-width: 100px;
+    font-weight: bold;
 }
 
 .staking-button:hover {
-  background-color: #ff9f1c;
-  color: #fff;
+    background-color: #ff9f1c;
+    color: #fff;
 }
 
 .staking-button:disabled {
-  background-color: #666;
-  cursor: not-allowed;
+    background-color: #666;
+    cursor: not-allowed;
+    opacity: 0.7;
 }
 
 .claim-button {
-  width: 100%;
-  margin-top: 10px;
+    width: 100%;
+    margin-top: 10px;
 }
 
 .error-message {
-  background-color: rgba(255, 0, 0, 0.2);
-  color: #ff6b6b;
-  padding: 10px;
-  border-radius: 5px;
-  margin: 10px 0;
-  max-width: 800px;
+    background-color: rgba(255, 0, 0, 0.2);
+    color: #ff6b6b;
+    padding: 10px;
+    border-radius: 5px;
+    margin: 10px 0;
+    max-width: 800px;
+    text-align: left;
 }
 
-.lock-period-selector {
-  margin-bottom: 15px;
+.staking-info p {
+    display: flex;
+    justify-content: space-between;
+    margin: 8px 0;
 }
 
-.lock-period-selector select {
-  width: 100%;
-  padding: 10px;
-  border-radius: 5px;
-  background-color: rgba(0, 0, 0, 0.5);
-  color: white;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  margin-top: 5px;
+.wallet-info-box {
+    background-color: rgba(0, 0, 0, 0.8);
+    color: #ffd700;
+    padding: 15px;
+    margin-top: 20px;
+    border-radius: 8px;
+    max-width: 800px;
+    font-size: 1em;
 }
 
-/* Animation de chargement */
-.loading {
-  opacity: 0.7;
-  pointer-events: none;
+/* Animation de chargement pour les boutons */
+.staking-button.loading {
+    position: relative;
+    opacity: 0.8;
+    pointer-events: none;
+}
+
+.staking-button.loading:after {
+    content: '';
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    border: 3px solid transparent;
+    border-top-color: #ffffff;
+    border-radius: 50%;
+    animation: button-loading-spinner 1s ease infinite;
+}
+
+@keyframes button-loading-spinner {
+    from {
+        transform: rotate(0turn);
+    }
+    to {
+        transform: rotate(1turn);
+    }
 }
 
 /* Responsive Design */
 @media (max-width: 768px) {
-  .staking-container {
-    grid-template-columns: 1fr;
-  }
-  
-  .wallet-info,
-  .token-price,
-  .staking-info {
-    grid-column: span 1;
-  }
-  
-  .staking-card {
-    margin: 0;
-  }
+    .staking-container {
+        grid-template-columns: 1fr;
+    }
+    
+    .wallet-info,
+    .token-price,
+    .staking-info {
+        grid-column: span 1;
+    }
+    
+    .input-group {
+        flex-direction: column;
+    }
+    
+    .staking-button {
+        width: 100%;
+    }
+    
+    .staking-card {
+        margin: 0;
+    }
+}
+
+/* Support pour les écrans très larges */
+@media (min-width: 1400px) {
+    .staking-container {
+        grid-template-columns: repeat(3, 1fr);
+    }
 }
