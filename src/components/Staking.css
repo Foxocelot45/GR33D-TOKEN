@@ -1,0 +1,41 @@
+/* Staking.css */
+
+.staking-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  color: #fff;
+  text-align: center;
+  background-image: url('../assets/staking-background.png');
+  background-size: cover;
+  background-position: center;
+}
+
+h2 {
+  font-size: 2.5em;
+  color: #ffd700;
+  margin-bottom: 20px;
+}
+
+.connect-button {
+  padding: 15px 30px;
+  font-size: 1.2em;
+  color: #fff;
+  background-color: #ff8c00;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.connect-button:hover {
+  background-color: #ffd700;
+}
+
+.connected-address {
+  font-size: 1.2em;
+  color: #ffd700;
+  margin-top: 20px;
+}
