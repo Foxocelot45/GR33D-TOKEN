@@ -49,3 +49,23 @@
   margin-bottom: 8px;
 }
 
+/* Responsive styles for AboutUs */
+@media (max-width: 768px) {
+  .aboutus-container {
+    max-width: 90%;
+    padding: 15px;
+  }
+
+  .aboutus-container h2 {
+    font-size: 1.5em;
+  }
+
+  .aboutus-container h3 {
+    font-size: 1em;
+  }
+
+  .aboutus-container p,
+  .aboutus-container ul li {
+    font-size: 0.9em;
+  }
+}
