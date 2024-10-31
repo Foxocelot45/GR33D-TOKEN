@@ -19,6 +19,12 @@
   font-weight: bold;
   line-height: 1.4;
   color: #f5c518; /* Couleur dorée */
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Ajout de transition */
+}
+
+.home-text:hover {
+  transform: translateY(-3px); /* Animation de survol */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
 }
 
 .home-text span {
@@ -26,6 +32,18 @@
   display: block;
   margin-top: 20px;
   color: #ffffff;
+}
+
+/* Effet de scroll reveal */
+.home-text.scroll-reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.home-text.scrolled {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 /* Responsive styles for Home */
