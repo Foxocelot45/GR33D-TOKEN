@@ -32,3 +32,19 @@
   font-size: 1em;
   color: #cccccc;
 }
+
+/* Responsive styles for DexAmm */
+@media (max-width: 768px) {
+  .dexamm-container {
+    max-width: 90%;
+    padding: 15px;
+  }
+
+  .dexamm-container h2 {
+    font-size: 1.3em;
+  }
+
+  .dexamm-container p {
+    font-size: 0.9em;
+  }
+}
