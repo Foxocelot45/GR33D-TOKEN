@@ -1,6 +1,5 @@
-/* DexAmm.css */
 .dexamm-section {
-  background-image: url('/src/assets/about-background.png'); /* Vous pouvez changer l'image si nécessaire */
+  background-image: url('/src/assets/about-background.png'); /* Assurez-vous que le chemin est correct */
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -29,14 +28,15 @@
 }
 
 .dexamm-container h2 {
-  font-size: 1.5em;
+  font-size: 2em;
   color: #ffd700;
   margin-bottom: 15px;
 }
 
 .dexamm-container p {
-  font-size: 1em;
+  font-size: 1.1em;
   color: #cccccc;
+  line-height: 1.6;
 }
 
 /* Effet de scroll reveal */
@@ -59,10 +59,10 @@
   }
 
   .dexamm-container h2 {
-    font-size: 1.3em;
+    font-size: 1.6em;
   }
 
   .dexamm-container p {
-    font-size: 0.9em;
+    font-size: 1em;
   }
 }
