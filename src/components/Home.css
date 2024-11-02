@@ -19,7 +19,13 @@
   font-weight: bold;
   line-height: 1.4;
   color: #f5c518; /* Couleur dorée */
-  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Ajout de transition */
+  transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.6s ease; /* Ajout de transition */
+  opacity: 0;
+}
+
+.home-text.scrolled {
+  opacity: 1;
+  transform: translateY(0); /* Animation de révélation au scroll */
 }
 
 .home-text:hover {
@@ -35,15 +41,10 @@
 }
 
 /* Effet de scroll reveal */
-.home-text.scroll-reveal {
+.scroll-reveal {
   opacity: 0;
   transform: translateY(20px);
   transition: opacity 0.6s ease, transform 0.6s ease;
-}
-
-.home-text.scrolled {
-  opacity: 1;
-  transform: translateY(0);
 }
 
 /* Responsive styles for Home */
