@@ -6,7 +6,7 @@ function Contacts() {
     <div className="contacts-section">
       <div className="contacts-content">
         <h2>Contacts</h2>
-        <p>Retrouvez-nous sur nos réseaux sociaux :</p>
+        <p>Follow us on social media :</p>
         <div className="social-links">
           <a href="https://x.com/TheGr33dyzClub" target="_blank" rel="noopener noreferrer">Twitter</a>
           <a href="https://t.co/e6Z9lyHC2k" target="_blank" rel="noopener noreferrer">GitHub</a>
