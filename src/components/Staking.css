@@ -102,6 +102,21 @@
     margin-top: 15px;
 }
 
+/* Nouveau style pour le menu déroulant des périodes de lock */
+.staking-select {
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    font-size: 1em;
+}
+
+.staking-select:focus {
+    outline: none;
+    border-color: #ffb347;
+}
+
 .staking-input {
     flex: 1;
     padding: 10px;
