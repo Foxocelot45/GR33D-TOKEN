@@ -1,9 +1,8 @@
-// App.js
 import React, { useState, useEffect } from 'react';
 import './App.css';
 import './components/AboutUs/AboutUs.css';
 import { BrowserRouter as Router, Routes, Route, Link, useLocation } from 'react-router-dom';
-import { connectWallet, disconnectWallet, getWalletInfo } from './web3config';
+import { useWeb3 } from './Web3Provider';
 
 import AboutUs from './components/AboutUs/AboutUs';
 import Home from './components/Home';
@@ -32,39 +31,7 @@ function Footer() {
 }
 
 function App() {
-  const [walletInfo, setWalletInfo] = useState(null);
-  const [isConnected, setIsConnected] = useState(false);
-
-  const handleConnect = async () => {
-    try {
-      const info = await connectWallet();
-      setWalletInfo(info);
-      setIsConnected(true);
-    } catch (error) {
-      console.error("Connection failed:", error);
-    }
-  };
-
-  const handleDisconnect = async () => {
-    await disconnectWallet();
-    setWalletInfo(null);
-    setIsConnected(false);
-  };
-
-  useEffect(() => {
-    const fetchWalletInfo = async () => {
-      try {
-        const info = await getWalletInfo();
-        setWalletInfo(info);
-        setIsConnected(true);
-      } catch {
-        setIsConnected(false);
-      }
-    };
-    if (walletInfo) {
-      fetchWalletInfo();
-    }
-  }, [walletInfo]);
+  const { account, connectWallet, disconnectWallet } = useWeb3();
 
   return (
     <Router>
@@ -82,12 +49,12 @@ function App() {
             <Link to="/contacts">Contacts</Link>
           </nav>
           <div className="wallet-buttons">
-            {isConnected ? (
-              <button className="button disconnect-button" onClick={handleDisconnect}>
+            {account ? (
+              <button className="button disconnect-button" onClick={disconnectWallet}>
                 Disconnect Wallet
               </button>
             ) : (
-              <button className="button connect-button" onClick={handleConnect}>
+              <button className="button connect-button" onClick={connectWallet}>
                 Connect Wallet
               </button>
             )}
