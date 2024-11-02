@@ -2,8 +2,9 @@ import React, { useState, useEffect } from 'react';
 import './Staking.css';
 import { ethers } from 'ethers';
 
-// Configuration du contrat avec ABI mis à jour sans lock period
+// Configuration du contrat avec ABI mis à jour, incluant le lock period
 const PROXY_ADDRESS = "0xeBaFE97112C5008249fb6fF4bCAf0a603d39e2a7";
+const LOCK_PERIOD = 30 * 24 * 60 * 60 * 1000; // Période de lock en millisecondes (par exemple 30 jours)
 const CONTRACT_ABI = [
     "function name() view returns (string)",
     "function symbol() view returns (string)",
@@ -11,7 +12,7 @@ const CONTRACT_ABI = [
     "function totalSupply() view returns (uint256)",
     "function balanceOf(address account) view returns (uint256)",
     "function allowance(address owner, address spender) view returns (uint256)",
-    "function getStakeInfo(address) view returns (uint256 stakedAmount, uint256 pendingRewards, uint256 contractBalance, uint256 rewardsPool)",
+    "function getStakeInfo(address) view returns (uint256 stakedAmount, uint256 pendingRewards, uint256 lockEndTime, uint256 rewardsPool)", // lockEndTime ajouté
     "function BASE_APY() view returns (uint256)",
     "function stakingBurnRate() view returns (uint256)",
     "function standardBurnRate() view returns (uint256)",
@@ -53,6 +54,7 @@ function Staking() {
     const [balance, setBalance] = useState('0');
     const [stakedAmount, setStakedAmount] = useState('0');
     const [pendingRewards, setPendingRewards] = useState('0');
+    const [lockEndTime, setLockEndTime] = useState(null); // Temps de fin du lock
     const [baseAPY] = useState('20.00');
     const [stakeAmount, setStakeAmount] = useState('');
     const [unstakeAmount, setUnstakeAmount] = useState('');
@@ -77,6 +79,7 @@ function Staking() {
             setBalance(ethers.utils.formatEther(balance));
             setStakedAmount(ethers.utils.formatEther(stakeInfo.stakedAmount));
             setPendingRewards(ethers.utils.formatEther(stakeInfo.pendingRewards));
+            setLockEndTime(stakeInfo.lockEndTime.toNumber() * 1000); // Convertir en millisecondes
         } catch (error) {
             console.error("Erreur lors de la mise à jour des données:", error);
             showNotification("Erreur lors de la mise à jour des données", "error");
@@ -130,7 +133,6 @@ function Staking() {
                     const amount = ethers.utils.parseEther(stakeAmount);
                     const tx = await contract.stake(amount);
 
-                    // Simulation de progression de la barre
                     const interval = setInterval(() => {
                         setProgress(prev => {
                             if (prev >= 100) {
@@ -160,7 +162,14 @@ function Staking() {
 
     const handleUnstake = async () => {
         if (!contract || !unstakeAmount) return;
-        
+
+        const currentTime = Date.now();
+        if (lockEndTime && currentTime < lockEndTime) {
+            const timeLeft = ((lockEndTime - currentTime) / (1000 * 60 * 60 * 24)).toFixed(2);
+            showNotification(`Le staking est verrouillé. Temps restant : ${timeLeft} jours`, "error");
+            return;
+        }
+
         setConfirmationConfig({
             message: `Êtes-vous sûr de vouloir unstaker ${unstakeAmount} $GR33D ?`,
             onConfirm: async () => {
@@ -281,6 +290,9 @@ function Staking() {
                         <p>Montant Staké: {stakedAmount} $GR33D</p>
                         <p>Récompenses en attente: {pendingRewards} $GR33D</p>
                         <p>APY Base: {baseAPY}%</p>
+                        {lockEndTime && (
+                            <p>Verrouillé jusqu'à : {new Date(lockEndTime).toLocaleDateString()}</p>
+                        )}
                     </div>
 
                     <div className="staking-card staking-actions">
