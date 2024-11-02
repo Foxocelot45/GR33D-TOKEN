@@ -141,6 +141,33 @@
     opacity: 0.7;
 }
 
+/* Style de verrouillage (lock) pour les boutons d'Unstaking */
+.locked {
+    position: relative;
+    pointer-events: none;
+    opacity: 0.6;
+}
+
+.locked::before {
+    content: '🔒 Lock active';
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    background-color: #ff4d4d;
+    color: #fff;
+    padding: 5px;
+    border-radius: 5px;
+    font-size: 0.8em;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+/* Style pour l'indicateur de fin de verrouillage */
+.lock-timer {
+    margin-top: 10px;
+    color: #ff9f1c;
+    font-size: 0.9em;
+}
+
 .claim-button {
     width: 100%;
     margin-top: 10px;
