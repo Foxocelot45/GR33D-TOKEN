@@ -4,7 +4,6 @@ import { ethers } from 'ethers';
 
 // Configuration du contrat avec ABI mis à jour, incluant le lock period
 const PROXY_ADDRESS = "0xeBaFE97112C5008249fb6fF4bCAf0a603d39e2a7";
-const LOCK_PERIOD = 30 * 24 * 60 * 60 * 1000; // Période de lock en millisecondes (par exemple 30 jours)
 const CONTRACT_ABI = [
     "function name() view returns (string)",
     "function symbol() view returns (string)",
@@ -12,12 +11,11 @@ const CONTRACT_ABI = [
     "function totalSupply() view returns (uint256)",
     "function balanceOf(address account) view returns (uint256)",
     "function allowance(address owner, address spender) view returns (uint256)",
-    "function getStakeInfo(address) view returns (uint256 stakedAmount, uint256 pendingRewards, uint256 lockEndTime, uint256 rewardsPool)", // lockEndTime ajouté
+    "function getStakeInfo(address) view returns (uint256 stakedAmount, uint256 pendingRewards, uint256 lockEndTime, uint256 rewardsPool)",
     "function BASE_APY() view returns (uint256)",
     "function stakingBurnRate() view returns (uint256)",
     "function standardBurnRate() view returns (uint256)",
     "function isExcludedFromTxLimit(address) view returns (bool)",
-    
     "function approve(address spender, uint256 amount) returns (bool)",
     "function transfer(address to, uint256 amount) returns (bool)",
     "function transferFrom(address from, address to, uint256 amount) returns (bool)",
@@ -48,13 +46,12 @@ const ConfirmationModal = ({ onConfirm, onCancel, message }) => (
 
 function Staking() {
     const [userAddress, setUserAddress] = useState(null);
-    const [provider, setProvider] = useState(null);
     const [contract, setContract] = useState(null);
     const [error, setError] = useState(null);
     const [balance, setBalance] = useState('0');
     const [stakedAmount, setStakedAmount] = useState('0');
     const [pendingRewards, setPendingRewards] = useState('0');
-    const [lockEndTime, setLockEndTime] = useState(null); // Temps de fin du lock
+    const [lockEndTime, setLockEndTime] = useState(null);
     const [baseAPY] = useState('20.00');
     const [stakeAmount, setStakeAmount] = useState('');
     const [unstakeAmount, setUnstakeAmount] = useState('');
@@ -63,8 +60,8 @@ function Staking() {
     const [networkName, setNetworkName] = useState('');
     const [showConfirmation, setShowConfirmation] = useState(false);
     const [confirmationConfig, setConfirmationConfig] = useState({});
-    const [progress, setProgress] = useState(0); // Ajout de la progression de staking
-    const [isStaking, setIsStaking] = useState(false); // Indicateur de staking en cours
+    const [progress, setProgress] = useState(0);
+    const [isStaking, setIsStaking] = useState(false);
 
     const showNotification = (message, type = 'info') => {
         setNotification({ message, type });
@@ -79,7 +76,7 @@ function Staking() {
             setBalance(ethers.utils.formatEther(balance));
             setStakedAmount(ethers.utils.formatEther(stakeInfo.stakedAmount));
             setPendingRewards(ethers.utils.formatEther(stakeInfo.pendingRewards));
-            setLockEndTime(stakeInfo.lockEndTime.toNumber() * 1000); // Convertir en millisecondes
+            setLockEndTime(stakeInfo.lockEndTime.toNumber() * 1000);
         } catch (error) {
             console.error("Erreur lors de la mise à jour des données:", error);
             showNotification("Erreur lors de la mise à jour des données", "error");
@@ -106,7 +103,6 @@ function Staking() {
             
             const contract = new ethers.Contract(PROXY_ADDRESS, CONTRACT_ABI, signer);
             
-            setProvider(provider);
             setContract(contract);
             setUserAddress(address);
 
@@ -126,8 +122,8 @@ function Staking() {
             message: `Êtes-vous sûr de vouloir staker ${stakeAmount} $GR33D ?`,
             onConfirm: async () => {
                 setIsLoading(true);
-                setIsStaking(true); // Active la barre de progression
-                setProgress(0); // Réinitialise la barre de progression
+                setIsStaking(true);
+                setProgress(0);
                 setError(null);
                 try {
                     const amount = ethers.utils.parseEther(stakeAmount);
@@ -153,7 +149,7 @@ function Staking() {
                     showNotification("Erreur lors du staking", "error");
                 } finally {
                     setIsLoading(false);
-                    setIsStaking(false); // Désactive la barre de progression
+                    setIsStaking(false);
                 }
             }
         });
@@ -226,7 +222,7 @@ function Staking() {
             }, 30000);
             return () => clearInterval(interval);
         }
-    }, [contract, userAddress]);
+    }, [contract, userAddress, updateUserData]);
 
     useEffect(() => {
         if (window.ethereum) {
