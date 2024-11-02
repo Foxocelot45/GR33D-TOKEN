@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './App.css';
 import './components/AboutUs/AboutUs.css';
 import { BrowserRouter as Router, Routes, Route, Link, useLocation } from 'react-router-dom';
-import { useWeb3 } from './Web3Provider';
+import Web3Provider from './components/Web3Provider';
 
 import AboutUs from './components/AboutUs/AboutUs';
 import Home from './components/Home';
