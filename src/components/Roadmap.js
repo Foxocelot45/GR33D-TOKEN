@@ -6,7 +6,7 @@ function Roadmap() {
   return (
     <div className="roadmap-section">
       <div className="roadmap-container">
-        <img src={roadmapImage} alt="Roadmap" />
+        <img src={roadmapImage} alt="Roadmap" className="roadmap-image" />
       </div>
     </div>
   );
