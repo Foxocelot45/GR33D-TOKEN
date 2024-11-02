@@ -16,12 +16,22 @@ const CONTRACT_ABI = [
     "function stakingBurnRate() view returns (uint256)",
     "function standardBurnRate() view returns (uint256)",
     "function isExcludedFromTxLimit(address) view returns (bool)",
+    "function isPaused() view returns (bool)", // Vérifie si le contrat est en pause
     "function approve(address spender, uint256 amount) returns (bool)",
     "function transfer(address to, uint256 amount) returns (bool)",
     "function transferFrom(address from, address to, uint256 amount) returns (bool)",
-    "function stake(uint256 amount) external",
+    "function stake(uint256 amount, uint256 lockPeriod) external", // lockPeriod ajouté pour le staking
     "function unstake(uint256) external",
     "function claimRewards() external"
+];
+
+// Options de lock avec APY bonus
+const lockOptions = [
+    { label: "No lock", value: 0, bonusAPY: 0 },
+    { label: "3 months", value: 3 * 30 * 24 * 60 * 60, bonusAPY: 5 },
+    { label: "6 months", value: 6 * 30 * 24 * 60 * 60, bonusAPY: 10 },
+    { label: "9 months", value: 9 * 30 * 24 * 60 * 60, bonusAPY: 15 },
+    { label: "12 months", value: 12 * 30 * 24 * 60 * 60, bonusAPY: 20 }
 ];
 
 const Notification = ({ message, type, onClose }) => (
@@ -55,6 +65,9 @@ function Staking() {
     const [baseAPY] = useState('20.00');
     const [stakeAmount, setStakeAmount] = useState('');
     const [unstakeAmount, setUnstakeAmount] = useState('');
+    const [selectedLockPeriod, setSelectedLockPeriod] = useState(lockOptions[0].value);
+    const [selectedAPY, setSelectedAPY] = useState(lockOptions[0].bonusAPY);
+    const [isPaused, setIsPaused] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const [notification, setNotification] = useState(null);
     const [networkName, setNetworkName] = useState('');
@@ -94,17 +107,19 @@ function Staking() {
             await provider.send("eth_requestAccounts", []);
             const signer = provider.getSigner();
             const address = await signer.getAddress();
-            
+
             const network = await provider.getNetwork();
             if (network.chainId !== 11155111) {
                 throw new Error("Veuillez vous connecter au réseau Sepolia");
             }
             setNetworkName("Testnet Sepolia");
-            
+
             const contract = new ethers.Contract(PROXY_ADDRESS, CONTRACT_ABI, signer);
-            
             setContract(contract);
             setUserAddress(address);
+
+            const paused = await contract.isPaused();
+            setIsPaused(paused);
 
             await updateUserData(contract, address);
             showNotification("Wallet connecté avec succès", "success");
@@ -117,9 +132,13 @@ function Staking() {
 
     const handleStake = async () => {
         if (!contract || !stakeAmount) return;
+        if (isPaused) {
+            showNotification("Le contrat est en pause, le staking est désactivé", "error");
+            return;
+        }
 
         setConfirmationConfig({
-            message: `Êtes-vous sûr de vouloir staker ${stakeAmount} $GR33D ?`,
+            message: `Êtes-vous sûr de vouloir staker ${stakeAmount} $GR33D avec une durée de verrouillage de ${selectedAPY}% APY bonus?`,
             onConfirm: async () => {
                 setIsLoading(true);
                 setIsStaking(true);
@@ -127,7 +146,7 @@ function Staking() {
                 setError(null);
                 try {
                     const amount = ethers.utils.parseEther(stakeAmount);
-                    const tx = await contract.stake(amount);
+                    const tx = await contract.stake(amount, selectedLockPeriod);
 
                     const interval = setInterval(() => {
                         setProgress(prev => {
@@ -222,7 +241,7 @@ function Staking() {
             }, 30000);
             return () => clearInterval(interval);
         }
-    }, [contract, userAddress, updateUserData]);
+    }, [contract, userAddress]);
 
     useEffect(() => {
         if (window.ethereum) {
@@ -294,6 +313,21 @@ function Staking() {
                     <div className="staking-card staking-actions">
                         <h3>Staking</h3>
                         <div className="input-group">
+                            <select
+                                className="staking-select"
+                                value={selectedLockPeriod}
+                                onChange={(e) => {
+                                    const selectedOption = lockOptions.find(opt => opt.value === parseInt(e.target.value));
+                                    setSelectedLockPeriod(selectedOption.value);
+                                    setSelectedAPY(selectedOption.bonusAPY);
+                                }}
+                            >
+                                {lockOptions.map((option) => (
+                                    <option key={option.value} value={option.value}>
+                                        {option.label} ({option.bonusAPY}% bonus)
+                                    </option>
+                                ))}
+                            </select>
                             <input
                                 type="number"
                                 className="staking-input"
