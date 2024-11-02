@@ -1,8 +1,9 @@
+// App.js
 import React from 'react';
 import './App.css';
 import './components/AboutUs/AboutUs.css';
 import { BrowserRouter as Router, Routes, Route, Link, useLocation } from 'react-router-dom';
-import { Web3Provider, useWeb3 } from './components/Web3Provider'; // Assurez-vous d'avoir ces importations
+import { useWeb3 } from './components/Web3Provider';
 import AboutUs from './components/AboutUs/AboutUs';
 import Home from './components/Home';
 import Roadmap from './components/Roadmap';
@@ -79,10 +80,4 @@ function App() {
   );
 }
 
-export default function WrappedApp() {
-  return (
-    <Web3Provider>
-      <App />
-    </Web3Provider>
-  );
-}
+export default App;
