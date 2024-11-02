@@ -16,6 +16,9 @@
     "axios": "^0.24.0",
     "dotenv": "^16.4.5"
   },
+  "devDependencies": {
+    "@babel/plugin-proposal-private-property-in-object": "^7.14.5"
+  },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
