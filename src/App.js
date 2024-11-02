@@ -3,7 +3,7 @@ import './App.css';
 import './components/AboutUs/AboutUs.css';
 import { BrowserRouter as Router, Routes, Route, Link, useLocation } from 'react-router-dom';
 import Web3Provider from './components/Web3Provider';
-
+import useWeb3 from './components/Web3Provider';
 import AboutUs from './components/AboutUs/AboutUs';
 import Home from './components/Home';
 import Roadmap from './components/Roadmap';
