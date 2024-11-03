@@ -59,18 +59,59 @@ header {
   z-index: 1000;
 }
 
+header nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
 header nav a {
   color: #ffd700;
   text-decoration: none;
-  margin: 0 15px;
+  padding: 8px 15px;
   font-size: 1.1em;
   font-weight: 600;
   transition: color 0.3s ease-in-out, transform 0.3s ease;
+  background-color: rgba(255, 215, 0, 0.2);
+  border-radius: 8px;
 }
 
 header nav a:hover {
   color: #ff8c00;
   transform: translateY(-3px);
+}
+
+/* Hamburger menu pour mobile */
+.hamburger {
+  display: none;
+  font-size: 1.5em;
+  cursor: pointer;
+  color: #ffd700;
+}
+
+.mobile-nav {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.9);
+  padding: 10px;
+  z-index: 1000;
+}
+
+.mobile-nav a {
+  display: block;
+  padding: 10px;
+  margin: 5px 0;
+  font-size: 1.2em;
+  text-align: center;
+  background-color: rgba(255, 215, 0, 0.2);
+  border-radius: 8px;
+}
+
+.show {
+  display: block !important;
 }
 
 /* Boutons de connexion et déconnexion */
@@ -142,28 +183,59 @@ footer a:hover {
 
 /* Responsive */
 @media (max-width: 768px) {
-  header {
-    flex-direction: column;
-    padding: 10px;
-  }
-
   .header-title {
     font-size: 1.5em;
   }
 
+  .hamburger {
+    display: block;
+  }
+
   header nav {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 5px;
+    display: none;
   }
 
-  header nav a {
+  .mobile-nav {
+    display: none;
+  }
+  
+  /* Menu repliable en version mobile */
+  .mobile-nav a {
     font-size: 1em;
-    margin: 5px 0;
   }
-
+  
   footer a {
     font-size: 1em;
+  }
+}
+
+/* Styles pour la barre de navigation sur mobile */
+@media (max-width: 768px) {
+  .mobile-nav a {
+    font-size: 1em;
+  }
+}
+
+/* Progress bar */
+.progress-bar-container {
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 5px;
+  margin-top: 15px;
+  height: 10px;
+  overflow: hidden;
+}
+
+.progress-bar {
+  width: 0%;
+  height: 100%;
+  background-color: #ffb347;
+  transition: width 0.4s ease;
+}
+
+/* Support pour les écrans très larges */
+@media (min-width: 1400px) {
+  .staking-container {
+    grid-template-columns: repeat(3, 1fr);
   }
 }
