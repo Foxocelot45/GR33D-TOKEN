@@ -1,241 +1,215 @@
-/* Styles globaux */
-body, html {
-  margin: 0;
-  padding: 0;
-  font-family: 'Arial', sans-serif;
-  color: #fff;
-  background-image: url('/src/assets/about-background.png');
-  background-size: cover;
-  background-attachment: fixed;
-  background-position: center;
-}
-
+/* Styles généraux */
 .App {
   text-align: center;
-  background-color: #121212;
+  color: #fff;
+  background-image: url('/src/assets/background.png');
+  background-size: cover;
+  background-position: center;
+  min-height: 100vh;
 }
 
-/* Loader */
-.loader {
-  border: 5px solid #f3f3f3;
-  border-radius: 50%;
-  border-top: 5px solid #ffb347;
-  width: 40px;
-  height: 40px;
-  animation: spin 1s linear infinite;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 1000;
-}
-
-@keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}
-
-/* Header et Navigation */
 .header-title {
-  font-size: 2.2em;
-  font-weight: 700;
-  margin: 10px 0;
-  color: #ffd700;
-  background: linear-gradient(90deg, #ffd700, #ff8c00);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  font-family: 'Roboto', sans-serif;
-  letter-spacing: 0.5px;
+  font-size: 2em;
+  margin: 0.5em 0;
+  color: #ffb347;
 }
 
-header {
-  position: sticky;
-  top: 0;
+/* Navigation */
+nav {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 15px 50px;
-  background-color: rgba(0, 0, 0, 0.9);
-  z-index: 1000;
-}
-
-header nav {
-  display: flex;
+  justify-content: center;
+  gap: 1em;
   flex-wrap: wrap;
-  gap: 15px;
+  margin: 1em 0;
 }
 
-header nav a {
-  color: #ffd700;
+nav a {
+  color: #fff;
   text-decoration: none;
-  padding: 8px 15px;
-  font-size: 1.1em;
-  font-weight: 600;
-  transition: color 0.3s ease-in-out, transform 0.3s ease;
-  background-color: rgba(255, 215, 0, 0.2);
-  border-radius: 8px;
+  font-weight: bold;
+  padding: 0.5em 1em;
+  background-color: rgba(255, 179, 71, 0.2); /* Fond translucide jaune */
+  border-radius: 5px;
+  transition: background 0.3s;
 }
 
-header nav a:hover {
-  color: #ff8c00;
-  transform: translateY(-3px);
+nav a:hover {
+  background-color: rgba(255, 179, 71, 0.5);
 }
 
-/* Hamburger menu pour mobile */
-.hamburger {
-  display: none;
-  font-size: 1.5em;
-  cursor: pointer;
-  color: #ffd700;
-}
-
-.mobile-nav {
-  display: none;
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  background-color: rgba(0, 0, 0, 0.9);
-  padding: 10px;
-  z-index: 1000;
-}
-
-.mobile-nav a {
-  display: block;
-  padding: 10px;
-  margin: 5px 0;
-  font-size: 1.2em;
-  text-align: center;
-  background-color: rgba(255, 215, 0, 0.2);
-  border-radius: 8px;
-}
-
-.show {
-  display: block !important;
-}
-
-/* Boutons de connexion et déconnexion */
+/* Wallet Buttons */
 .wallet-buttons {
-  display: flex;
-  align-items: center;
-  gap: 10px;
+  margin-top: 1em;
 }
 
 .connect-button,
 .disconnect-button {
-  padding: 10px 20px;
-  font-size: 1em;
-  font-weight: bold;
-  color: #121212;
-  background-color: #ffd700;
+  padding: 0.5em 1em;
   border: none;
   border-radius: 5px;
+  font-weight: bold;
   cursor: pointer;
-  transition: background-color 0.3s ease;
 }
 
-.connect-button:hover,
-.disconnect-button:hover {
-  background-color: #ff8c00;
+.connect-button {
+  background-color: #ffb347;
+  color: #121212;
+}
+
+.disconnect-button {
+  background-color: #ff4d4d;
+  color: #fff;
 }
 
 /* Footer */
 footer {
-  padding: 20px;
-  background-color: rgba(0, 0, 0, 0.8);
-  display: flex;
-  justify-content: center;
-  gap: 15px;
+  margin-top: 2em;
+  color: #ccc;
 }
 
 footer a {
-  color: #ffd700;
-  font-size: 1.1em;
+  color: #ffb347;
   text-decoration: none;
-  transition: color 0.3s ease-in-out;
+  margin: 0 0.5em;
 }
 
-footer a:hover {
-  color: #ff8c00;
+/* Notifications */
+.notification {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  padding: 15px 40px 15px 20px;
+  border-radius: 8px;
+  color: white;
+  animation: slideIn 0.3s ease-out;
+  z-index: 1000;
+  text-align: left;
 }
 
-/* Transitions et animations */
-.button {
-  transition: transform 0.3s ease, background-color 0.3s ease;
+.notification.success {
+  background-color: rgba(46, 125, 50, 0.9);
 }
 
-.button:hover {
-  transform: translateY(-3px);
-  background-color: #ff9f1c;
+.notification.error {
+  background-color: rgba(198, 40, 40, 0.9);
 }
 
-/* Classes de transition pour les animations au scroll */
-.scroll-reveal {
-  opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.6s ease, transform 0.6s ease;
+.notification.info {
+  background-color: rgba(2, 136, 209, 0.9);
 }
 
-.scroll-reveal.scrolled {
-  opacity: 1;
-  transform: translateY(0);
+.notification-close {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+  font-size: 1.2em;
+  padding: 0 5px;
 }
 
-/* Responsive */
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+/* Responsive Design */
 @media (max-width: 768px) {
-  .header-title {
-    font-size: 1.5em;
+  nav {
+    flex-direction: column;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.8);
+    padding: 1em;
+    z-index: 1000;
+    transition: transform 0.3s ease;
   }
 
-  .hamburger {
+  nav a {
     display: block;
+    width: 100%;
+    text-align: center;
+    padding: 0.8em;
+    margin: 0.2em 0;
   }
 
-  header nav {
-    display: none;
-  }
-
-  .mobile-nav {
-    display: none;
-  }
-  
-  /* Menu repliable en version mobile */
-  .mobile-nav a {
-    font-size: 1em;
-  }
-  
-  footer a {
-    font-size: 1em;
+  .menu-toggle {
+    display: block;
+    cursor: pointer;
+    padding: 0.5em;
+    background: #ffb347;
+    border-radius: 5px;
   }
 }
 
-/* Styles pour la barre de navigation sur mobile */
-@media (max-width: 768px) {
-  .mobile-nav a {
-    font-size: 1em;
-  }
-}
-
-/* Progress bar */
-.progress-bar-container {
-  width: 100%;
-  background-color: rgba(255, 255, 255, 0.1);
-  border-radius: 5px;
-  margin-top: 15px;
-  height: 10px;
-  overflow: hidden;
-}
-
-.progress-bar {
-  width: 0%;
-  height: 100%;
-  background-color: #ffb347;
-  transition: width 0.4s ease;
-}
-
-/* Support pour les écrans très larges */
 @media (min-width: 1400px) {
   .staking-container {
     grid-template-columns: repeat(3, 1fr);
   }
+}
+
+/* Modal de confirmation */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  backdrop-filter: blur(5px);
+}
+
+.modal-content {
+  background-color: rgba(30, 30, 30, 0.95);
+  padding: 25px;
+  border-radius: 12px;
+  min-width: 300px;
+  max-width: 500px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.modal-buttons {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+  justify-content: flex-end;
+}
+
+.modal-button {
+  padding: 8px 20px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
+
+.modal-button.confirm {
+  background-color: #ffb347;
+  color: #121212;
+}
+
+.modal-button.cancel {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: white;
+}
+
+.modal-button:hover {
+  transform: translateY(-2px);
 }
