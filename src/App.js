@@ -1,4 +1,3 @@
-// App.js
 import React from 'react';
 import './App.css';
 import './components/AboutUs/AboutUs.css';
@@ -32,6 +31,10 @@ function Footer() {
 
 function App() {
   const { account, connectWallet, disconnectWallet } = useWeb3();
+  const location = useLocation();
+
+  // Condition to show the "Connect Wallet" button only on Staking and Liquidity pages
+  const showConnectButton = location.pathname === '/staking' || location.pathname === '/liquidity';
 
   return (
     <Router>
@@ -48,17 +51,19 @@ function App() {
             <Link to="/liquidity">Liquidity (Coming Soon)</Link>
             <Link to="/contacts">Contacts</Link>
           </nav>
-          <div className="wallet-buttons">
-            {account ? (
-              <button className="button disconnect-button" onClick={disconnectWallet}>
-                Disconnect Wallet
-              </button>
-            ) : (
-              <button className="button connect-button" onClick={connectWallet}>
-                Connect Wallet
-              </button>
-            )}
-          </div>
+          {showConnectButton && (
+            <div className="wallet-buttons">
+              {account ? (
+                <button className="button disconnect-button" onClick={disconnectWallet}>
+                  Disconnect Wallet
+                </button>
+              ) : (
+                <button className="button connect-button" onClick={connectWallet}>
+                  Connect Wallet
+                </button>
+              )}
+            </div>
+          )}
         </header>
 
         <main>
