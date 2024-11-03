@@ -6,9 +6,9 @@ function Whitepaper() {
     <div className="whitepaper-container">
       <div className="whitepaper-content">
         <h2>Whitepaper</h2>
-        <p>Consultez ou téléchargez notre Whitepaper pour découvrir tous les détails de notre projet.</p>
+        <p>Consult or download our Whitepaper to discover all the details of our project.</p>
         <a href="/whitepaper.pdf" target="_blank" rel="noopener noreferrer" className="download-link">
-          Télécharger le Whitepaper
+          Download the Whitepaper
         </a>
       </div>
     </div>
