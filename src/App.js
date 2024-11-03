@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+// App.js
+import React from 'react';
 import './App.css';
 import './components/AboutUs/AboutUs.css';
 import { BrowserRouter as Router, Routes, Route, Link, useLocation } from 'react-router-dom';
@@ -32,32 +33,23 @@ function Footer() {
 function App() {
   const { account, connectWallet, disconnectWallet } = useWeb3();
   const location = useLocation();
-  const [menuOpen, setMenuOpen] = useState(false);
 
-  // Condition pour afficher le bouton "Connect Wallet" uniquement sur Staking et Liquidity
   const showConnectButton = location.pathname === '/staking' || location.pathname === '/liquidity';
-
-  // Fonction pour basculer l'ouverture du menu
-  const toggleMenu = () => setMenuOpen(!menuOpen);
 
   return (
     <Router>
       <div className="App">
         <header>
           <h1 className="header-title">The Greedy's Club</h1>
-          {/* Menu hamburger pour les petits écrans */}
-          <div className="hamburger" onClick={toggleMenu}>
-            ☰
-          </div>
-          <nav className={menuOpen ? 'menu-open' : ''}>
-            <Link to="/" onClick={() => setMenuOpen(false)}>Home</Link>
-            <Link to="/about" onClick={() => setMenuOpen(false)}>About Us</Link>
-            <Link to="/roadmap" onClick={() => setMenuOpen(false)}>Roadmap</Link>
-            <Link to="/whitepaper" target="_blank" rel="noopener noreferrer" onClick={() => setMenuOpen(false)}>Whitepaper</Link>
-            <Link to="/dex" onClick={() => setMenuOpen(false)}>DEX/AMM (Soon)</Link>
-            <Link to="/staking" onClick={() => setMenuOpen(false)}>Staking</Link>
-            <Link to="/liquidity" onClick={() => setMenuOpen(false)}>Liquidity (Coming Soon)</Link>
-            <Link to="/contacts" onClick={() => setMenuOpen(false)}>Contacts</Link>
+          <nav>
+            <Link to="/">Home</Link>
+            <Link to="/about">About Us</Link>
+            <Link to="/roadmap">Roadmap</Link>
+            <Link to="/whitepaper" target="_blank" rel="noopener noreferrer">Whitepaper</Link>
+            <Link to="/dex">DEX/AMM (Soon)</Link>
+            <Link to="/staking">Staking</Link>
+            <Link to="/liquidity">Liquidity (Coming Soon)</Link>
+            <Link to="/contacts">Contacts</Link>
           </nav>
           {showConnectButton && (
             <div className="wallet-buttons">
@@ -94,3 +86,4 @@ function App() {
 }
 
 export default App;
+
