@@ -1,92 +1,70 @@
-# $GR33D Token Economics
+# TOKENOMICS.md
 
-## Overview
-The $GR33D token is designed with a deflationary model to ensure long-term value appreciation while maintaining ecosystem sustainability.
+# $GR33D Tokenomics
 
-## Token Specifications
-- **Name**: GREEDYSCLUB
-- **Symbol**: $GR33D
-- **Initial Supply**: 5,000,000 tokens
-- **Decimals**: 18
-- **Network**: Multi-chain (ETH, BSC, Solana)
-- **Smart Contract**: 0xeBaFE97112C5008249fb6fF4bCAf0a603d39e2a7
+## Initial Distribution
 
-## Distribution Model
-- **Fair Launch**: 100% fair launch with no pre-mine
-- **Team Allocation**: No team allocation
-- **Maximum Wallet**: 2% of total supply (100,000 tokens)
-- **Maximum Transaction**: 10,000 tokens per transaction
+### Supply Allocation
+Total Supply: 5,000,000 $GR33D
+- Liquidity Pool: 150,000 GR33D (3%)
+- Rewards Pool: 1,000,000 GR33D (20%)
+- LP Rewards: 500,000 GR33D (10%)
+- Marketing: 200,000 GR33D (4%)
+- Dev Fund: 400,000 GR33D (8%)
+- Trading Reserve: 2,410,000 GR33D (48.2%)
+- Team & LP Initial: 340,000 GR33D (6.8%)
 
-## Deflationary Mechanism
-### Burn Rates
-- **Standard Transactions**: 0.5% burn rate
-- **Staking Transactions**: 0.25% burn rate
-- **Maximum Burn Cap**: 40% of total supply
-- **Burn Rate Evolution**: Decreases as supply diminishes
+## Vesting Schedules
 
-### Burn Implementation
-- Automatic burn mechanism on every transaction
-- Real-time tracking through blockchain explorer
-- Progressive reduction in burn rate as supply decreases
-- Transparent burn address
+### Marketing Supply
+- Total Amount: 200,000 GR33D
+- Initial Lock: 1 month
+- Distribution: ~13,333 GR33D/month over 15 months
+- Period: December 2024 - February 2026
 
-## Staking Rewards
-- **Base APY**: 20%
-- **Maximum APY**: 40%
-- **Quarterly Bonus**: +5% per quarter held
-- **Compound Option**: Available for optimized returns
-- **Flexible Entry/Exit**: No minimum lock period
+### Dev Fund
+- Total Amount: 400,000 GR33D
+- Initial Lock: 2 months
+- Distribution: 33,333 GR33D/month over 12 months
+- Period: February 2025 - January 2026
 
-## Sustainable Staking System
+### Trading Reserve
+- Total Amount: 2,410,000 GR33D
+- Initial Lock: 3 months
+- Distribution: ~50,200 GR33D/month
+- Start Date: March 2025
 
-### Initial Rewards Pool
-- 20% of total supply allocated (1,000,000 $GR33D)
-- Used for initial staking rewards distribution
-- Supports early adopters and bootstrap phase
+## Staking System
 
-### Long-term Sustainability Mechanism
-1. **Transaction Fee Distribution**
-   - 0.5% of each transaction fee goes to staking rewards pool
-   - Continuous replenishment of rewards
-   - Sustainable long-term yield generation
+### Base Mechanism
+- Foundation APY: 20%
+- Maximum APY: 40% (with lock bonuses)
+- Daily Compound Options
+- Flexible Entry/Exit
 
-2. **Dynamic APY System**
-   - Base APY: 20% (supported by transaction fees)
-   - Bonus APY: Up to +20% (from initial rewards pool)
-   - Total Maximum APY: 40%
+### Lock Period Bonuses
+- No Lock: 20% Base APY
+- 90 Days: +5% (25% Total)
+- 180 Days: +10% (30% Total)
+- 270 Days: +15% (35% Total)
+- 360 Days: +20% (40% Total)
 
-3. **APY Evolution**
-   - Initial Phase: Full APY from rewards pool
-   - Transition Phase: Gradual shift to transaction-based rewards
-   - Mature Phase: Self-sustaining system through transaction fees
+### Pool Threshold APY Adjustments
+- Above 750,000 GR33D: 100% of Base APY
+- 500,000-750,000 GR33D: 75% of Base APY
+- 250,000-500,000 GR33D: 50% of Base APY
+- Below 250,000 GR33D: 25% of Base APY
 
-### Reward Distribution Strategy
-- **Short-term**: Primarily from allocated rewards pool
-- **Mid-term**: Hybrid of pool and transaction fees
-- **Long-term**: Primarily sustained by transaction fees
-- **Emergency Reserve**: 5% of rewards pool kept for stability
+## LP Rewards Program
 
-### Monitoring and Adjustment
-- Real-time APY calculations based on pool size
-- Automatic adjustment mechanisms
-- Regular community updates on rewards status
-- DAO governance for parameter adjustments
+### Launch Phase (First 14 Days)
+- Week 1: 120% Total APY (80% Base + 40% Bonus)
+- Week 2: 100% Total APY (80% Base + 20% Bonus)
+- Post-Launch: 80% Base APY
 
-## Anti-Whale Measures
-- Maximum wallet holding cap (2% of total supply)
-- Transaction limit (10,000 tokens)
-- Progressive burn rates
-- No single entity can accumulate excessive control
+### LP Pool Thresholds
+- Above 375,000 GR33D: 80% APY
+- 250,000-375,000 GR33D: 60% APY
+- 125,000-250,000 GR33D: 40% APY
+- Below 125,000 GR33D: 20% APY
 
-## Security Features
-- Renounced contract ownership after launch
-- Liquidity locked for minimum 12 months
-- Multi-signature requirement for critical functions
-- No mint function
-- Regular security audits
-
-## Treasury Management
-- Community-controlled treasury
-- Transparent use of funds
-- Multi-signature wallet implementation
-- Regular financial reports
