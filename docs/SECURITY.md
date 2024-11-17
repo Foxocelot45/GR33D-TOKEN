@@ -48,6 +48,3 @@ For urgent security matters:
 - Email: thegr33dysclub@gmail.com
 - Telegram Security Channel: [To be announced]
 - Emergency Contact: [To be provided]
-
-# NFT.md will be updated closer to Q2-Q3 2025 launch
-# DAO.md will be updated prior to Q1 2025 governance implementation
