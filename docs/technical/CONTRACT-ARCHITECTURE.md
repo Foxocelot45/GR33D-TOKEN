@@ -49,8 +49,6 @@ HARDHAT_VERSION = "^2.19.1"
 
 // Testing Environment
 NETWORK: "sepolia"
-ALCHEMY_KEY: "lr9JPx6sJhRWwTYZngq-gJwUc-rEpB_I"
-```
 
 ## Deployment Procedure
 
