@@ -1,43 +1,53 @@
-# Security Policy & Measures
+# SECURITY.md
 
-## Audits & Security
-- Smart Contract Audit: [Pending]
-- Security Partner: [To be announced]
-- Bug Bounty Program: [Coming soon]
+# Security Framework
 
-## Security Measures
-### Smart Contract Security
-- Multi-signature requirement for critical functions
-- Emergency pause functionality
-- Anti-flash loan protection
-- Rate limiting on transactions
-- Anti-whale mechanisms
-- Ownership renouncement after launch
+## Smart Contract Security
+
+### Core Protections
+- UUPS Upgradeable Pattern
+- ReentrancyGuard Implementation
+- Emergency Circuit Breakers
+- Event Monitoring System
+- Real-time Verification System
 
 ### Transaction Security
-- Maximum transaction limit: 10,000 tokens
-- Maximum wallet holding: 2% of total supply
-- Blacklist functionality for suspicious addresses
-- Automated monitoring system
+- 20-second Anti-Bot Delay
+- Maximum Transaction Limits:
+  * Standard: 15,000 GR33D
+  * Staking: 50,000 GR33D
+- Maximum Wallet: 100,000 GR33D (2%)
+- Burn Rate Protection
+- Slippage Controls
 
 ### Staking Security
-- Anti-reentrancy protection
-- Timelock for large unstaking
-- Reward calculation verification
-- Emergency withdrawal function
+- Validated Reward Calculations
+- Anti-Gaming Mechanics
+- Daily Reward Caps
+- Compound Interest Protection
+- Emergency Withdrawal System
 
-## Reporting Security Issues
-For any security concerns, please follow these steps:
-1. DO NOT disclose the issue publicly
-2. Send a detailed report to [security@greedysclub.com]
-3. Include:
-   - Description of the issue
-   - Steps to reproduce
-   - Potential impact
-   - Suggested fix (if any)
+## Monitoring & Response
 
-## Security Updates
-- Regular smart contract audits
-- Continuous monitoring
-- Prompt issue resolution
-- Community notifications
+### 24/7 Surveillance
+- Transaction Pattern Analysis
+- Wallet Behavior Monitoring
+- Smart Contract Events
+- Price Impact Tracking
+- Volume Analysis
+
+### Emergency Procedures
+1. Anomaly Detection
+2. Automatic Alert System
+3. Quick Response Protocol
+4. Community Communication
+5. Resolution Tracking
+
+## Security Contacts
+For urgent security matters:
+- Email: thegr33dysclub@gmail.com
+- Telegram Security Channel: [To be announced]
+- Emergency Contact: [To be provided]
+
+# NFT.md will be updated closer to Q2-Q3 2025 launch
+# DAO.md will be updated prior to Q1 2025 governance implementation
