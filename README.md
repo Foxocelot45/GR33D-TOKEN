@@ -1,4 +1,4 @@
-# GreedysClub ($GR33D)
+# Gr33dysClub ($GR33D)
 
 ## Overview
 GreedysClub represents a next-generation DeFi ecosystem, built on the foundation of security, transparency, and community governance. Launched by a dedicated French-speaking crypto community, $GR33D combines innovative tokenomics with sustainable staking rewards and future NFT integration.
