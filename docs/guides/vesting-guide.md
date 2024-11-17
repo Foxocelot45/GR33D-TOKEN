@@ -6,10 +6,10 @@ This document details all vesting schedules and token release mechanisms for the
 ### LP Providers Initial Distribution
 | Investor                                       | LP Investment | Initial Release | Vesting Amount |
 |------------------------------------------------|---------------|-----------------|----------------|
-| 0x0D7083D8dCdF1DBc72D1CcD2653f9fDB1981505E    | $500         | 20,000 GR33D    | 20,000 GR33D  |
-| 0xcaDf2f51CB897cb4E476435772c3Ff3572f924e2    | $500         | 20,000 GR33D    | 20,000 GR33D  |
-| 0xBFc831C5CcF3FE6bF03e0051C72B1066c7A136d9    | $1,000       | 40,000 GR33D    | 40,000 GR33D  |
-| 0xeF616AF55083Cb6BDF355a34224FFE829100D9b2    | $1,000       | 40,000 GR33D    | 40,000 GR33D  |
+| LP1    | $500         | 20,000 GR33D    | 20,000 GR33D  |
+| LP2    | $500         | 20,000 GR33D    | 20,000 GR33D  |
+| LP3    | $1,000       | 40,000 GR33D    | 40,000 GR33D  |
+| LP4   | $1,000       | 40,000 GR33D    | 40,000 GR33D  |
 
 ### Team Bonus Initial Distribution
 - Initial Release: 40,000 GR33D
