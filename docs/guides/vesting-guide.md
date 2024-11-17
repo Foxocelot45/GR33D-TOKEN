@@ -162,9 +162,9 @@ function claimVestedTokens() external {
 - Telegram (EN): https://t.me/+WipDE7pBxF41Mzc0
 
 ### Emergency Contact
-- Technical Issues: [Emergency Contact]
-- Claim Problems: [Support Contact]
-- Contract Issues: [Security Team]
+- Technical Issues: https://t.me/GreedyFoxxx
+- Claim Problems: https://t.me/GreedyFoxxx
+- Contract Issues: https://t.me/GreedyFoxxx
 
 ## Schedule Updates
 This vesting schedule is final and cannot be modified after contract deployment. All dates and amounts are immutable once set in the smart contract.
