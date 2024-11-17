@@ -9,24 +9,6 @@ npm >= 7.0.0
 Hardhat
 ```
 
-### Configuration Files
-```javascript
-// hardhat.config.js
-require("@nomiclabs/hardhat-ethers");
-require("@openzeppelin/hardhat-upgrades");
-require("@nomiclabs/hardhat-etherscan");
-
-module.exports = {
-  solidity: "0.8.20",
-  networks: {
-    mainnet: {
-      url: `https://eth-mainnet
-      accounts: [PRIVATE_KEY]
-    }
-  }
-};
-```
-
 ## Deployment Schedule (November 24, 2024)
 
 ### 11:45 UTC - Initial Setup
