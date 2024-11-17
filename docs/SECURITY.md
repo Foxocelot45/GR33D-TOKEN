@@ -46,5 +46,5 @@
 ## Security Contacts
 For urgent security matters:
 - Email: thegr33dysclub@gmail.com
-- Telegram Security Channel: [To be announced]
-- Emergency Contact: [To be provided]
+- Telegram Security Channel: https://t.me/GreedyFoxxx
+- Emergency Contact: https://t.me/GreedyFoxxx
