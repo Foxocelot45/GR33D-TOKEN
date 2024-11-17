@@ -20,20 +20,11 @@ module.exports = {
   solidity: "0.8.20",
   networks: {
     mainnet: {
-      url: `https://eth-mainnet.alchemyapi.io/v2/${ALCHEMY_KEY}`,
+      url: `https://eth-mainnet
       accounts: [PRIVATE_KEY]
     }
   }
 };
-```
-
-### Critical Addresses
-```solidity
-ADMIN_ADDRESS = "0x5A46d0F5bbce72D9665689cDAe9993824260b882"
-TEAM_ADDRESS = "0xeF616AF55083Cb6BDF355a34224FFE829100D9b2"
-DEV_MARKETING = "0x4ddbb990c286ee71cd128899949e506f78eb08C0"
-LP_INVESTOR_1 = "0x0D7083D8dCdF1DBc72D1CcD2653f9fDB1981505E"
-LP_INVESTOR_2 = "0xcaDf2f51CB897cb4E476435772c3Ff3572f924e2"
 ```
 
 ## Deployment Schedule (November 24, 2024)
