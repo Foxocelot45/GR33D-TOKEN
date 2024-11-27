@@ -8,41 +8,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
-- Initial smart contract development
-- Tokenomics implementation
-- Security features
-- Staking system
-- Vesting mechanisms
+- Planned NFT integration and cross-chain functionality.
 
-## [2.4.0] - 2024-11-24 (Planned Release)
+## [1.0.0] - 2024-11-24
 ### Added
-- UUPS upgradeable pattern implementation
-- Advanced staking features with lock periods
-- Dynamic APY system based on pool thresholds
-- LP rewards program with launch bonuses
-- Anti-bot protection mechanisms
-- Transaction and wallet limits
-- Burn mechanism with dual rates
+- Initial deployment on Ethereum Mainnet.
+- Activation of core features: staking, vesting, and anti-bot protection.
+- Creation of Uniswap V2 liquidity pool.
+- Burn mechanism: 0.5% for standard transactions, 0.25% for staking transactions.
+- Supply metrics:
+  - Total Supply: 5,000,000 GR33D.
+  - Liquidity Pool: 150,000 GR33D.
+  - Rewards Pool: 1,000,000 GR33D.
+  - Trading Reserve: 2,410,000 GR33D.
+- Fully functional DAO governance with proposal and voting mechanisms.
+- Secured transactions with cooldown periods and wallet caps.
 
-### Security
-- Implementation of ReentrancyGuard
-- Advanced security measures
-- Permanent liquidity lock
-- Transaction cooldown periods
+---
 
-### Changed
-- Increased marketing allocation from 100k to 200k tokens
-- Updated vesting schedule for 15-month distribution
-- Modified transaction limits for optimization
-
-## Future Releases
-
-### [3.0.0] - Q1 2025 (Planned)
-- DAO governance implementation
-- Enhanced security features
-- Cross-chain bridge development
-
-### [3.1.0] - Q2-Q3 2025 (Planned)
-- NFT marketplace launch
-- Additional chain support
-- Mobile application development
