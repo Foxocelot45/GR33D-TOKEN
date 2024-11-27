@@ -1,49 +1,49 @@
-# Gr33dysClub ($GR33D)
+# Gr33dVault ($GR33D)
 
 ## Overview
-GreedysClub represents a next-generation DeFi ecosystem, built on the foundation of security, transparency, and community governance. Launched by a dedicated French-speaking crypto community, $GR33D combines innovative tokenomics with sustainable staking rewards and future NFT integration.
+Gr33dVault represents a next-generation DeFi platform, built on the principles of security, transparency, and community governance. Deployed on the Ethereum Mainnet, $GR33D combines innovative tokenomics, sustainable staking rewards, and future NFT integration.
 
 ## Core Features
-- **Advanced Tokenomics**: Deflationary model with smart burn mechanics
-- **Sustainable Staking**: Up to 40% APY with dynamic reward scaling
-- **Security First**: Anti-bot protection, transaction limits, permanent liquidity lock
-- **Community Governed**: DAO implementation with clear governance framework
-- **Future Vision**: NFT marketplace integration and cross-chain expansion planned
+- **Advanced Tokenomics**: Deflationary model with intelligent burn mechanisms.
+- **Sustainable Staking**: Up to 40% APY with dynamically adjusted rewards.
+- **Security First**: Anti-bot protection, transaction limits, permanent liquidity lock.
+- **Community Governance**: DAO framework for decentralized decision-making.
+- **Future Vision**: Planned NFT marketplace integration and cross-chain expansion.
 
-## Technical Specifications
-
-### Token Details
-- **Name**: GREEDYSCLUB
+## Token Details
+- **Name**: Gr33dVault
 - **Symbol**: $GR33D
-- **Total Supply**: 5,000,000 tokens
+- **Address**: `0xC3b2990027217b9970b2d526aa11Ba3f223eb39C`
+- **Supply**: 5,000,000 GR33D
 - **Decimals**: 18
-- **Network**: Ethereum (ETH)
+- **Network**: Ethereum Mainnet
 
-### Distribution Model
-- **Liquidity Pool**: 150,000 GR33D (3%)
-- **Rewards Pool**: 1,000,000 GR33D (20%)
-- **LP Rewards**: 500,000 GR33D (10%)
-- **Marketing**: 200,000 GR33D (4%)
-- **Dev Fund**: 400,000 GR33D (8%)
-- **Trading Reserve**: 2,410,000 GR33D (48.2%)
-- **Team & LP Initial**: 340,000 GR33D (6.8%)
+## Distribution Model
+| Category            | Amount         | Percentage |
+|---------------------|----------------|------------|
+| Liquidity Pool      | 150,000 GR33D  | 3%         |
+| Rewards Pool        | 1,000,000 GR33D| 20%        |
+| LP Rewards          | 500,000 GR33D  | 10%        |
+| Marketing           | 200,000 GR33D  | 4%         |
+| Development Fund    | 400,000 GR33D  | 8%         |
+| Trading Reserve     | 2,410,000 GR33D| 48.2%      |
+| Team & LP Initial   | 340,000 GR33D  | 6.8%       |
 
 ### Security Features
-- **Transaction Limits**: 15,000 tokens standard / 50,000 tokens staking
-- **Wallet Cap**: 100,000 tokens (2% of supply)
-- **Anti-Bot Delay**: 20 seconds between transactions
-- **Burn Rates**: 0.5% standard / 0.25% staking transactions
-- **Maximum Burn**: 40% of total supply (2,000,000 GR33D)
+- **Transaction Limits**: 15,000 GR33D (standard) / 50,000 GR33D (staking).
+- **Wallet Cap**: 100,000 GR33D (2% of total supply).
+- **Burn Rates**: 0.5% (standard transactions) / 0.25% (staking transactions).
+- **Maximum Burn**: 40% of the total supply (2,000,000 GR33D).
 
 ## Smart Contracts
-Contracts will be deployed on November 24, 2024, at 12:00 UTC.
-- **Framework**: OpenZeppelin
-- **Pattern**: UUPS Upgradeable
-- **Solidity Version**: 0.8.20
+- **Framework**: OpenZeppelin (UUPS Upgradeable).
+- **Solidity Version**: 0.8.20.
+- **Uniswap Pair**: `0x8a1D8f57261e8832CE1D7C525Df76dbe002B2e25`.
 
-## Links & Resources
-- **Website**: https://gr33d-vault.vercel.app/
-- **Twitter**: https://x.com/TheGr33dyzClub
-- **Telegram (FR)**: https://t.me/+ST4-blQBoLs5NWI8
-- **Telegram (EN)**: https://t.me/+WipDE7pBxF41Mzc0
-- **Email**: thegr33dysclub@gmail.com
+## Resources
+- **Website**: [Gr33dVault](https://gr33d-vault.vercel.app/)
+- **Twitter**: [TheGr33dysClub](https://x.com/TheGr33dyzClub)
+- **Telegram (FR)**: [Discussion FR](https://t.me/+ST4-blQBoLs5NWI8)
+- **Telegram (EN)**: [Discussion EN](https://t.me/+WipDE7pBxF41Mzc0)
+
+---
