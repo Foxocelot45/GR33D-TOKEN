@@ -21,7 +21,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Liquidity Pool: 150,000 GR33D.
   - Rewards Pool: 1,000,000 GR33D.
   - Trading Reserve: 2,410,000 GR33D.
-- Fully functional DAO governance with proposal and voting mechanisms.
 - Secured transactions with cooldown periods and wallet caps.
 
 ---
