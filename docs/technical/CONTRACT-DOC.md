@@ -2,18 +2,12 @@
 
 ## Contract Addresses
 
-### Mainnet (Deployment: November 24, 2024)
+### Mainnet (Current Deployment)
 ```solidity
 // Core Contracts
-GREEDYS_TOKEN = "[To be deployed]"
-GREEDYS_STAKING = "[To be deployed]"
-UNISWAP_PAIR = "[To be created]"
-
-// Vesting Contracts
-MARKETING_VESTING = "[To be deployed]"
-DEV_FUND_VESTING = "[To be deployed]"
-TRADING_VESTING = "[To be deployed]"
-LP_VESTING = "[To be deployed]"
+GR33D_TOKEN_PROXY = "0xC3b2990027217b9970b2d526aa11Ba3f223eb39C"
+GR33D_IMPLEMENTATION_V2 = "0xdb2e16605c672bd0d743142e10ce2c1b12a876a4"
+UNISWAP_PAIR = "0x8a1D8f57261e8832CE1D7C525Df76dbe002B2e25"
 ```
 
 ### Important Addresses
@@ -24,20 +18,21 @@ TEAM_ADDRESS = "0xeF616AF55083Cb6BDF355a34224FFE829100D9b2"
 DEV_MARKETING = "0x4ddbb990c286ee71cd128899949e506f78eb08C0"
 
 // LP Providers
-LP_INVESTOR_1 = "0x0D7083D8dCdF1DBc72D1CcD2653f9fDB1981505E"
-LP_INVESTOR_2 = "0xcaDf2f51CB897cb4E476435772c3Ff3572f924e2"
-LP_INVESTOR_3 = "0xBFc831C5CcF3FE6bF03e0051C72B1066c7A136d9"
+LP1_ADDRESS = "0x0D7083D8dCdF1DBc72D1CcD2653f9fDB1981505E"
+LP2_ADDRESS = "0xcaDf2f51CB897cb4E476435772c3Ff3572f924e2"
+LP3_ADDRESS = "0xBFc831C5CcF3FE6bF03e0051C72B1066c7A136d9"
 ```
 
 ## Contract Specifications
 
-### Main Token Contract (GreedysClubV2_4_0)
+### Token Contract (GR33DVaultV2)
 ```solidity
 // Basic Token Info
-name = "GREEDYSCLUB"
+name = "GR33DVAULT"
 symbol = "GR33D"
 decimals = 18
 totalSupply = 5_000_000 * 10**18
+currentSupply = 4_999_220.52 * 10**18  // After burn
 
 // Transaction Limits
 STANDARD_TX_LIMIT = 15_000 * 10**18
@@ -48,12 +43,17 @@ MAX_WALLET = 100_000 * 10**18
 STANDARD_BURN_RATE = 50      // 0.5%
 STAKING_BURN_RATE = 25       // 0.25%
 MAX_BURN_SUPPLY = 2_000_000 * 10**18  // 40% of supply
+totalBurned = 779.48 * 10**18  // Current burned amount
+
+// Rewards Configuration
+INITIAL_REWARDS_POOL = 1_000_000 * 10**18
+currentRewardsPool = 999_997.85 * 10**18
 
 // Security
 MIN_TIME_BETWEEN_TXS = 20    // seconds
 ```
 
-### Staking Contract
+### Staking System (V2)
 ```solidity
 // Base Configuration
 BASE_APY = 2000             // 20%
@@ -70,88 +70,239 @@ LOCK_PERIOD_360_DAYS = 360 days // +20%
 THRESHOLD_1 = 750_000 * 10**18  // 100% APY
 THRESHOLD_2 = 500_000 * 10**18  // 75% APY
 THRESHOLD_3 = 250_000 * 10**18  // 50% APY
+
+// Launch Bonuses (for LP Staking)
+WEEK1_BONUS = 4000  // +40%
+WEEK2_BONUS = 2000  // +20%
+```
+
+## Key Structures
+
+### StakePosition (V2)
+```solidity
+struct StakePosition {
+    uint96 positionId;              // Unique identifier
+    uint96 amount;                  // Staked amount
+    uint64 timestamp;               // Start time
+    uint64 lockEndTime;             // Lock expiration (if locked)
+    uint64 lastRewardCalculation;   // Last reward calc timestamp
+    uint64 lastWeeklyReward;        // Last weekly reward timestamp
+    uint32 bonusApy;                // Lock bonus APY in basis points
+    uint128 pendingRewards;         // Accumulated rewards
+    bool isLocked;                  // Whether position is locked
+    bool exists;                    // Position exists flag
+    uint8 padding;                  // For struct alignment
+}
+```
+
+### VestingSchedule
+```solidity
+struct VestingSchedule {
+    uint256 totalAmount;      // Total tokens in vesting
+    uint256 weeklyAmount;     // Weekly release rate
+    uint256 startTime;        // Start timestamp
+    uint256 lockEndTime;      // Lock expiration
+    uint256 lastClaimTime;    // Last claim timestamp
+    uint256 endTime;          // End of vesting
+    uint256 claimed;          // Amount claimed so far
+    bool isLP;                // Whether LP provider vesting
+    bool isActive;            // Whether vesting is active
+}
+```
+
+### LPStakeInfo
+```solidity
+struct LPStakeInfo {
+    uint256 amount;                 // LP tokens staked
+    uint256 timestamp;              // Stake start time
+    uint256 lastRewardCalculation;  // Last reward calc
+    uint256 pendingRewards;         // Accumulated rewards
+    uint256 totalClaimed;           // Total claimed rewards
+    uint256 bonusEndTime;           // End of launch bonus
+}
 ```
 
 ## Key Functions
 
-### Token Contract
+### Token Core Functions
 ```solidity
-// Core Functions
-function transfer(address to, uint256 amount) external returns (bool)
-function approve(address spender, uint256 amount) external returns (bool)
-function transferFrom(address from, address to, uint256 amount) external returns (bool)
+// Transfer with burn mechanism and security checks
+function _transfer(address from, address to, uint256 amount) internal virtual override;
 
-// Staking Interface
-function stake(uint256 amount) external
-function unstake(uint256 amount) external
-function claimRewards() external
-
-// Admin Functions
-function setStakingContract(address _stakingContract) external onlyOwner
-function addLPPool(address lpToken) external onlyOwner
+// Admin functions
+function adminClaimInitialLiquidity() external onlyOwner;
+function setupInitialLiquidity(address _uniswapPair) external onlyOwner;
+function lockInitialLiquidity() external onlyOwner;
+function enableTrading() external onlyOwner;
 ```
 
-### Staking Contract
+### Staking System (V2)
 ```solidity
-// Standard Staking
-function stake(uint256 amount) external
-function stakeWithLock(uint256 amount, uint256 lockPeriod) external
-function unstake(uint256 amount) external
-function claimRewards() external
+// Position-based staking
+function stake(uint256 amount) external nonReentrant whenNotPaused notBlacklisted;
+function stakeWithLock(uint256 amount, uint256 lockDuration) external nonReentrant whenNotPaused notBlacklisted;
+function unstakePosition(uint256 positionId) external nonReentrant whenNotPaused;
 
-// LP Staking
-function stakeLPTokens(address lpToken, uint256 amount) external
-function unstakeLPTokens(address lpToken, uint256 amount) external
-function claimLPRewards(address lpToken) external
+// View functions
+function getStakePositions(address user) external view returns (StakePosition[] memory);
+function getTotalUserStake(address user) external view returns (uint256);
 ```
 
-## Contract Security
-
-### Implementation Pattern
+### LP Staking
 ```solidity
-// Upgradeable Pattern
-UUPS (Universal Upgradeable Proxy Standard)
-OpenZeppelin Implementation v4.9.3
+// LP staking operations
+function stakeLPTokens(uint256 amount) external nonReentrant whenNotPaused notBlacklisted antiFlashLoan;
+function unstakeLPTokens(uint256 amount) external nonReentrant whenNotPaused;
 
-// Security Features
-ReentrancyGuard
-Ownable
-Pausable (emergency only)
+// View functions
+function getLPStakeInfo(address user) external view returns (uint256 amount, uint256 pendingRewards, uint256 bonusEndTime);
 ```
 
-### Security Measures
-- Multi-signature authorization
-- Time-locked functions
-- Rate limiting systems
-- Anti-bot protection
-- Emergency circuit breakers
-
-## Vesting Details
-
-### Marketing Vesting
+### Vesting System
 ```solidity
-Total: 200,000 GR33D
-Lock: 1 month
-Distribution: ~13,333 GR33D/month
-Duration: 15 months
-Start: December 24, 2024
+// Vesting management
+function initializeVesting(address beneficiary, uint256 totalAmount, uint256 vestingWeeks, uint256 lockDuration) external onlyOwner nonReentrant;
+function batchReleaseVesting(address[] calldata beneficiaries, uint256[] calldata vestingIds, uint256[] calldata amounts) external onlyOwner nonReentrant whenNotPaused;
+function releaseTradeReserveToPool(uint256 amount) external onlyOwner nonReentrant whenNotPaused;
+
+// View functions
+function getVestingInfo(address wallet, uint256 vestingId) external view validVesting(wallet, vestingId) returns (VestingSchedule memory schedule, uint256 available);
+function calculateAvailableVesting(address beneficiary, uint256 vestingId) public view validVesting(beneficiary, vestingId) returns (uint256);
 ```
 
-### Dev Fund Vesting
+### Security Functions (V2)
 ```solidity
-Total: 400,000 GR33D
-Lock: 2 months
-Distribution: 33,333 GR33D/month
-Duration: 12 months
-Start: February 22, 2025
+// Whitelist management
+function setWhitelist(address account, bool maxWalletExempt_, bool txLimitExempt_) external onlyOwner;
+
+// Blacklist system (new in V2)
+function updateBlacklist(address account, bool blacklisted) external onlyOwner;
+
+// Emergency controls
+function pause() external onlyOwner;
+function unpause() external onlyOwner;
+function emergencyWithdraw() external onlyOwner nonReentrant;
+
+// Upgrade system (UUPS)
+function _authorizeUpgrade(address) internal override view onlyOwner;
 ```
 
-### Trading Reserve
+## Key Modifiers
+
 ```solidity
-Total: 2,410,000 GR33D
-Lock: 3 months
-Distribution: ~50,200 GR33D/month
-Start: March 2025
+// Transaction security
+modifier whenTradingEnabled();
+modifier antiFlashLoan();  // New in V2
+modifier notBlacklisted(); // New in V2
+modifier nonReentrant();
+modifier whenNotPaused();
+modifier onlyOwner();
+
+// Vesting validation
+modifier validVesting(address beneficiary, uint256 vestingId);
+```
+
+## Events
+
+```solidity
+// Staking events
+event Staked(address indexed user, uint256 amount, uint256 lockDuration);
+event Unstaked(address indexed user, uint256 amount);
+event RewardsClaimed(address indexed user, uint256 amount);
+event StakePositionCreated(address indexed user, uint256 positionId, uint256 amount);
+event StakePositionUpdated(address indexed user, uint256 positionId, uint256 amount);
+
+// LP staking events
+event LPStaked(address indexed user, uint256 amount);
+event LPUnstaked(address indexed user, uint256 amount);
+event LPRewardsClaimed(address indexed user, uint256 amount);
+
+// Vesting events
+event VestingScheduleCreated(address indexed beneficiary, uint256 totalAmount, uint256 weeklyAmount);
+event VestingClaimed(address indexed beneficiary, uint256 amount);
+event VestingBatchReleased(uint256 beneficiariesCount, uint256 totalAmount);
+
+// Contract events
+event LiquidityLocked(uint256 timestamp);
+event TradingEnabled(uint256 timestamp);
+event InitialLiquiditySetup(address indexed pair, uint256 lpAmount);
+event InitialLiquidityLocked(uint256 lpAmount, uint256 timestamp);
+event TradeReserveReleasedToPool(uint256 amount, uint256 timestamp, uint256 remainingReserve);
+event InitialAllocationClaimed(address indexed beneficiary, uint256 amount);
+
+// Security events
+event WhitelistUpdated(address indexed account, bool maxWalletExempt, bool txLimitExempt);
+event BlacklistUpdated(address indexed account, bool status);
+event Paused(uint256 timestamp);
+event Unpaused(uint256 timestamp);
+event EmergencyWithdraw(address indexed user, uint256 amount);
+event BurnExecuted(uint256 amount, uint256 newTotalBurned, uint256 timestamp);
+```
+
+## Contract Deployment History
+
+### Initial Deployment (V1)
+- **Date**: November 24, 2024
+- **Implementation Address**: 0x148497C73FE8B0185bd0615067791cd80d3bdda8
+- **Trading Enabled**: November 24, 2024
+
+### V2 Upgrade
+- **Date**: December 24, 2024
+- **Implementation Address**: 0xdb2e16605c672bd0d743142e10ce2c1b12a876a4
+- **Key Improvements**: 
+  - Position-based staking system
+  - Flash loan protection
+  - Blacklist system
+  - Gas optimizations
+  - Emergency functions
+
+## Integration & Development
+
+### Contract Interaction Requirements
+```javascript
+// Required Packages
+const { ethers } = require("ethers");
+const PROVIDER_URL = "https://mainnet.infura.io/v3/YOUR_INFURA_KEY";
+const provider = new ethers.providers.JsonRpcProvider(PROVIDER_URL);
+const wallet = new ethers.Wallet(PRIVATE_KEY, provider);
+const GR33D_ABI = require("./GR33DVaultV2.json");
+const gr33dContract = new ethers.Contract(GR33D_TOKEN_PROXY, GR33D_ABI, wallet);
+```
+
+### Common Function Calls
+```javascript
+// Staking example
+const stakeAmount = ethers.utils.parseEther("1000");
+const tx = await gr33dContract.stake(stakeAmount, {
+  gasLimit: 300000,
+});
+await tx.wait();
+
+// Position-based staking
+const positions = await gr33dContract.getStakePositions(userAddress);
+console.log("User positions:", positions);
+
+// LP staking example
+const lpAmount = ethers.utils.parseEther("0.1"); // LP tokens
+const lpTx = await gr33dContract.stakeLPTokens(lpAmount, {
+  gasLimit: 300000,
+});
+await lpTx.wait();
+
+// Vesting check example
+const vestingInfo = await gr33dContract.getVestingInfo(beneficiaryAddress, 0);
+console.log("Vesting schedule:", vestingInfo.schedule);
+console.log("Available to claim:", ethers.utils.formatEther(vestingInfo.available));
+```
+
+### Development Requirements
+```javascript
+// Required Packages for Development
+"@openzeppelin/contracts-upgradeable": "^4.9.3",
+"@openzeppelin/hardhat-upgrades": "^1.28.0",
+"@nomiclabs/hardhat-ethers": "^2.2.3",
+"hardhat": "^2.19.1",
+"solidity": "0.8.20"
 ```
 
 ## Emergency Procedures
@@ -165,48 +316,23 @@ Response Time: < 5 minutes for critical issues
 ### Critical Functions
 ```solidity
 // Emergency Pause
-function pause() external onlyOwner
-function unpause() external onlyOwner
+function pause() external onlyOwner;
+function unpause() external onlyOwner;
 
 // Emergency Withdrawal
-function emergencyWithdraw() external onlyOwner whenPaused
+function emergencyWithdraw() external onlyOwner whenPaused;
 ```
 
-## Contract Verification
+## Security Notes
 
-### Etherscan Verification
-- All contract source code will be verified on Etherscan
-- Contract interfaces will be published
-- Contract ABIs will be available
-- Read/Write function guides will be provided
+The contract includes several security features:
 
-### Post-Deployment Verification
-```
-□ Contract deployment verified
-□ Function permissions confirmed
-□ Event emissions checked
-□ Initial parameters validated
-□ Security features tested
-```
+1. **Anti-Flash Loan Protection**: Prevents exploitation through flash loans by requiring `tx.origin == msg.sender`
+2. **Blacklist System**: Allows blocking malicious addresses from interacting with the contract
+3. **Transaction Rate Limiting**: Prevents spam attacks with a 20-second cooldown between transactions
+4. **ReentrancyGuard**: Prevents reentrancy attacks on all sensitive functions
+5. **Emergency Circuit Breakers**: Allow pausing the contract in case of detected vulnerabilities
+6. **Access Controls**: Strict permission management for administrative functions
+7. **Secure Upgrade Pattern**: UUPS implementation with proper authorization checks
 
-## Integration & Development
-
-### Development Requirements
-```javascript
-// Required Packages
-@openzeppelin/contracts-upgradeable: "^4.9.3"
-@openzeppelin/hardhat-upgrades: "^1.28.0"
-@nomiclabs/hardhat-ethers: "^2.2.3"
-```
-
-### Testing Environment
-```javascript
-// Test Network
-network: "sepolia"
-hardhat: "^2.19.1"
-solidity: "0.8.20"
-```
-
-This documentation will be updated with contract addresses and additional verification information after deployment on November 24, 2024. Always verify contract addresses against official sources and documentation.
-
-*Note: Contract audit reports and detailed technical documentation will be available after deployment.*
+This documentation reflects the current state of the GR33DVaultV2 contract deployed on Ethereum Mainnet. All function signatures and event definitions are accurate as of the V2 upgrade on December 24, 2024.
