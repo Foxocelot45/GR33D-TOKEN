@@ -1,20 +1,7 @@
 # GR33D Vesting Guide
 
 ## Overview
-This document details all vesting schedules and token release mechanisms for the GR33D token ecosystem. All times are in UTC.
-
-### LP Providers Initial Distribution
-| Investor                                       | LP Investment | Initial Release | Vesting Amount |
-|------------------------------------------------|---------------|-----------------|----------------|
-| LP1    | $500         | 20,000 GR33D    | 20,000 GR33D  |
-| LP2    | $500         | 20,000 GR33D    | 20,000 GR33D  |
-| LP3    | $1,000       | 40,000 GR33D    | 40,000 GR33D  |
-| LP4   | $1,000       | 40,000 GR33D    | 40,000 GR33D  |
-
-### Team Bonus Initial Distribution
-- Initial Release: 40,000 GR33D
-- Vesting Amount: 40,000 GR33D
-- Total Day 1: 160,000 GR33D
+This document details all vesting schedules and token release mechanisms for the GR33D token ecosystem. The V2 upgrade has enhanced the security and efficiency of the vesting system while maintaining the original distribution schedule. All times are in UTC.
 
 ## Vesting Schedules
 
@@ -24,41 +11,33 @@ This document details all vesting schedules and token release mechanisms for the
   * Month 1 (December 24, 2024): 80,000 GR33D
   * Month 2 (January 23, 2025): 80,000 GR33D
 - **Total Vesting**: 160,000 GR33D
+- **Status**: Complete as of January 23, 2025
 
 ### Marketing Supply
 - **Total Amount**: 200,000 GR33D
-- **Lock Period**: 1 month
+- **Lock Period**: 1 month (until December 24, 2024)
 - **Distribution**: ~13,333 GR33D/month
 - **Duration**: 15 months
 - **Period**: December 2024 - February 2026
-- **Release Schedule**:
-  * Lock Until: December 24, 2024
-  * Monthly Release: ~13,333 GR33D
-  * Final Month Adjustment: Remaining balance
+- **Current Status**: Active, lock period ended
 
 ### Development Fund
 - **Total Amount**: 400,000 GR33D
-- **Lock Period**: 2 months
+- **Lock Period**: 2 months (until January 24, 2025)
 - **Distribution**: 33,333 GR33D/month
 - **Duration**: 12 months
 - **Period**: February 2025 - January 2026
-- **Release Schedule**:
-  * Lock Until: January 24, 2025
-  * Monthly Release: 33,333 GR33D
-  * Final Month: 33,337 GR33D (adjustment)
+- **Current Status**: Active, lock period ended
 
 ### Trading Reserve
 - **Total Amount**: 2,410,000 GR33D
-- **Lock Period**: 3 months
+- **Lock Period**: 3 months (until February 24, 2025)
 - **Distribution**: ~50,200 GR33D/month
 - **Duration**: 48 months
 - **Start Date**: March 2025
-- **Release Schedule**:
-  * Lock Until: February 24, 2025
-  * Monthly Release: 50,200 GR33D
-  * Final Month Adjustment: Remaining balance
+- **Current Status**: Active, lock period ended
 
-## Monthly Distribution Timeline
+## Key Distribution Milestones
 
 ### Phase 1 - Launch (November 24, 2024)
 ```
@@ -97,60 +76,93 @@ Monthly Distribution:
 - Marketing: 13,333 GR33D (until February 2026)
 ```
 
+## V2 Vesting Enhancements
+
+### Improved Security Features
+- **Enhanced access controls**: Additional verification steps for vesting beneficiaries
+- **Anti-flash loan protection**: Protection against exploitation attempts
+- **Blacklist system integration**: Vesting can be secured against malicious actors
+- **Gas optimization**: Reduced transaction costs for vesting operations
+- **Position tracking**: Improved monitoring of vesting schedules
+
+### Structure of VestingSchedule
+```solidity
+struct VestingSchedule {
+    uint256 totalAmount;      // Total tokens allocated to this vesting
+    uint256 weeklyAmount;     // Weekly allocation rate
+    uint256 startTime;        // When the vesting begins
+    uint256 lockEndTime;      // When tokens become claimable
+    uint256 lastClaimTime;    // Last time tokens were claimed
+    uint256 endTime;          // When vesting schedule ends
+    uint256 claimed;          // Amount already claimed
+    bool isLP;                // Whether this is for a LP provider
+    bool isActive;            // Whether this vesting is active
+}
+```
+
 ## Claiming Process
 
 ### Technical Implementation
+The V2 upgrade brings improvements to the claiming process, including gas optimization and enhanced security checks:
+
 ```solidity
-function claimVestedTokens() external {
-    require(block.timestamp >= vestingSchedule[msg.sender].nextUnlock, "Too early");
-    require(vestingSchedule[msg.sender].remainingAmount > 0, "No tokens to claim");
-    
-    uint256 claimableAmount = calculateClaimableAmount(msg.sender);
-    vestingSchedule[msg.sender].remainingAmount -= claimableAmount;
-    vestingSchedule[msg.sender].nextUnlock = calculateNextUnlock(msg.sender);
-    
-    require(token.transfer(msg.sender, claimableAmount), "Transfer failed");
-    emit VestingClaimed(msg.sender, claimableAmount);
+function batchReleaseVesting(
+    address[] calldata beneficiaries,
+    uint256[] calldata vestingIds,
+    uint256[] calldata amounts
+) external onlyOwner nonReentrant whenNotPaused {
+    // Batch processing of vesting releases
+    // Enhanced security checks and optimized gas usage
+}
+
+function calculateAvailableVesting(
+    address beneficiary,
+    uint256 vestingId
+) public view validVesting(beneficiary, vestingId) returns (uint256) {
+    // Improved calculation with additional security checks
 }
 ```
 
 ### Claim Instructions
-1. Connect wallet to platform
-2. Verify vesting schedule
-3. Check available tokens
-4. Initiate claim transaction
-5. Confirm in wallet
+1. Connect wallet to the platform
+2. Navigate to the "Vesting" section
+3. View your available vesting schedules
+4. Check claimable tokens for each schedule
+5. Request claim transaction
+6. Confirm in wallet
+7. Receive tokens directly to your wallet
 
 ## Security Measures
 
 ### Vesting Contract Security
-- Multi-signature requirement for setup
-- Time-locked releases
-- Anti-gaming mechanisms
-- Emergency pause capability
-- Real-time monitoring
+- **Multi-signature requirement**: Critical operations require multiple confirmations
+- **Time-locked releases**: Enforced waiting periods before claiming
+- **Anti-gaming mechanisms**: Protections against exploitation
+- **Emergency pause capability**: Contract can be paused if issues are detected
+- **Blacklist integration**: Protection against malicious actors
 
 ### Claim Security
-- Rate limiting
-- Address verification
-- Amount validation
-- Transaction monitoring
-- Event logging
+- **Rate limiting**: Controls to prevent abuse
+- **Address verification**: Validation of beneficiary addresses
+- **Amount validation**: Checks to ensure claim amounts are correct
+- **Transaction monitoring**: Real-time tracking of claim transactions
+- **Event logging**: Complete audit trail of all vesting activities
 
 ## Monitoring & Verification
 
 ### Real-Time Tracking
-- Total tokens released
+Through the V2 upgrade, beneficiaries can now easily track:
+- Total tokens released to date
 - Remaining vesting balances
-- Claim history
-- Lock status
-- Distribution schedule
+- Complete claim history
+- Current lock status
+- Projected distribution schedule
 
 ### Verification Tools
-- Etherscan verification
-- Smart contract events
-- Distribution logs
-- Claim records
+- **Etherscan verification**: All claims can be verified on-chain
+- **Smart contract events**: Transparent logging of all vesting activities
+- **Distribution logs**: Complete history of token distributions
+- **Claim records**: Detailed record of all claims made
 
 ## Support & Emergency Procedures
 
@@ -165,4 +177,4 @@ function claimVestedTokens() external {
 - Contract Issues: https://t.me/GreedyFoxxx
 
 ## Schedule Updates
-This vesting schedule is final and cannot be modified after contract deployment. All dates and amounts are immutable once set in the smart contract.
+The vesting schedule is final and immutable once set in the smart contract. All dates and amounts are established at initialization and cannot be modified. The V2 upgrade has maintained the integrity of all existing vesting schedules while enhancing security and efficiency.
