@@ -1,16 +1,51 @@
 # GR33D Staking Guide
 
 ## Overview
-This guide details the staking mechanisms of the GR33D token, including both standard staking and LP staking features.
+This guide details the staking mechanisms of the GR33D token, including both standard staking and LP staking features, with special focus on the position-based staking system introduced in V2.
 
-## Standard Staking
+## Position-Based Staking System (V2)
+
+### What's New in V2
+The V2 upgrade introduced a position-based staking system that offers:
+- Multiple separate staking positions for flexible management
+- Individual lock periods per position
+- Enhanced security with anti-flash loan protection
+- Gas optimizations for more efficient transactions
+- Improved reward calculation accuracy
+
+### Creating Staking Positions
+
+#### Standard Staking Position
+```solidity
+function stake(uint256 amount) external
+```
+- Creates a flexible staking position with no lock period
+- Minimum stake: 100 GR33D
+- Base APY: 20%
+- No withdrawal restrictions
+
+#### Locked Staking Position
+```solidity
+function stakeWithLock(uint256 amount, uint256 lockDuration) external
+```
+- Creates a locked staking position with enhanced rewards
+- Lock options: 90, 180, 270, or 360 days
+- Minimum stake: 100 GR33D
+- APY boost based on lock period
+- Cannot unstake until lock period ends
+
+### Managing Multiple Positions
+- Each position is tracked separately with a unique ID
+- Rewards are calculated individually per position
+- Unstaking is performed per position rather than a global amount
+- Position IDs can be retrieved via `getStakePositions(address user)`
 
 ### Base Mechanics
 - **Foundation APY**: 20%
 - **Maximum APY**: 40% (with lock bonuses)
 - **Daily Rewards**: Calculated continuously
-- **Minimum Stake**: No minimum
-- **Maximum Stake**: 50,000 GR33D per transaction
+- **Minimum Stake**: 100 GR33D
+- **Maximum Stake Transaction**: 50,000 GR33D per transaction
 
 ### Lock Period Bonuses
 | Lock Period | Bonus APY | Total APY |
@@ -46,81 +81,120 @@ This guide details the staking mechanisms of the GR33D token, including both sta
 
 ## Technical Details
 
-### Staking Functions
+### Position Functions (V2)
 ```solidity
-// Standard Staking
+// Create a standard stake position
 function stake(uint256 amount) external
-function stakeWithLock(uint256 amount, uint256 lockPeriod) external
-function unstake(uint256 amount) external
-function claimRewards() external
 
-// LP Staking
-function stakeLPTokens(address lpToken, uint256 amount) external
-function unstakeLPTokens(address lpToken, uint256 amount) external
-function claimLPRewards(address lpToken) external
+// Create a locked stake position
+function stakeWithLock(uint256 amount, uint256 lockDuration) external
+
+// Unstake a specific position
+function unstakePosition(uint256 positionId) external
+
+// View all your staking positions
+function getStakePositions(address user) external view returns (StakePosition[] memory)
+
+// Get your total staked amount across all positions
+function getTotalUserStake(address user) external view returns (uint256)
+```
+
+### LP Staking Functions
+```solidity
+// Stake LP tokens
+function stakeLPTokens(uint256 amount) external
+
+// Unstake LP tokens
+function unstakeLPTokens(uint256 amount) external
+
+// Get LP stake information
+function getLPStakeInfo(address user) external view returns (
+    uint256 amount,
+    uint256 pendingRewards,
+    uint256 bonusEndTime
+)
 ```
 
 ### Security Features
 - ReentrancyGuard on all staking functions
+- Anti-flash loan protection
+- Transaction delay requirements (20 seconds)
 - Daily reward caps
-- Anti-gaming measures
-- Emergency withdrawal system
-- Real-time monitoring
+- Blacklist system for security enforcement
+- Emergency withdrawal system in case of contract pause
 
 ## How to Stake
 
 ### Standard Staking
 1. Connect wallet to platform
-2. Choose stake amount
-3. Select lock period (optional)
-4. Confirm transaction
-5. Monitor rewards accumulation
+2. Navigate to the "Staking" tab
+3. Enter the amount you wish to stake
+4. Click "Stake" for flexible staking or "Stake with Lock" for locked staking
+5. If choosing a locked position, select your preferred lock period
+6. Confirm the transaction in your wallet
+7. Your new staking position will appear in your dashboard
+
+### Managing Multiple Positions
+1. View all your positions in the "My Positions" section
+2. Each position shows:
+   - Position ID
+   - Staked amount
+   - Start date
+   - Lock end date (if applicable)
+   - Current rewards
+   - APY (including bonuses)
+3. To unstake, select a position and click "Unstake"
+4. Locked positions cannot be unstaked until the lock period ends
 
 ### LP Staking
-1. Add liquidity to get LP tokens
-2. Connect wallet to platform
-3. Stake LP tokens
-4. Choose lock period
-5. Monitor enhanced rewards
+1. Add liquidity to the GR33D/ETH pool on Uniswap
+2. Receive LP tokens representing your pool share
+3. Go to the "LP Staking" tab on the platform
+4. Enter the amount of LP tokens to stake
+5. Confirm the transaction in your wallet
+6. Monitor enhanced rewards in your dashboard
 
 ## Important Notes
 
 ### Rewards
-- Rewards accrue continuously
-- Claim available anytime
-- Compound options available
-- Enhanced rates for longer locks
+- Rewards accrue continuously for each position
+- Each position's rewards are calculated independently
+- Rewards are claimed automatically when unstaking a position
+- Maximum daily reward per position: 2% of staked amount
 
 ### Withdrawals
-- No lock: withdraw anytime
-- With lock: must wait until lock expires
-- Emergency withdrawal available (with penalty)
+- No lock: withdraw any position anytime
+- With lock: must wait until that position's lock expires
+- Emergency withdrawal available (with penalty) if contract is paused
 - 20-second cooldown between transactions
 
 ### Risks & Security
-- Smart contract audited
-- Funds secured by timelock
-- Anti-flash loan protection
-- Rate limiting implemented
+- Smart contract audited and upgraded to V2
+- Anti-flash loan protection prevents exploitation
+- Blacklist system protects against malicious activities
+- Position-based system isolates risk between positions
 
 ## FAQ
 
 ### Standard Staking
-Q: How often are rewards calculated?
-A: Rewards are calculated continuously and can be claimed at any time.
+Q: What happens to my existing stakes after the V2 upgrade?  
+A: All existing stakes were automatically converted to positions in the new system. Your funds and rewards are safe.
 
-Q: Can I add to my locked stake?
-A: Yes, but it will create a separate stake with its own lock period.
+Q: Can I have multiple positions with different lock periods?  
+A: Yes, you can create as many positions as you want with various lock periods to diversify your staking strategy.
+
+Q: What's the advantage of the position-based system?  
+A: It provides greater flexibility, allows for diversification of lock periods, and enhances security by isolating each position.
 
 ### LP Staking
-Q: How do LP rewards differ from standard staking?
+Q: How do LP rewards differ from standard staking?  
 A: LP staking offers higher base APY (80%) with additional launch bonuses.
 
-Q: Can I withdraw LP tokens early?
-A: Yes, but you'll forfeit any unclaimed rewards.
+Q: Can I withdraw LP tokens early?  
+A: Yes, you can withdraw LP tokens anytime, but you'll forfeit any unclaimed rewards.
 
 ## Support & Resources
 - Technical Support: thegr33dysclub@gmail.com
 - Telegram (FR): https://t.me/+ST4-blQBoLs5NWI8
 - Telegram (EN): https://t.me/+WipDE7pBxF41Mzc0
-- Real-time Monitoring: [Dashboard Link]
+- Website: https://gr33d-vault.vercel.app/
