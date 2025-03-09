@@ -1,419 +1,355 @@
-# GR33D Smart Contract Audit Guide
+# Deployment Guide
 
 ## Overview
-This document outlines the comprehensive audit process for the GR33DVaultV2 smart contract. It provides guidance for security researchers, auditors, and developers who wish to verify the contract's security and functionality.
+This document details the deployment process for the GR33D smart contract ecosystem, including both the initial V1 deployment and the V2 upgrade process. This guide is intended for technical team members responsible for contract deployment and maintenance.
 
-## Critical Components for Audit
+## Pre-Deployment Requirements
 
-### 1. V2 Core Components
-```solidity
-// Core Token Parameters
-- Initial Supply: 5,000,000 tokens
-- Current Supply: 4,999,220.52 tokens
-- Transaction Limits: 15,000/50,000 tokens
-- Wallet Cap: 100,000 tokens (2%)
-- Anti-Bot Delay: 20 seconds
-
-// Burn Mechanics
-- Standard Rate: 0.5%
-- Staking Rate: 0.25%
-- Maximum Burn: 40% (2,000,000 tokens)
-- Current Burned: 779.48 tokens
-
-// Security V2 Enhancements
-- Anti-Flash Loan Protection
-- Blacklist System
-- Position-Based Staking
-- Emergency Functions
-- Gas Optimizations
-```
-
-### 2. Position-Based Staking System
-```solidity
-// StakePosition Structure
-struct StakePosition {
-    uint96 positionId;
-    uint96 amount;
-    uint64 timestamp;
-    uint64 lockEndTime;
-    uint64 lastRewardCalculation;
-    uint64 lastWeeklyReward;
-    uint32 bonusApy;
-    uint128 pendingRewards;
-    bool isLocked;
-    bool exists;
-    uint8 padding;
-}
-
-// Staking Parameters
-- Base APY: 20%
-- Maximum APY: 40%
-- Lock Periods: 90/180/270/360 days
-- Bonus Rates: 5%/10%/15%/20%
-```
-
-### 3. Vesting Mechanisms
-```solidity
-// Vesting Structure
-struct VestingSchedule {
-    uint256 totalAmount;
-    uint256 weeklyAmount;
-    uint256 startTime;
-    uint256 lockEndTime;
-    uint256 lastClaimTime;
-    uint256 endTime;
-    uint256 claimed;
-    bool isLP;
-    bool isActive;
-}
-
-// Vesting Schedules
-- Marketing: 200,000 (15 months)
-- Dev Fund: 400,000 (12 months)
-- Trading: 2,410,000 (48 months)
-```
-
-## Audit Checklist
-
-### 1. Security Vulnerabilities
-
-#### Reentrancy Attacks
-```solidity
-□ Staking Functions
-  - stake(uint256 amount)
-  - stakeWithLock(uint256 amount, uint256 lockDuration)
-  - unstakePosition(uint256 positionId)
-  - stakeLPTokens(uint256 amount)
-  - unstakeLPTokens(uint256 amount)
-
-□ Vesting Functions
-  - initializeVesting(address, uint256, uint256, uint256)
-  - batchReleaseVesting(address[], uint256[], uint256[])
-  - releaseTradeReserveToPool(uint256)
-```
-
-#### Access Control
-```solidity
-□ Owner Functions
-  - setWhitelist(address, bool, bool)
-  - updateBlacklist(address, bool)
-  - pause()
-  - unpause()
-  - emergencyWithdraw()
-  - _authorizeUpgrade(address)
-
-□ Modifiers Implementation
-  - onlyOwner
-  - nonReentrant
-  - whenNotPaused
-  - whenTradingEnabled
-  - antiFlashLoan
-  - notBlacklisted
-  - validVesting
-```
-
-#### V2 Security Features
-```solidity
-□ Anti-Flash Loan Protection
-  - Verification that tx.origin == msg.sender
-  - Implementation in critical functions
-
-□ Blacklist System
-  - Function to add/remove addresses
-  - Effect on transfers and interactions
-  - Edge cases handling
-
-□ Emergency Circuit Breakers
-  - Pause/Unpause functionality
-  - Affected functions
-  - Emergency withdrawal mechanism
-```
-
-#### Integer Overflow/Underflow
-```solidity
-□ Critical Math Operations
-  - Reward calculations
-  - Burn amount determination
-  - Vesting period calculations
-  - APY adjustments based on thresholds
-```
-
-### 2. Business Logic
-
-#### Position-Based Staking Implementation
-```solidity
-□ Staking Position Creation
-  - Position ID assignment
-  - Lock period enforcement
-  - Reward rate determination
-
-□ Reward Calculations
-  - _calculateRewards() accuracy
-  - Bonus APY application
-  - Pool threshold adjustments
-  - Maximum daily rewards
-
-□ Position Management
-  - Multiple position handling
-  - Position deletion on unstake
-  - Edge cases (zero amounts, maximum positions)
-```
-
-#### V2 Vesting Enhancements
-```solidity
-□ Vesting Schedule Creation
-  - Parameter validation
-  - Timelock enforcement
-  - Weekly amount calculation
-
-□ Vesting Claims
-  - Available amount calculation
-  - Batch release implementation
-  - Claim conditions enforcement
-```
-
-#### LP Staking System
-```solidity
-□ LP Token Handling
-  - Transfer safety
-  - Reward calculations
-  - Launch bonuses
-  - Edge cases
-```
-
-### 3. Gas Optimization
-
-#### Struct Packing
-```solidity
-□ StakePosition Struct
-  - Proper size allocation
-  - Memory efficiency
-  - Alignment optimization
-
-□ Storage Layout
-  - Gas-efficient storage usage
-  - Minimized storage operations
-  - Optimized data types
-```
-
-#### Function Efficiency
-```solidity
-□ Loop Optimization
-  - Batch operations efficiency
-  - Array operations
-  - Gas limits consideration
-
-□ Memory vs Storage
-  - Appropriate usage of memory/storage
-  - Unnecessary storage operations
-  - Read operation optimization
-```
-
-## Testing Methodology
-
-### 1. Functional Testing
-```javascript
-describe("GR33DVaultV2", () => {
-    // Basic Token Tests
-    it("Should enforce transaction limits", async () => {
-        // Test tx limits
-    });
-    
-    it("Should calculate burns correctly", async () => {
-        // Test burn mechanics
-    });
-    
-    // V2 Feature Tests
-    it("Should create and manage staking positions", async () => {
-        // Test position-based staking
-    });
-    
-    it("Should prevent flash loan attacks", async () => {
-        // Test antiFlashLoan modifier
-    });
-    
-    it("Should enforce blacklist restrictions", async () => {
-        // Test blacklist system
-    });
-});
-```
-
-### 2. V2 Security Testing
-```solidity
-// Attack Vectors to Test
-- Flash loan simulation attacks
-- Position manipulation attempts
-- Reward calculation exploits
-- Blacklist bypass attempts
-- Emergency function abuse
-```
-
-### 3. Upgrade Integrity Testing
-```javascript
-// Upgrade Verification
-- State preservation during upgrade
-- New function availability post-upgrade
-- Storage layout compatibility
-- Access control persistence
-```
-
-## Static Analysis Tools
-
-### 1. Automated Tools
+### Environment Setup
 ```bash
-# Required Tools
-- Slither
-- Mythril
-- Echidna
-- Solhint
+Node.js >= 16.0.0
+npm >= 7.0.0
+Hardhat >= 2.19.1
+@openzeppelin/contracts-upgradeable: "^4.9.3"
+@openzeppelin/hardhat-upgrades: "^1.28.0"
 ```
 
-### 2. Manual Review Focus Areas for V2
-```solidity
-// Code Review Priorities
-- Position-based staking implementation
-- Anti-flash loan protection
-- Blacklist system
-- Struct packing efficiency
-- Emergency functions
-```
-
-## Dynamic Analysis
-
-### 1. Network Testing
+### Network Configuration
 ```javascript
-// Test Networks
-- Local Hardhat
-- Sepolia
-- Mainnet Fork
-```
+// hardhat.config.js
+require("@nomicfoundation/hardhat-toolbox");
+require("@openzeppelin/hardhat-upgrades");
+require("dotenv").config();
 
-### 2. Integration Testing
-```solidity
-// External Interactions
-- Uniswap integration
-- LP token handling
-- Cross-contract calls
-```
-
-## V2 Focus Areas
-
-### 1. Position-Based Staking
-```solidity
-// Critical Functions
-function _createStakePosition(uint256 amount, uint256 lockDuration) internal;
-function unstakePosition(uint256 positionId) external;
-function _calculateRewards(StakePosition storage position) internal view returns (uint256);
-```
-
-#### Verification Points
-```
-□ Position creation integrity
-□ Reward calculation accuracy
-□ Position isolation security
-□ Lock period enforcement
-□ Reward rate determination
-```
-
-### 2. Anti-Flash Loan Protection
-```solidity
-// Implementation
-modifier antiFlashLoan() {
-    require(tx.origin == msg.sender, "Flash loan detected");
-    _;
+module.exports = {
+  solidity: {
+    version: "0.8.20",
+    settings: {
+      optimizer: {
+        enabled: true,
+        runs: 100
+      }
+    }
+  },
+  networks: {
+    mainnet: {
+      url: `https://eth-mainnet.g.alchemy.com/v2/${process.env.ALCHEMY_KEY}`,
+      accounts: [process.env.PRIVATE_KEY],
+      gasPrice: "auto",
+      chainId: 1,
+      timeout: 60000 // 1 minute
+    }
+  },
+  etherscan: {
+    apiKey: process.env.ETHERSCAN_API_KEY
+  }
 }
 ```
 
-#### Verification Points
+## Initial V1 Deployment (Completed)
+
+### Deployment Timeline (November 24, 2024)
+
+#### 11:45 UTC - Initial Setup
+1. Deploy Proxy and Implementation V1
+   ```javascript
+   // deploy.js
+   const { ethers, upgrades } = require("hardhat");
+   
+   async function main() {
+     console.log("Deploying GR33DVault proxy and implementation...");
+     
+     const GR33DVault = await ethers.getContractFactory("GR33DVault");
+     const gr33dVault = await upgrades.deployProxy(GR33DVault, [], {
+       initializer: "initialize",
+       kind: "uups"
+     });
+     
+     await gr33dVault.deployed();
+     console.log("GR33DVault deployed to:", gr33dVault.address);
+   }
+   
+   main().catch((error) => {
+     console.error(error);
+     process.exitCode = 1;
+   });
+   ```
+
+2. Verify Contract on Etherscan
+   ```bash
+   npx hardhat verify --network mainnet IMPLEMENTATION_ADDRESS
+   ```
+
+#### 11:55 UTC - Liquidity Setup
+1. Create Uniswap Pool
+   ```javascript
+   // setupUniswap.js
+   async function setupUniswapPool() {
+     // Code to set up the Uniswap pool
+     await gr33dVault.adminClaimInitialLiquidity();
+     // Add liquidity to Uniswap
+   }
+   ```
+
+2. Lock Liquidity
+   ```javascript
+   // lockLiquidity.js
+   async function lockLiquidity() {
+     await gr33dVault.lockInitialLiquidity();
+   }
+   ```
+
+#### 12:00 UTC - Launch Activation
+1. Enable Trading
+   ```javascript
+   // enableTrading.js
+   async function enableTrading() {
+     await gr33dVault.enableTrading();
+   }
+   ```
+
+2. Whitelist Setup
+   ```javascript
+   // setupWhitelist.js
+   async function setupWhitelist() {
+     // Whitelist critical addresses
+     await gr33dVault.setWhitelist(
+       "0x5A46d0F5bbce72D9665689cDAe9993824260b882", 
+       true, // maxWalletExempt
+       true  // txLimitExempt
+     );
+     // Add other addresses as needed
+   }
+   ```
+
+### Post-Deployment Tasks
+1. Setup Vesting Schedules
+   ```javascript
+   // setupVestings.js
+   async function setupVestings() {
+     // Marketing vesting (200,000 GR33D, 15 months, 1 month lock)
+     await gr33dVault.initializeVesting(
+       DEV_MARKETING,
+       ethers.utils.parseEther("200000"),
+       15, // weeks
+       30 * 24 * 60 * 60 // 30 days in seconds
+     );
+     
+     // Dev Fund vesting (400,000 GR33D, 12 months, 2 months lock)
+     await gr33dVault.initializeVesting(
+       DEV_MARKETING,
+       ethers.utils.parseEther("400000"),
+       12, // weeks
+       60 * 24 * 60 * 60 // 60 days in seconds
+     );
+     
+     // Trading Reserve vesting (2,410,000 GR33D, 48 months, 3 months lock)
+     await gr33dVault.initializeVesting(
+       ADMIN_ADDRESS,
+       ethers.utils.parseEther("2410000"),
+       48, // weeks
+       90 * 24 * 60 * 60 // 90 days in seconds
+     );
+   }
+   ```
+
+## V2 Upgrade Deployment (Completed)
+
+### V2 Upgrade Timeline (December 24, 2024)
+
+#### Pre-Upgrade Checklist
 ```
-□ Correct implementation in critical functions
-□ Edge case handling
-□ Gas cost impact
-□ Compatibility with legitimate contract interactions
+□ V2 Contract Audited
+□ Test Suite Passing
+□ Gas Estimations Completed
+□ Storage Layout Validated
+□ Upgrade Simulation on Fork
 ```
 
-### 3. Blacklist System
-```solidity
-// Implementation
-mapping(address => bool) public isBlacklisted;
+#### Upgrade Process
+1. Deploy V2 Implementation
+   ```javascript
+   // upgradeToV2.js
+   const { ethers, upgrades } = require("hardhat");
+   
+   async function main() {
+     console.log("Upgrading GR33DVault to V2...");
+     
+     const GR33DVaultV2 = await ethers.getContractFactory("GR33DVaultV2");
+     const upgradedContract = await upgrades.upgradeProxy(
+       "0xC3b2990027217b9970b2d526aa11Ba3f223eb39C", // Proxy address
+       GR33DVaultV2
+     );
+     
+     console.log("GR33DVault upgraded to V2");
+     console.log("Implementation address:", await upgrades.erc1967.getImplementationAddress(
+       upgradedContract.address
+     ));
+   }
+   
+   main().catch((error) => {
+     console.error(error);
+     process.exitCode = 1;
+   });
+   ```
 
-modifier notBlacklisted() {
-    require(!isBlacklisted[msg.sender], "Address blacklisted");
-    _;
+2. Verify V2 Implementation
+   ```bash
+   npx hardhat verify --network mainnet NEW_IMPLEMENTATION_ADDRESS
+   ```
+
+#### Post-Upgrade Verification
+```javascript
+// verifyUpgrade.js
+async function verifyUpgrade() {
+  const gr33dVault = await ethers.getContractAt(
+    "GR33DVaultV2",
+    "0xC3b2990027217b9970b2d526aa11Ba3f223eb39C"
+  );
+  
+  // Verify state was preserved
+  const totalSupply = await gr33dVault.totalSupply();
+  console.log("Total supply:", ethers.utils.formatEther(totalSupply));
+  
+  // Verify new functions are available
+  const blacklistStatus = await gr33dVault.isBlacklisted("0x0000000000000000000000000000000000000000");
+  console.log("Blacklist status for zero address:", blacklistStatus);
+  
+  // Check staking system
+  const stakePositions = await gr33dVault.getStakePositions("0xeF616AF55083Cb6BDF355a34224FFE829100D9b2");
+  console.log("Team stake positions:", stakePositions.length);
 }
 ```
 
-#### Verification Points
-```
-□ Function scope coverage
-□ Access control for blacklist management
-□ Event emission for transparency
-□ Impact on existing balances
-```
+## Future Upgrade Guidelines
 
-### 4. Emergency Functions
+### Preparation Phase
+1. Develop and test new implementation thoroughly
+2. Ensure storage compatibility with previous version
+3. Complete comprehensive security audit
+4. Prepare detailed upgrade documentation
+5. Create backup and rollback procedures
+
+### Development Recommendations
 ```solidity
-// Critical Functions
-function pause() external onlyOwner;
-function unpause() external onlyOwner;
-function emergencyWithdraw() external onlyOwner nonReentrant;
+// Ensure storage compatibility by following this pattern:
+contract GR33DVaultV3 is GR33DVaultV2 {
+    // New storage variables should be added at the end
+    uint256 public newFeature;
+    mapping(address => uint256) public newMapping;
+    
+    // Never modify existing storage variable declarations
+    // Never remove existing storage variables
+    
+    // For new functions, follow this pattern:
+    function newFunction() external {
+        // Implementation
+    }
+    
+    // For modified functions, override with care:
+    function existingFunction() external override {
+        // Call super to maintain compatibility
+        super.existingFunction();
+        // Add new functionality
+    }
+}
 ```
 
-#### Verification Points
+### Execution Process
+1. Deploy new implementation
+2. Verify implementation on Etherscan
+3. Perform upgrade through proxy
+4. Verify all functions work as expected
+5. Monitor contract for 48 hours post-upgrade
+
+## Verification Checklist
+
+### Pre-Deployment/Pre-Upgrade
 ```
-□ Access restrictions
-□ Pause effect scope
-□ Emergency withdrawal limits
-□ Event logging
+□ Test API Connections
+□ Verify ETH Balances
+□ Confirm Gas Settings
+□ Test All Functions
+□ Backup Security Keys
+□ Simulate on Mainnet Fork
 ```
 
-## Audit Report Requirements
-
-### 1. Vulnerability Classification
+### During Deployment/Upgrade
 ```
-Risk Levels:
-- Critical: Immediate action required
-- High: Must be fixed before production use
-- Medium: Should be addressed
-- Low: Consider fixing
-- Informational: Best practice recommendations
+□ Monitor Gas Prices
+□ Verify Each Transaction
+□ Document All Steps
+□ Save All Transaction Hashes
+□ Monitor Network Conditions
 ```
 
-### 2. Documentation Components
+### Post-Deployment/Post-Upgrade
 ```
-Required Sections:
-- Executive Summary
-- Audit Methodology
-- Findings and Classification
-- Recommendations
-- V2 Feature Assessment
-- Risk Analysis and Mitigation
+□ Verify Contract on Etherscan
+□ Test All Contract Functions
+□ Check Storage State Preservation
+□ Monitor Contract Activity
+□ Confirm Event Emissions
 ```
 
-## Post-Audit Actions
+## Security Measures
 
-### 1. Remediation Verification
+### Critical Parameters
+- Gas Price Maximum: 30 gwei
+- Transaction Timing: 5-minute spacing
+- Backup RPC Providers Ready
+- Emergency Contacts on Standby
+
+### No-Go Conditions
+1. Gas Price > 30 gwei
+2. Network Congestion
+3. Contract Verification Failure
+4. Storage Layout Issues
+
+## Emergency Procedures
+
+### Contact Protocol
+1. Technical Issues:
+   - Primary: Development Team Lead
+   - Secondary: Smart Contract Developers
+
+2. Transaction Issues:
+   - Monitor: Etherscan/Tenderly
+   - Response: < 5 minutes
+
+### Recovery Procedures
+1. Transaction Failure:
+   - Check Gas/Nonce
+   - Verify Parameters
+   - Retry with Adjusted Settings
+
+2. Failed Upgrade:
+   - Evaluate Impact
+   - Consider Redeployment
+   - Implement Recovery Plan
+
+## Documentation Requirements
+
+### Deployment Records
 ```
-Process:
-1. Address identified issues
-2. Implement recommended changes
-3. Re-audit critical fixes
-4. Verify all issues resolved
+Required Information:
+- Deployment Date/Time
+- Transaction Hashes
+- Contract Addresses
+- Etherscan Links
+- Initial Parameters
+- Gas Costs
 ```
 
-### 2. Continuous Security
+### Upgrade Records
 ```
-Ongoing Security:
-- Regular code reviews
-- Scheduled re-audits
-- Bug bounty program
-- Security monitoring system
+Required Information:
+- Upgrade Date/Time
+- Old Implementation Address
+- New Implementation Address
+- Upgrade Transaction Hash
+- Feature Changes
+- Security Improvements
 ```
 
-## Emergency Contact
-
-For critical security findings or vulnerabilities discovered during audit, please contact:
-- Email: thegr33dysclub@gmail.com
-- Telegram: https://t.me/GreedyFoxxx
-
-This audit guide is specifically designed for the GR33DVaultV2 contract deployed at `0xC3b2990027217b9970b2d526aa11Ba3f223eb39C` with implementation at `0xdb2e16605c672bd0d743142e10ce2c1b12a876a4`. Auditors should verify contract addresses and implementation details before beginning the audit process.
+This deployment guide serves as both a historical record of the completed deployments and a reference for future upgrades. All procedures should be followed precisely to ensure the security and integrity of the GR33D ecosystem.
