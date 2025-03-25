@@ -32,7 +32,7 @@ name = "GR33DVAULT"
 symbol = "GR33D"
 decimals = 18
 totalSupply = 5_000_000 * 10**18
-currentSupply = 4_999_220.52 * 10**18  // After burn
+currentSupply = 4_999_164.96 * 10**18  // After burn (March 2025)
 
 // Transaction Limits
 STANDARD_TX_LIMIT = 15_000 * 10**18
@@ -43,11 +43,11 @@ MAX_WALLET = 100_000 * 10**18
 STANDARD_BURN_RATE = 50      // 0.5%
 STAKING_BURN_RATE = 25       // 0.25%
 MAX_BURN_SUPPLY = 2_000_000 * 10**18  // 40% of supply
-totalBurned = 779.48 * 10**18  // Current burned amount
+totalBurned = 835.04 * 10**18  // Current burned amount (March 2025)
 
 // Rewards Configuration
 INITIAL_REWARDS_POOL = 1_000_000 * 10**18
-currentRewardsPool = 999_997.85 * 10**18
+currentRewardsPool = 999_993.58 * 10**18  // As of March 2025
 
 // Security
 MIN_TIME_BETWEEN_TXS = 20    // seconds
@@ -121,6 +121,29 @@ struct LPStakeInfo {
     uint256 bonusEndTime;           // End of launch bonus
 }
 ```
+
+## Post-V2 Upgrade Vesting Reinitialization
+
+### March 2025 Vesting Update
+Following the V2 upgrade, vesting schedules were reinitialized on March 20, 2025:
+
+```solidity
+// New active vesting schedules created with isActive = true
+// Each beneficiary received new vesting IDs
+// Team: ID 1 - 80,000 GR33D
+// DEV_MARKETING: ID 2 - 200,000 GR33D (Marketing)
+// DEV_MARKETING: ID 3 - 400,000 GR33D (Dev Fund)
+// LP1: ID 1 - 20,000 GR33D
+// LP2: ID 1 - 20,000 GR33D
+// LP3: ID 1 - 40,000 GR33D
+
+// ADMIN (Trading Reserve): ID 0 - 2,410,000 GR33D
+// Remains with isActive = false but functions properly
+// with releaseTradeReserveToPool function
+```
+
+### Technical Notes
+The ADMIN Trading Reserve (ID 0) was kept inactive but remains functional because the `releaseTradeReserveToPool` function checks only `schedule.totalAmount == TRADING_RESERVE_AMOUNT` without using the `validVesting` modifier that checks for `isActive`.
 
 ## Key Functions
 
@@ -256,6 +279,26 @@ event BurnExecuted(uint256 amount, uint256 newTotalBurned, uint256 timestamp);
   - Gas optimizations
   - Emergency functions
 
+### Vesting Reinitialization
+- **Date**: March 20, 2025
+- **Process**: Creation of new active vesting entries with equivalent parameters
+- **Impact**: Restored access to vesting functions for all beneficiaries
+
+## Future Art Marketplace Integration
+
+The contract architecture has been designed with future expansion in mind, particularly for integration with the planned art marketplace. Key integration points include:
+
+### Art Certification
+- Authentication mechanisms for verifying artwork ownership
+- Royalty distribution system for artists
+- Provenance tracking for complete ownership history
+
+### Planned Smart Contract Extensions
+- Royalty management contract (Q3 2025)
+- Art certification registry (Q3 2025)
+- DAO governance for marketplace parameters (Q3 2025)
+- Cross-chain bridges for expanded art market reach (Q3-Q4 2025)
+
 ## Integration & Development
 
 ### Contract Interaction Requirements
@@ -290,9 +333,32 @@ const lpTx = await gr33dContract.stakeLPTokens(lpAmount, {
 await lpTx.wait();
 
 // Vesting check example
-const vestingInfo = await gr33dContract.getVestingInfo(beneficiaryAddress, 0);
+// Important: Use the new vesting IDs from March 2025 reinitialization
+const vestingInfo = await gr33dContract.getVestingInfo(beneficiaryAddress, newVestingId);
 console.log("Vesting schedule:", vestingInfo.schedule);
 console.log("Available to claim:", ethers.utils.formatEther(vestingInfo.available));
+```
+
+### Vesting Monitoring Script
+```javascript
+// Script to check all vestings for an address
+const checkVestings = async (address) => {
+  const vestingCount = await gr33dContract.vestingCount(address);
+  console.log(`Address ${address} has ${vestingCount} vestings`);
+  
+  for (let i = 0; i < vestingCount; i++) {
+    try {
+      const vestingInfo = await gr33dContract.getVestingInfo(address, i);
+      console.log(`Vesting #${i} (Active):`, vestingInfo);
+    } catch (e) {
+      console.log(`Vesting #${i} (Inactive): Error - ${e.message}`);
+      
+      // Direct access via the mapping (works for inactive vestings)
+      const rawVesting = await gr33dContract.vestingSchedules(address, i);
+      console.log(`Vesting #${i} (Raw Data):`, rawVesting);
+    }
+  }
+};
 ```
 
 ### Development Requirements
@@ -327,7 +393,7 @@ function emergencyWithdraw() external onlyOwner whenPaused;
 
 The contract includes several security features:
 
-1. **Anti-Flash Loan Protection**: Prevents exploitation through flash loans by requiring `tx.origin == msg.sender`
+1. **Transaction Protection**: Enhanced validation to prevent various types of attacks
 2. **Blacklist System**: Allows blocking malicious addresses from interacting with the contract
 3. **Transaction Rate Limiting**: Prevents spam attacks with a 20-second cooldown between transactions
 4. **ReentrancyGuard**: Prevents reentrancy attacks on all sensitive functions
@@ -335,4 +401,4 @@ The contract includes several security features:
 6. **Access Controls**: Strict permission management for administrative functions
 7. **Secure Upgrade Pattern**: UUPS implementation with proper authorization checks
 
-This documentation reflects the current state of the GR33DVaultV2 contract deployed on Ethereum Mainnet. All function signatures and event definitions are accurate as of the V2 upgrade on December 24, 2024.
+This documentation reflects the current state of the GR33DVaultV2 contract deployed on Ethereum Mainnet as of March 2025, including the vesting reinitialization performed on March 20, 2025.
