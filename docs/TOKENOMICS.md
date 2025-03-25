@@ -6,16 +6,33 @@
 
 ### Supply Statistics
 - **Initial Supply**: 5,000,000 $GR33D
-- **Current Supply**: 4,999,220.52 $GR33D
-- **Total Burned**: 779.48 $GR33D (0.016% of initial supply)
-- **Circulating Supply**: 148,622.67 $GR33D (2.97% of total)
-- **Contract Balance**: 4,850,597.85 $GR33D (97.03% of total)
+- **Current Supply**: 4,999,164.96 $GR33D
+- **Total Burned**: 835.04 $GR33D (0.017% of initial supply)
+- **Circulating Supply**: ~159,000 $GR33D (3.18% of total)
+- **Contract Balance**: 4,840,165 $GR33D (96.82% of total)
 - **Maximum Burnable**: 2,000,000 $GR33D (40% of initial supply)
 
 ### Distribution Status
-- **Staked Tokens**: 600.0 $GR33D
-- **LP Staked**: 1.25 LP tokens
-- **Rewards Pool**: 999,997.85 $GR33D
+- **Staked Tokens**: 4,708.28 $GR33D
+- **LP Staked**: 4.34 LP tokens
+- **Rewards Pool**: 999,993.58 $GR33D
+
+## Art Ecosystem Token Utility
+
+The $GR33D token is designed as a multifunctional utility token specifically engineered to support the art marketplace ecosystem:
+
+### Primary Art Market Utilities
+- **Royalty Medium**: Used for automated perpetual royalty payments to artists
+- **Authentication Verification**: Backs the blockchain certification system for artworks
+- **Marketplace Transactions**: Primary currency for art platform transactions
+- **Artist Incentives**: Distribution program for early-adopting artists
+- **Collector Benefits**: Exclusive access to limited artwork releases
+
+### Supporting Ecosystem Functions
+- **Governance**: Voting rights within the upcoming DAO (Q3 2025)
+- **Fee Reduction**: Holders receive discounted platform fees
+- **Priority Access**: Early access to new features and artwork releases
+- **Cross-Chain Compatibility**: Planned bridges to BSC and Solana for expanded art market reach
 
 ## Initial Distribution
 
@@ -35,21 +52,24 @@
 - **Initial Lock**: 1 month (until December 24, 2024)
 - **Distribution**: ~13,333 GR33D/month over 15 months
 - **Period**: December 2024 - February 2026
-- **Status**: Lock ended, vesting active
+- **Status**: Lock ended, vesting active, reinitialized March 20, 2025
+- **Current ID**: 2 (assigned during reinitialization)
 
 ### Dev Fund
 - **Total Amount**: 400,000 GR33D
 - **Initial Lock**: 2 months (until January 24, 2025)
 - **Distribution**: 33,333 GR33D/month over 12 months
 - **Period**: February 2025 - January 2026
-- **Status**: Lock ended, vesting active
+- **Status**: Lock ended, vesting active, reinitialized March 20, 2025
+- **Current ID**: 3 (assigned during reinitialization)
 
 ### Trading Reserve
 - **Total Amount**: 2,410,000 GR33D
 - **Initial Lock**: 3 months (until February 24, 2025)
 - **Distribution**: ~50,200 GR33D/month over 48 months
 - **Start Date**: March 2025
-- **Status**: Lock ended, vesting active
+- **Status**: Lock ended, vesting active, 101 GR33D released to date
+- **Current ID**: 0 (maintained original ID)
 
 ## Burn Mechanism
 
@@ -57,7 +77,7 @@
 - **Standard Transaction Burn**: 0.5% of transaction amount
 - **Staking Transaction Burn**: 0.25% of transaction amount
 - **Maximum Burn Cap**: 40% of total supply (2,000,000 GR33D)
-- **Current Burned Amount**: 779.48 GR33D (0.016% of initial supply)
+- **Current Burned Amount**: 835.04 GR33D (0.017% of initial supply)
 - **Burn Recipient**: Tokens are permanently removed from circulation
 
 ### Burn Exemptions
@@ -135,45 +155,44 @@
 - **Emergency Circuit Breakers**: Contract can be paused in emergencies
 - **Access Controls**: Strict permission management for administrative functions
 
+## Art Marketplace Financial Structure (Planned)
+
+### Primary Sale Revenue Distribution
+- **Artist**: 90-97.5%
+- **Platform Fee**: 2.5-10% (variable based on art category)
+- **Distribution**: Immediate, transparent, on-chain
+
+### Secondary Sale Royalties
+- **Artist Perpetual Royalty**: 2.5-7.5% (artist-configurable)
+- **Platform Fee**: 2.5%
+- **Automated Payment**: Smart contract-enforced payments to original artist
+- **Transparency**: Full on-chain tracking of all sales and royalties
+
 ## Distribution Timeline
 
-### Phase 1 - Launch (Completed)
-- **Date**: November 24, 2024
-- **Initial Distribution**: 160,000 GR33D
-  * LP Providers: 120,000 GR33D
-  * Team: 40,000 GR33D
+### 2024 (Completed)
+- [x] November 24: Initial distribution (160,000 GR33D)
+- [x] December 24: LP/Team vesting (80,000 GR33D) & Marketing start (13,333 GR33D)
 
-### Phase 2 - Month 1 (Completed)
-- **Date**: December 24, 2024
-- **Distribution**: 93,333 GR33D
-  * LP/Team Vesting: 80,000 GR33D
-  * Marketing: 13,333 GR33D
+### 2025 (In Progress)
+- [x] January 23: LP/Team final (80,000 GR33D) & Marketing (13,333 GR33D)
+- [x] February 22: Dev Fund start (33,333 GR33D) & Marketing (13,333 GR33D)
+- [x] March 20: Vesting schedules reinitialization
+- [ ] March-December: Monthly distributions of ~96,866 GR33D:
+  * Trading Reserve: 50,200 GR33D/month
+  * Dev Fund: 33,333 GR33D/month (until January 2026)
+  * Marketing: 13,333 GR33D/month (until February 2026)
 
-### Phase 3 - Month 2 (Completed)
-- **Date**: January 23, 2025
-- **Distribution**: 93,333 GR33D
-  * LP/Team Final: 80,000 GR33D
-  * Marketing: 13,333 GR33D
-
-### Phase 4 - Month 3 (Completed)
-- **Date**: February 22, 2025
-- **Distribution**: 46,666 GR33D
-  * Marketing: 13,333 GR33D
-  * Dev Fund: 33,333 GR33D
-
-### Phase 5 - Month 4+ (Current)
-- **Date**: March 2025 onwards
-- **Monthly Distribution**: ~96,866 GR33D
-  * Trading Reserve: 50,200 GR33D
-  * Dev Fund: 33,333 GR33D (until January 2026)
-  * Marketing: 13,333 GR33D (until February 2026)
+### 2026
+- [ ] January-February: Final marketing distributions
+- [ ] March 2026 onward: Trading Reserve only (50,200 GR33D/month until 2029)
 
 ## Market Information
 
 ### Trading Data
 - **Contract Address**: 0xC3b2990027217b9970b2d526aa11Ba3f223eb39C
 - **Uniswap Pair**: 0x8a1D8f57261e8832CE1D7C525Df76dbe002B2e25
-- **Liquidity Status**: Active on Uniswap V2
+- **Liquidity Status**: Active on Uniswap V2, locked via Team Finance (March 2025)
 - **Initial Liquidity**: 150,000 GR33D + ~0.88 ETH (~$3,000 at launch)
 
 ### Security Controls
@@ -182,15 +201,22 @@
 - **Solidity Version**: 0.8.20
 - **Gas Optimization**: Struct packing for reduced gas costs
 
-## Token Utility
+## Token Utility in Art Ecosystem
 
 ### Current Utility
 - **Staking Rewards**: Earn passive income through flexible or locked staking
 - **LP Rewards**: Enhanced returns for liquidity providers
 - **Burning Mechanism**: Deflationary pressure through transaction burns
 
-### Future Utility (Planned)
+### Art Platform Utility (Planned)
+- **Artwork Certification**: Blockchain-verified authentication system for art pieces
+- **Royalty Distribution**: Automated payment system for artist royalties
 - **Governance Rights**: DAO participation with voting power (Q3 2025)
-- **NFT Platform Access**: Privileged access to upcoming NFT marketplace (Q2-Q3 2025)
-- **Reduced Fees**: Discounted fees across the ecosystem
-- **Cross-Chain Utility**: Functionality on BSC and Solana (Q3-Q4 2025)
+- **Reduced Platform Fees**: Stakers receive discounted fees on the art marketplace
+- **Cross-Chain Art Market**: Art certification and transactions on multiple chains (Q3-Q4 2025)
+
+### Artist Incentives
+- **Creator Staking Bonuses**: Enhanced staking rewards for verified artists
+- **Early Adopter Rewards**: Token distributions for early platform artists
+- **Exhibition Support**: Funding for physical exhibitions through DAO
+- **Collaborative Creation**: Token-backed initiatives for artistic collaborations
