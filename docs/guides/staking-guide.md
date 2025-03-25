@@ -1,7 +1,7 @@
 # GR33D Staking Guide
 
 ## Overview
-This guide details the staking mechanisms of the GR33D token, including both standard staking and LP staking features, with special focus on the position-based staking system introduced in V2.
+This guide details the staking mechanisms of the GR33D token, which serve as an essential financial foundation for our art ecosystem. The staking system provides sustainable support for the upcoming art marketplace while offering token holders a way to earn rewards and participate in ecosystem governance.
 
 ## Position-Based Staking System (V2)
 
@@ -40,6 +40,12 @@ function stakeWithLock(uint256 amount, uint256 lockDuration) external
 - Unstaking is performed per position rather than a global amount
 - Position IDs can be retrieved via `getStakePositions(address user)`
 
+### Current Metrics (March 2025)
+- Total Staked: 4,708.28 GR33D
+- Active Staking Positions: Multiple across users
+- Rewards Pool: 999,993.58 GR33D
+- Current Base APY: 20%
+
 ### Base Mechanics
 - **Foundation APY**: 20%
 - **Maximum APY**: 40% (with lock bonuses)
@@ -66,10 +72,10 @@ function stakeWithLock(uint256 amount, uint256 lockDuration) external
 
 ## LP Staking
 
-### Launch Phase (First 14 Days)
-- **Week 1**: 120% APY (80% Base + 40% Bonus)
-- **Week 2**: 100% APY (80% Base + 20% Bonus)
-- **Post-Launch**: 80% Base APY
+### Current Metrics (March 2025)
+- Base APY: 80%
+- Total LP Staked: 4.34 LP tokens
+- Active LP Providers: 3
 
 ### LP Pool Thresholds
 | Pool Balance     | APY Rate |
@@ -122,6 +128,26 @@ function getLPStakeInfo(address user) external view returns (
 - Daily reward caps
 - Blacklist system for security enforcement
 - Emergency withdrawal system in case of contract pause
+
+## Role in Art Ecosystem
+
+### Supporting the Art Marketplace
+The staking system serves as a crucial financial foundation for our upcoming art marketplace:
+
+- **Sustainable Economics**: Provides stable financial support for the art platform
+- **Governance Participation**: Stakers will have a voice in marketplace parameters via DAO
+- **Royalty Pool Support**: Contributes to ensuring artist royalties are reliably distributed
+- **Platform Development**: Helps fund ongoing development of artist-centric features
+- **Community Alignment**: Creates long-term alignment between token holders and artists
+
+### Future Benefits for Artists and Collectors
+As the art marketplace launches, stakers will receive:
+
+- **Reduced Marketplace Fees**: Stakers enjoy discounted fees on art transactions
+- **Early Access**: Priority access to new artwork releases
+- **Enhanced Voting Rights**: Greater influence in the governance of artist royalty rates
+- **Artist Staking Bonuses**: Special staking programs for verified platform artists
+- **Exhibition Funding**: DAO-governed funding for physical art exhibitions
 
 ## How to Stake
 
@@ -186,15 +212,23 @@ A: Yes, you can create as many positions as you want with various lock periods t
 Q: What's the advantage of the position-based system?  
 A: It provides greater flexibility, allows for diversification of lock periods, and enhances security by isolating each position.
 
+Q: How does staking contribute to the art ecosystem?  
+A: Staking provides financial stability for the ecosystem, ensuring reliable operation of the upcoming art marketplace, royalty systems, and creator compensation.
+
 ### LP Staking
 Q: How do LP rewards differ from standard staking?  
-A: LP staking offers higher base APY (80%) with additional launch bonuses.
+A: LP staking offers higher base APY (80%) to reward those providing market liquidity.
 
 Q: Can I withdraw LP tokens early?  
 A: Yes, you can withdraw LP tokens anytime, but you'll forfeit any unclaimed rewards.
+
+Q: How does LP staking support artists?  
+A: By enhancing market liquidity, LP staking creates a stable trading environment for the token, which underpins the financial aspects of the art marketplace.
 
 ## Support & Resources
 - Technical Support: thegr33dysclub@gmail.com
 - Telegram (FR): https://t.me/+ST4-blQBoLs5NWI8
 - Telegram (EN): https://t.me/+WipDE7pBxF41Mzc0
 - Website: https://gr33d-vault.vercel.app/
+
+*Last Updated: March 25, 2025*
