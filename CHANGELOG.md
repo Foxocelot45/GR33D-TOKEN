@@ -8,10 +8,34 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Planned
-- NFT integration and marketplace (Q2-Q3 2025)
-- DAO governance implementation (Q3 2025)
-- Cross-chain functionality via BSC and Solana bridges (Q3-Q4 2025)
-- DEX/AMM platform development (Q1 2026)
+- Art marketplace with blockchain certification system (Q2-Q3 2025)
+- DAO governance implementation for artists and collectors (Q3 2025)
+- Cross-chain art certification via BSC and Solana bridges (Q3-Q4 2025)
+- Enhanced royalty distribution system for artists (Q4 2025)
+- Physical art tokenization and authentication (Q1 2026)
+
+## [3.0.0] - 2025-03-20
+### Added
+- Strategic repositioning as a platform for art certification and artist empowerment
+- Perpetual royalty system concept for artists (2.5-7.5% on secondary sales)
+- Framework for upcoming art marketplace as core ecosystem component
+- Technical architecture for blockchain-based art authentication
+- Physical art tokenization planning
+
+### Changed
+- Reinitialized vesting schedules to resolve inactive vestings issue
+- Team vesting reset with ID 1 (80,000 GR33D)
+- Marketing vesting reset with ID 2 (200,000 GR33D)
+- Development fund vesting reset with ID 3 (400,000 GR33D)
+- LP providers vestings reset with ID 1
+- Whitelist configuration for staking improvements
+- Contract documentation updated to reflect March 2025 status
+
+### Fixed
+- Resolved issue with vesting access after V2 upgrade
+- Fixed staking transaction issues by whitelisting contract address
+- Enhanced monitoring system for vesting status tracking
+- Optimized script for vesting information retrieval
 
 ## [2.0.0] - 2024-12-24
 ### Added
