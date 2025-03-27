@@ -34,7 +34,7 @@ module.exports = {
   networks: {
     mainnet: {
       url: `https://eth-mainnet.g.alchemy.com/v2/${process.env.ALCHEMY_KEY}`,
-      accounts: [process.env.PRIVATE_KEY],
+      accounts: ["PLACEHOLDERS_FOR_PRIVATE_KEYS"],
       gasPrice: "auto",
       chainId: 1,
       timeout: 60000 // 1 minute
@@ -83,17 +83,17 @@ module.exports = {
 #### 11:55 UTC - Liquidity Setup
 1. Create Uniswap Pool
    ```javascript
-   // setupUniswap.js
+   // Example function (implementation will vary)
    async function setupUniswapPool() {
-     // Code to set up the Uniswap pool
+     // Initialize Uniswap pool setup
      await gr33dVault.adminClaimInitialLiquidity();
-     // Add liquidity to Uniswap
+     // Add liquidity to Uniswap with appropriate parameters
    }
    ```
 
 2. Lock Liquidity
    ```javascript
-   // lockLiquidity.js
+   // Example function
    async function lockLiquidity() {
      await gr33dVault.lockInitialLiquidity();
    }
@@ -102,7 +102,7 @@ module.exports = {
 #### 12:00 UTC - Launch Activation
 1. Enable Trading
    ```javascript
-   // enableTrading.js
+   // Example function
    async function enableTrading() {
      await gr33dVault.enableTrading();
    }
@@ -110,46 +110,32 @@ module.exports = {
 
 2. Whitelist Setup
    ```javascript
-   // setupWhitelist.js
+   // Example function
    async function setupWhitelist() {
-     // Whitelist critical addresses
+     // Configure whitelist for critical addresses
      await gr33dVault.setWhitelist(
-       "0x5A46d0F5bbce72D9665689cDAe9993824260b882", 
+       "ADDRESS_PLACEHOLDER", 
        true, // maxWalletExempt
        true  // txLimitExempt
      );
-     // Add other addresses as needed
    }
    ```
 
 ### Post-Deployment Tasks
 1. Setup Vesting Schedules
    ```javascript
-   // setupVestings.js
+   // Example implementation
    async function setupVestings() {
-     // Marketing vesting (200,000 GR33D, 15 months, 1 month lock)
+     // Initialize vesting schedules with appropriate parameters
+     // Marketing vesting
      await gr33dVault.initializeVesting(
-       DEV_MARKETING,
+       DEV_MARKETING_ADDRESS,
        ethers.utils.parseEther("200000"),
        15, // weeks
        30 * 24 * 60 * 60 // 30 days in seconds
      );
      
-     // Dev Fund vesting (400,000 GR33D, 12 months, 2 months lock)
-     await gr33dVault.initializeVesting(
-       DEV_MARKETING,
-       ethers.utils.parseEther("400000"),
-       12, // weeks
-       60 * 24 * 60 * 60 // 60 days in seconds
-     );
-     
-     // Trading Reserve vesting (2,410,000 GR33D, 48 months, 3 months lock)
-     await gr33dVault.initializeVesting(
-       ADMIN_ADDRESS,
-       ethers.utils.parseEther("2410000"),
-       48, // weeks
-       90 * 24 * 60 * 60 // 90 days in seconds
-     );
+     // Similar calls for other vesting schedules
    }
    ```
 
@@ -200,24 +186,19 @@ module.exports = {
 
 #### Post-Upgrade Verification
 ```javascript
-// verifyUpgrade.js
+// Example verification script
 async function verifyUpgrade() {
   const gr33dVault = await ethers.getContractAt(
     "GR33DVaultV2",
     "0xC3b2990027217b9970b2d526aa11Ba3f223eb39C"
   );
   
-  // Verify state was preserved
+  // Verify state preservation and new functionality
   const totalSupply = await gr33dVault.totalSupply();
   console.log("Total supply:", ethers.utils.formatEther(totalSupply));
   
-  // Verify new functions are available
-  const blacklistStatus = await gr33dVault.isBlacklisted("0x0000000000000000000000000000000000000000");
-  console.log("Blacklist status for zero address:", blacklistStatus);
-  
-  // Check staking system
-  const stakePositions = await gr33dVault.getStakePositions("0xeF616AF55083Cb6BDF355a34224FFE829100D9b2");
-  console.log("Team stake positions:", stakePositions.length);
+  // Verify new functions
+  // Additional verification steps as needed
 }
 ```
 
@@ -353,3 +334,7 @@ Required Information:
 ```
 
 This deployment guide serves as both a historical record of the completed deployments and a reference for future upgrades. All procedures should be followed precisely to ensure the security and integrity of the GR33D ecosystem.
+
+---
+
+**Note**: For security reasons, actual private keys, specific address values, and detailed security implementations have been replaced with placeholders in this public document. Team members should refer to secure internal documentation for actual values.
