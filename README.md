@@ -89,6 +89,7 @@ Our primary focus is revolutionizing the art market through:
 ## Resources
 - **Website**: [Gr33dVault](https://gr33d-vault.vercel.app/)
 - **Twitter**: [TheGr33dyzClub](https://x.com/TheGr33dyzClub)
+- **Discord**: [GR33D Community](https://discord.gg/FPGyuKxJx6)
 - **Telegram (FR)**: [Discussion FR](https://t.me/+ST4-blQBoLs5NWI8)
 - **Telegram (EN)**: [Discussion EN](https://t.me/+WipDE7pBxF41Mzc0)
 - **Email**: thegr33dysclub@gmail.com
