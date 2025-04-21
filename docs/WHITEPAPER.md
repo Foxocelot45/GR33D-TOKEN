@@ -364,6 +364,7 @@ The blockchain authentication system for artworks will utilize:
 - Twitter: https://x.com/TheGr33dyzClub
 
 **Community Channels**:
+- **Discord**: [GR33D Community](https://discord.gg/FPGyuKxJx6)
 - Telegram (FR): https://t.me/+ST4-blQBoLs5NWI8
 - Telegram (EN): https://t.me/+WipDE7pBxF41Mzc0
 - Email: thegr33dysclub@gmail.com
