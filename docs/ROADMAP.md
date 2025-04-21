@@ -212,6 +212,7 @@ Features: {
 - Website: https://gr33d-vault.vercel.app/
 - GitHub: https://github.com/Foxocelot45/GR33D-TOKEN
 - Twitter: https://x.com/TheGr33dyzClub
+- Discord: https://discord.gg/FPGyuKxJx6
 - Telegram (FR): https://t.me/+ST4-blQBoLs5NWI8
 - Telegram (EN): https://t.me/+WipDE7pBxF41Mzc0
 - Email: thegr33dysclub@gmail.com
