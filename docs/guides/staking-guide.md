@@ -227,6 +227,7 @@ A: By enhancing market liquidity, LP staking creates a stable trading environmen
 
 ## Support & Resources
 - Technical Support: thegr33dysclub@gmail.com
+- Discord: https://discord.gg/FPGyuKxJx6
 - Telegram (FR): https://t.me/+ST4-blQBoLs5NWI8
 - Telegram (EN): https://t.me/+WipDE7pBxF41Mzc0
 - Website: https://gr33d-vault.vercel.app/
