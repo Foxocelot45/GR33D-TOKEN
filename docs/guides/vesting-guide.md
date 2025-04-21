@@ -164,6 +164,7 @@ This function specifically uses the ADMIN address with vesting ID 0 and adds tok
 
 ### Standard Support
 - Email: thegr33dysclub@gmail.com
+- Discord: https://discord.gg/FPGyuKxJx6
 - Telegram (FR): https://t.me/+ST4-blQBoLs5NWI8
 - Telegram (EN): https://t.me/+WipDE7pBxF41Mzc0
 
