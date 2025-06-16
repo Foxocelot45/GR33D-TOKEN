@@ -1,5 +1,3 @@
-# TOKENOMICS.md
-
 # $GR33D Tokenomics
 
 ## Current Token Metrics (March 2025)
@@ -29,10 +27,10 @@ The $GR33D token is designed as a multifunctional utility token specifically eng
 - **Collector Benefits**: Exclusive access to limited artwork releases
 
 ### Supporting Ecosystem Functions
-- **Governance**: Voting rights within the upcoming DAO (Q3 2025)
+- **Governance**: Voting rights within the upcoming DAO (Q3-Q4 2025)
 - **Fee Reduction**: Holders receive discounted platform fees
 - **Priority Access**: Early access to new features and artwork releases
-- **Cross-Chain Compatibility**: Planned bridges to BSC and Solana for expanded art market reach
+- **Future Multi-Chain Evaluation**: Cross-chain compatibility assessment for expanded art market reach (2026+)
 
 ## Initial Distribution
 
@@ -208,12 +206,12 @@ The $GR33D token is designed as a multifunctional utility token specifically eng
 - **LP Rewards**: Enhanced returns for liquidity providers
 - **Burning Mechanism**: Deflationary pressure through transaction burns
 
-### Art Platform Utility (Planned)
+### Art Platform Utility (Planned Q3-Q4 2025)
 - **Artwork Certification**: Blockchain-verified authentication system for art pieces
 - **Royalty Distribution**: Automated payment system for artist royalties
-- **Governance Rights**: DAO participation with voting power (Q3 2025)
+- **Governance Rights**: DAO participation with voting power (Q3-Q4 2025)
 - **Reduced Platform Fees**: Stakers receive discounted fees on the art marketplace
-- **Cross-Chain Art Market**: Art certification and transactions on multiple chains (Q3-Q4 2025)
+- **Future Multi-Chain Art Market**: Art certification and transactions evaluation for multiple chains (2026+)
 
 ### Artist Incentives
 - **Creator Staking Bonuses**: Enhanced staking rewards for verified artists
