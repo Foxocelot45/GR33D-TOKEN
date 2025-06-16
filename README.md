@@ -7,12 +7,12 @@ Gr33dVault represents a revolutionary platform bridging art with blockchain tech
 Our fundamental mission is to create a sustainable ecosystem where artists receive fair, perpetual compensation for their work throughout its lifetime, while collectors gain verifiable ownership and participate in ecosystem governance.
 
 ## Core Features
-- **Art Marketplace & Certification**: Blockchain verification for art authenticity and permanent royalties for artists (in development for Q2-Q3 2025)
+- **Art Marketplace & Certification**: Blockchain verification for art authenticity and permanent royalties for artists (architecture development Q3-Q4 2025)
 - **Perpetual Royalty System**: Artists receive ongoing compensation throughout their artwork's lifetime (2.5-7.5% on secondary sales)
 - **Enhanced Staking System**: Up to 40% APY with position-based staking, supporting the art ecosystem's financial sustainability
 - **Security First**: Anti-bot protection, flash loan prevention, transaction limits, and blacklist system
-- **Community Governance**: DAO framework for artist and collector decision-making (planned Q3 2025)
-- **Cross-Chain Support**: Expanded art market reach with BSC/Solana bridges (planned Q3-Q4 2025)
+- **Community Governance**: DAO framework for artist and collector decision-making (implementation Q3-Q4 2025)
+- **Future Expansion**: Cross-chain evaluation for broader art market reach (planned 2026+)
 
 ## Token Details
 - **Name**: Gr33dVault
@@ -77,7 +77,7 @@ Our primary focus is revolutionizing the art market through:
   - Photography
   - 3D Models and Sculptures
   - Digital-Physical Hybrid Art
-- **Launch Timeline**: Initial features Q3 2025, full marketplace Q2 2026
+- **Launch Timeline**: Architecture development Q3-Q4 2025, Beta marketplace 2026
 
 ## Smart Contracts
 - **Framework**: OpenZeppelin (UUPS Upgradeable)
@@ -95,9 +95,8 @@ Our primary focus is revolutionizing the art market through:
 - **Email**: thegr33dysclub@gmail.com
 
 ## Development Roadmap
-- **Q2 2025**: Art Marketplace Architecture & Development
-- **Q3 2025**: DAO Governance Implementation & BSC Bridge
-- **Q4 2025**: Solana Bridge & Art Platform Beta
-- **2026**: Full Art Marketplace Launch & Enhanced Ecosystem
+- **Q3-Q4 2025**: DAO Governance Implementation & Art Marketplace Architecture
+- **2026**: Art Platform Beta Launch & Exchange Listings
+- **2027+**: Full Art Marketplace Ecosystem & Cross-Chain Evaluation
 
 ---
